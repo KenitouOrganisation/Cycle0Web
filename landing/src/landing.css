@@ -1,0 +1,87 @@
+/*
+    CSS only for the landing script
+*/
+
+body {
+    overflow-y: scroll;
+    background: linear-gradient(#004e4e, #004e4e, #00b0ac);
+}
+
+#introduction {
+    background-color: #254039;
+    /* background-image: url("./img/first-slide.png"); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.center-box.vertical .horizontal-box {
+    /* width: 90%; */
+    margin: 0 9%;
+}
+
+.text-box {
+    font-family: var(--main-font);
+}
+
+.container.spec_bloc .inline-box:first-child {
+    margin-right: 10%;
+}
+
+.illustration {
+    width: 335px;
+}
+
+.container .vertical.center-box {
+    width: 100%;
+}
+
+.table-box.text-box .h2_2 {
+    vertical-align: middle;
+    padding-left: 10px;
+    font-size: 30px;
+    color: var(--color-1);
+}
+
+.index {
+    color: var(--secondary-color);
+    font-size: 90px;
+}
+
+.block-box {
+    width: 100%;
+}
+
+.container[data-view="5"] .panorama-box {
+    margin: 20px 0;
+}
+.container[data-view="5"] .square-img {
+    width: 300px;
+    background-color: #171717;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.quote span {
+    display: block;
+}
+
+#pre-inscription {
+    background-color: #fff;
+}
+
+#pre-inscription table {
+    margin: auto;
+    display: block;
+    width: 80%;
+}
+
+#pre-inscription input:not(form input[type="submit"], form input[tye="reset"]) {
+    width: 100%;
+    display: inline-block;
+}
+
+#pre-inscription form {
+    width: 50%;
+    margin-left: 10%;
+}

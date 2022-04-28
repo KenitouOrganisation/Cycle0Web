@@ -1,24 +1,374 @@
+<!--
+
+    Copyright 2022 - Cycle Zéro
+    Toutes copies même partielles de n'importe qu'elle partie du code du site Cycle Zéro sont strictement interdites.
+
+-->
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <title>Cycle Zéro - Recyclage Chantier</title>
-        <link rel="stylesheet" href="./style.css">
-        <link rel="icon" type="image/png" href="./src/img/logo.png">
+        <link rel="stylesheet" href="./src/style.css" />
+        <link rel="stylesheet" href="./src/landing.css" />
+        <link rel="icon" type="image/png" href="./src/img/icon.png" />
 
         <!--
             Mettre ici les meta pour le SEO
         -->
+
+        <!--
+            Google Fonts
+        -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
+        <header>
+            <nav>
+                <div id="logo">
+                    <a href="/">
+                        <img src="./src/img/logo_white.png" alt="Cycle Zéro" />
+                    </a>
+                </div>
+                <div id="header-buttons">
+                    <a href="#pre-inscription" class="_btt _orange"
+                        >Pré-inscription</a
+                    >
+                </div>
+            </nav>
+        </header>
+
         <div id="view">
-
             <!-- 1rst view -->
-            <div class="container"></div>
-            <div class="container"></div>
+            <div class="container slider spec_bloc" id="introduction">
+                <div class="vertical center-box">
+                    <div class="horizontal-box">
+                        <div class="center-elmt-box">
+                            <!-- Content -->
+                            <div class="inline-box _w75">
+                                <div class="text-box h2_1">
+                                    <h2>
+                                        <span class="color_1">Cycle Zéro,</span>
+                                        <span class="secondary_color">
+                                            l’application qui permet de donner
+                                            ou de récupérer gratuitement des
+                                            matériaux de chantier.
+                                        </span>
+                                    </h2>
+                                </div>
+                                <div class="text-box">
+                                    <p class="p_1">
+                                        Une solution pour réduire vos dépenses
+                                        et votre impact environnemental
+                                    </p>
+                                </div>
+                                <a href="#pre-inscription" class="_btt _orange"
+                                    >Pré-inscription</a
+                                >
+                            </div>
+                            <div class="inline-box">
+                                <div class="illustration">
+                                    <img
+                                        src="./src/img/illustrations/app1.png"
+                                        alt="Illustration 1"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <div class="citation">
+                        <p class="quote">
+                            Rien ne se perd, rien ne se crée, tout se
+                            transforme.
+                        </p>
+                        <p class="author">Antoine Lavoisier.</p>
+                    </div>
+                </div>
+            </div>
 
+            <div
+                class="container slider _dark spec_bloc"
+                data-view="1"
+                id="etape_1"
+            >
+                <div class="vertical center-box">
+                    <div class="horizontal-box">
+                        <div class="center-elmt-box">
+                            <!-- Content -->
+                            <div class="inline-box _w75">
+                                <div class="text-box table-box">
+                                    <h2 class="index">1</h2>
+                                    <h2 class="h2_2">
+                                        Recherchez selon vos besoins et à
+                                        proximité
+                                    </h2>
+                                </div>
+                                <div class="text-box">
+                                    <p class="p_2">
+                                        Je tu il elle nous vous ils elles, tu
+                                        connais je connais nous connaissions
+                                        vous connaissiez ...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="inline-box">
+                                <div class="illustration">
+                                    <img
+                                        src="./src/img/illustrations/app1.png"
+                                        alt="Illustation 2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="container slider _dark spec_bloc"
+                data-view="2"
+                id="etape_2"
+            >
+                <div class="vertical center-box">
+                    <div class="horizontal-box">
+                        <div class="center-elmt-box">
+                            <!-- Content -->
+                            <div class="inline-box _w75">
+                                <div class="text-box table-box">
+                                    <h2 class="index">2</h2>
+                                    <h2 class="h2_2">
+                                        Envoyer votre demande au chantier
+                                    </h2>
+                                </div>
+                                <div class="text-box">
+                                    <p class="p_2">
+                                        Je tu il elle nous vous ils elles, tu
+                                        connais je connais nous connaissions
+                                        vous connaissiez ...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="inline-box">
+                                <div class="illustration">
+                                    <img
+                                        src="./src/img/illustrations/app2.png"
+                                        alt="Illustation 2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="container slider _dark spec_bloc"
+                data-view="3"
+                id="etape_3"
+            >
+                <div class="vertical center-box">
+                    <div class="horizontal-box">
+                        <div class="center-elmt-box">
+                            <!-- Content -->
+                            <div class="inline-box _w75">
+                                <div class="text-box table-box">
+                                    <h2 class="index">3</h2>
+                                    <h2 class="h2_2">
+                                        Le chantier à 24h pour valider votre
+                                        demande
+                                    </h2>
+                                </div>
+                                <div class="text-box">
+                                    <p class="p_2">
+                                        Je tu il elle nous vous ils elles, tu
+                                        connais je connais nous connaissions
+                                        vous connaissiez ...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="inline-box">
+                                <div class="illustration">
+                                    <img
+                                        src="./src/img/illustrations/app3.png"
+                                        alt="Illustation 2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="container slider _dark spec_bloc"
+                data-view="4"
+                id="etape_4"
+            >
+                <div class="vertical center-box">
+                    <div class="horizontal-box">
+                        <div class="center-elmt-box">
+                            <!-- Content -->
+                            <div class="inline-box _w75">
+                                <div class="text-box table-box">
+                                    <h2 class="index">4</h2>
+                                    <h2 class="h2_2">
+                                        Venez récupérer vos matériaux sur place
+                                    </h2>
+                                </div>
+                                <div class="text-box">
+                                    <p class="p_2">
+                                        Je tu il elle nous vous ils elles, tu
+                                        connais je connais nous connaissions
+                                        vous connaissiez ...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="inline-box">
+                                <div class="illustration">
+                                    <img
+                                        src="./src/img/illustrations/app4.png"
+                                        alt="Illustation 2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="container slider _dark spec_bloc"
+                data-view="5"
+                id="etape_5"
+            >
+                <div class="vertical center-box">
+                    <div class="horizontal-box">
+                        <div class="center-elmt-box flex-direction-col">
+                            <!-- Content -->
+                            <div class="block-box">
+                                <div class="text-box table-box">
+                                    <h2 class="index">5</h2>
+                                    <h2 class="h2_2">Faites nous rêver !</h2>
+                                </div>
+                                <div class="text-box">
+                                    <p class="p_2">
+                                        Je tu il elle nous vous ils elles, tu
+                                        connais je connais nous connaissions
+                                        vous connaissiez ...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="inline-box panorama-box">
+                                <div class="square-img">
+                                    <img src="" alt="Photo réemploi 1" />
+                                </div>
+                                <div class="square-img">
+                                    <img src="" alt="Photo réemploi 2" />
+                                </div>
+                                <div class="square-img">
+                                    <img src="" alt="Photo réemploi 3" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container _dark">
+                <!-- FIXME Style problem -->
+
+                <!-- Content -->
+                <img
+                    src="./src/img/schema-slide.png"
+                    alt="Schéma fonctionnement Cycle Zéro"
+                    style="
+                        width: 60%;
+                        margin: auto;
+                    "
+                />
+                <div class="bottom">
+                    <div class="citation">
+                        <p class="quote">
+                            <span
+                                >Dans la confusion, trouver la simplicité</span
+                            >
+                            <span>De la discorde, trouvez l'harmonie</span>
+                            <span
+                                >Au milieu de la difficulté se trouve
+                                l'opportunité</span
+                            >
+                        </p>
+                        <p class="author">Albert Einstein.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container _light" id="pre-inscription">
+                <div class="normal-box">
+                    <div class="text-box">
+                        <p class="p_2">
+                            Texte d'introduction à la pré-inscription et son
+                            importance
+                        </p>
+                    </div>
+                    <div class="center-elmt-box">
+                        <!-- Content -->
+                        <div class="inline-box _w60">
+                            <form action="" method="POST">
+                                <h3>Pré-inscription</h3>
+                                <p>
+                                    <input
+                                        type="email"
+                                        placeholder="Adresse E-mail"
+                                    />
+                                </p>
+                                <p>
+                                    <input
+                                        type="text"
+                                        placeholder="Code postale"
+                                    />
+                                </p>
+                                <input
+                                    type="submit"
+                                    value="Valider"
+                                    class="_btt _orange"
+                                />
+                            </form>
+                        </div>
+                        <div class="inline-box">
+                            <div class="border-box">
+                                <p class="p_number_1">1432</p>
+                                <p class="p_3">Pré-inscrits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <footer>
+            <div class="img-box">
+                <img
+                    src="./src/img/logo_white.png"
+                    alt="Cycle Zéro"
+                    id="logo_footer"
+                />
+            </div>
+            <div class="text-box _right">
+                <a href="mailto:cycle0zero@gmail.com" class="p_3 color_1">
+                    cycle0zero@gmail.com
+                </a>
+            </div>
+        </footer>
+
         <script src="./src/script/Main.js"></script>
+        <div id="ready"></div>
     </body>
 </html>
