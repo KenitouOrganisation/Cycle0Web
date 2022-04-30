@@ -4,11 +4,27 @@
 
 body {
     overflow-y: scroll;
-    background: linear-gradient(#004e4e, #004e4e, #00b0ac);
+    background: linear-gradient(#004c4c var(--page-height), #fff 95%);
+}
+
+#logo .image{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    aspect-ratio: 2/ 1; /* auto-height */
+    transition: background-image 500ms ease;
+}
+
+.top #logo .image{
+    background-image: url('./img/logo_white.png');
+}
+
+.scroll #logo .image{
+    background-image: url('./img/logo.png');
 }
 
 #introduction {
-    background-color: #171717;/*#254039;*/
+    background-color: #171717; /*#254039;*/
     /* background-image: url("./img/first-slide.png"); */
     background-size: cover;
     background-position: center;
@@ -84,4 +100,53 @@ body {
 #pre-inscription form {
     width: 50%;
     margin-left: 10%;
+}
+
+@media (min-width: 3024px) {
+    #introduction {
+        background-image: url("./img/introduction/3024.png");
+    }
+}
+
+@media (max-width: 3024px) {
+    #introduction {
+        background-image: url("./img/introduction/1850.png");
+    }
+}
+
+@media (max-width: 1850px) {
+    #introduction {
+        background-image: url("./img/introduction/1295.png");
+    }
+}
+
+@media (max-width: 1295px) {
+    #introduction {
+        background-image: url("./img/introduction/1036.png");
+    }
+}
+
+@media (max-width: 1036px) {
+    #introduction {
+        background-image: url("./img/introduction/725.png");
+    }
+}
+
+@media (max-width: 725px) {
+    #introduction {
+        background-image: url("./img/introduction/485.png");
+    }
+}
+
+header{
+    transition: all 300ms ease;
+}
+
+header.top {
+    background: transparent;
+    box-shadow: unset;
+}
+
+header.scroll{
+    background: #fff;
 }

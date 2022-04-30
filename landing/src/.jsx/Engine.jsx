@@ -1,5 +1,5 @@
 const Engine = {};
-Engine.JSEnable = false;
+Engine.JSEnable = true;
 
 Engine.CheckCompatibility = function () {
     const value = !Object.defineProperty || !document.addEventListener;
@@ -16,9 +16,8 @@ Engine.CheckCompatibility = function () {
 
 Engine.Console = class _Console {
     static __dev__ = true;
-    static Log(...args){
-        if(_Console.__dev__ === true)
-            console.log(...args);
+    static Log(...args) {
+        if (_Console.__dev__ === true) console.log(...args);
     }
 };
 
@@ -112,4 +111,24 @@ Engine.DOM.OnReady = Engine.OnReady = (callback) => {
             }
         }, 100);
     });
+};
+
+Engine.DOM.ClassSwitch = (elmt, class1, class2, force1 = null) => {
+    if (force1 === null)
+        return elmt.classList.contains(class1)
+            ? (elmt.classList.add(class2), elmt.classList.remove(class1))
+            : (elmt.classList.add(class1), elmt.classList.remove(class2));
+
+    let temp1, temp2;
+
+    if (force1 === true) {
+        temp1 = class1;
+        temp2 = class2;
+    } else {
+        temp1 = class2;
+        temp2 = class1;
+    }
+    
+    elmt.classList.add(temp1);
+    elmt.classList.remove(temp2);
 };
