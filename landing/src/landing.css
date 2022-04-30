@@ -7,7 +7,7 @@ body {
     background: linear-gradient(#004c4c var(--page-height), #fff 95%);
 }
 
-#logo .image{
+#logo .image {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,12 +15,12 @@ body {
     transition: background-image 500ms ease;
 }
 
-.top #logo .image{
-    background-image: url('./img/logo_white.png');
+.top #logo .image {
+    background-image: url("./img/logo_white.png");
 }
 
-.scroll #logo .image{
-    background-image: url('./img/logo.png');
+.scroll #logo .image {
+    background-image: url("./img/logo.png");
 }
 
 #introduction {
@@ -134,7 +134,7 @@ body {
     }
 }
 
-header{
+header {
     transition: all 300ms ease;
 }
 
@@ -143,6 +143,15 @@ header.top {
     box-shadow: unset;
 }
 
-header.scroll{
+header.scroll {
     background: #fff;
+}
+
+.slide-show {
+    position: fixed;
+    z-index: 100;
+}
+
+.slide-hide {
+    display: none;
 }

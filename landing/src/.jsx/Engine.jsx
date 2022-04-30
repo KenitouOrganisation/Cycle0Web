@@ -62,6 +62,8 @@ Engine.Alert = class _Alert {
 
 Engine.CSS = {};
 Engine.DOM = {};
+Engine.MATH = {};
+Engine.MATH.WithUnit = {};
 
 Engine.AddJsAttr = function (elmt, jsAttrObj) {
     for (let name in jsAttrObj) {
@@ -94,10 +96,16 @@ Engine.Q = (selector) => document.querySelector(selector);
 Engine.QAll = (selector) => document.querySelectorAll(selector);
 
 Engine.CSS._root = null;
-Engine.CSS.SetVar = function (name, value) {
+Engine.CSS.InitRoot = function () {
     if (!Engine.CSS._root) Engine.CSS._root = Engine.Q(":root");
-
+};
+Engine.CSS.SetVar = function (name, value) {
+    Engine.CSS.InitRoot();
     Engine.CSS._root.style.setProperty(name, value);
+};
+Engine.CSS.GetVar = function (name) {
+    Engine.CSS.InitRoot();
+    return Engine.CSS._root.style.getPropertyValue(name);
 };
 
 Engine.DOM._readyElement = "#ready";
@@ -128,7 +136,33 @@ Engine.DOM.ClassSwitch = (elmt, class1, class2, force1 = null) => {
         temp1 = class2;
         temp2 = class1;
     }
-    
+
     elmt.classList.add(temp1);
     elmt.classList.remove(temp2);
+};
+
+Engine.DOM.insertAfter = (newNode, referenceNode) => {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+};
+
+Engine.MATH.WithUnit.SplitValue = (valStr) => {
+    return valStr.split(/([0-9.]+)/); // return ["", "number", "unit"]
+};
+
+Engine.MATH.WithUnit.Multiply = (number, valStr) => {
+    const val = Engine.MATH.WithUnit.SplitValue(valStr);
+
+    // preventing undefined or null value, that cause NaN
+    if (!val[1]) val[1] = 1;
+
+    if (!val[2]) val[2] = "";
+
+    const result = number * val[1];
+    return result + val[2];
+};
+
+Engine.MATH.Bounded = ({ value, min, max }) => {
+    if (min && value < min) return min;
+    if (max && value > max) return max;
+    return value;
 };

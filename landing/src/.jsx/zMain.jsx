@@ -1,6 +1,7 @@
 // Const
+const slideHeightCssVar = '--page-height';
 const CSSHeightResize = () =>
-    Engine.CSS.SetVar("--page-height", window.innerHeight + "px");
+    Engine.CSS.SetVar(slideHeightCssVar, window.innerHeight + "px");
 
 // Init Call
 if(Engine.JSEnable)
@@ -17,7 +18,9 @@ Engine.OnReady(() => {
 
     // Init
 
-    SlideManager.Init();
+    SlideManager.Init({
+        slideHeightCssVar : slideHeightCssVar
+    });
 
     // event assign
     window.addEventListener('resize', CSSHeightResize);
