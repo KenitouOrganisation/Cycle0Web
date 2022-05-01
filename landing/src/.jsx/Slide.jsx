@@ -31,4 +31,20 @@ class Slide {
             false
         );
     }
+
+    ChangeToAbsolute(toAbsolute = true){
+        if(toAbsolute)
+            return this._elmt.classList.add('absolute');
+        
+        return this._elmt.classList.remove('absolute');
+    }
+
+    SearchChild(selector){
+        return this._elmt.querySelectorAll(selector);
+    }
+
+    GetTextBox(){
+        return this.SearchChild('.text-box');
+    }
+
 }

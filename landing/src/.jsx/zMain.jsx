@@ -1,16 +1,13 @@
 // Const
-const slideHeightCssVar = '--page-height';
+const slideHeightCssVar = "--page-height";
 const CSSHeightResize = () =>
     Engine.CSS.SetVar(slideHeightCssVar, window.innerHeight + "px");
 
 // Init Call
-if(Engine.JSEnable)
-    CSSHeightResize();
+if (Engine.JSEnable) CSSHeightResize();
 
 Engine.OnReady(() => {
-
-    if(Engine.CheckCompatibility() === false || !Engine.JSEnable)
-        return;
+    if (Engine.CheckCompatibility() === false || !Engine.JSEnable) return;
 
     // shorcut
     const _E = Engine;
@@ -18,12 +15,33 @@ Engine.OnReady(() => {
 
     // Init
 
+    for (let initFunc in Init) {
+        try {
+            Init[initFunc]();
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     SlideManager.Init({
-        slideHeightCssVar : slideHeightCssVar
+        slideHeightCssVar: slideHeightCssVar,
     });
 
-    // event assign
-    window.addEventListener('resize', CSSHeightResize);
-    window.addEventListener('scroll', SlideManager.OnScroll)
 
+    // grouping instructions
+    function OnResize() {
+        CSSHeightResize();
+        SlideManager.OnResize();
+    }
+
+    function OnScroll(e){
+        SlideManager.OnScroll(e);
+        InitManual.AssignAnimationWhenVisible();
+    }
+
+    // event assign
+    window.addEventListener("resize", OnResize);
+    window.addEventListener("scroll", OnScroll);
 });
+
+function CenterBodyBackground() {}

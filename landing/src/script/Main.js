@@ -129,8 +129,24 @@ Engine.DOM.ClassSwitch = (elmt, class1, class2, force1 = null) => {
   elmt.classList.remove(temp2);
 };
 
+Engine.DOM.insertBefore = (newNode, referenceNode) => {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode);
+};
+
 Engine.DOM.insertAfter = (newNode, referenceNode) => {
-  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  Engine.DOM.insertBefore(newNode, referenceNode.nextSibling);
+};
+
+Engine.DOM.getRect = elmt => {
+  const clientRect = elmt.getBoundingClientRect();
+  return clientRect ? clientRect : {};
+};
+
+Engine.DOM.IsVisible = (elmt, strict = false) => {
+  const clientRect = Engine.DOM.getRect(elmt);
+  const isAbove = clientRect.top < 0;
+  const isUnder = clientRect.top > window.innerHeight;
+  return !isAbove && !isUnder;
 };
 
 Engine.MATH.WithUnit.SplitValue = valStr => {
@@ -202,6 +218,19 @@ class Slide {
     Engine.DOM.ClassSwitch(this._elmt, this._const._SLIDE_SHOW, this._const._SLIDE_HIDE, false);
   }
 
+  ChangeToAbsolute(toAbsolute = true) {
+    if (toAbsolute) return this._elmt.classList.add('absolute');
+    return this._elmt.classList.remove('absolute');
+  }
+
+  SearchChild(selector) {
+    return this._elmt.querySelectorAll(selector);
+  }
+
+  GetTextBox() {
+    return this.SearchChild('.text-box');
+  }
+
 }
 const SlideManager = {};
 const SM = SlideManager;
@@ -212,7 +241,9 @@ SM._const = {
 };
 SM.slideList = [];
 SM.currentSlide = 0;
+SM.lastSlideUnlocked = false;
 SM.Header = {};
+SM.ignoringLastSlideScroll = false;
 
 SM.Init = ({
   slideHeightCssVar
@@ -233,18 +264,26 @@ SM.Init = ({
   }, Engine.Elmt("div", {
     class: "vertical center-box"
   }));
+  Engine.DOM.insertAfter(SM._elmt.fakeSpace, SM.SlideIndex({
+    last: true
+  })._elmt);
   SM.ShowSlide(SM.currentSlide);
+  SM.SetFakeSpace();
+  SM.slideList.forEach(slider => {
+    const textBox = Array.from(slider.GetTextBox());
+    let priority = 1;
+    textBox.forEach(box => {
+      box.classList.add('priority');
+      box.classList.add('_' + priority);
+      if (priority == 1) priority = 2;
+    });
+  });
 };
 
 SM.Header.SwitchState = (state = null) => {
+  state = state == "top" ? true : state;
+  state = state == "scroll" ? false : state;
   const header = SM._elmt.header;
-  Engine.DOM.ClassSwitch(header, SM._const._HEADER_ONTOP, SM._const._HEADER_ONSCROLL, false);
-  return;
-
-  if (state != null) {
-    if (state == SM._elmt._HEADER_ONTOP) state = true;else if (state == SM._elmt._HEADER_ONSCROLL) state = false;else state = null;
-  }
-
   Engine.DOM.ClassSwitch(header, SM._const._HEADER_ONTOP, SM._const._HEADER_ONSCROLL, state);
 };
 
@@ -252,21 +291,35 @@ SM.OnScroll = e => {
   const scrollingElmt = e.target.scrollingElement;
   const currentScroll = scrollingElmt.scrollTop;
   const totalScroll = scrollingElmt.scrollHeight;
-  const slideHeight = SM.GetSlideHeight();
-  const slidePosition = Math.round(currentScroll / parseInt(slideHeight));
-  if (currentScroll == 0) SM.Header.SwitchState("top");else SM.Header.SwitchState("scroll");
+  const slideHeight = parseInt(SM.GetSlideHeight());
+  const slidePosition = Math.floor(currentScroll / slideHeight);
   const currentSlide = Engine.MATH.Bounded({
     min: 0,
-    max: SM.slideList.length,
+    max: SM.slideList.length - 1,
     value: slidePosition
   });
   if (currentSlide != SM.currentSlide) SM.ShowSlide(currentSlide);
   SM.currentSlide = currentSlide;
+  if (SM.currentSlide == 0) SM.Header.SwitchState("top");else SM.Header.SwitchState("scroll");
+  const lastSlide = SM.slideList[SM.slideList.length - 1];
+
+  if (SM.lastSlideUnlocked != true && SM.LastSlideReach() === true) {
+    SM.lastSlideUnlocked = true;
+    Engine.DOM.insertBefore(SM._elmt.fakeSpace, lastSlide._elmt);
+    lastSlide.ChangeToAbsolute();
+    if (SM.ignoringLastSlideScroll !== true) lastSlide._elmt.scrollIntoView(true);else SM.ignoringLastSlideScroll = false;
+  } else if (SM.lastSlideUnlocked != false && SM.LastSlideReach() !== true) {
+    SM.lastSlideUnlocked = false;
+    lastSlide.ChangeToAbsolute(false);
+  }
 };
 
-SM.OnResize = () => {};
+SM.OnResize = () => {
+  SM.SetFakeSpace();
+};
 
 SM.SlideIndex = index => {
+  if (index.last && index.last == true) index = SM.slideList.length - 1;
   const slide = SM.slideList[index];
   return slide ? slide : {};
 };
@@ -275,10 +328,8 @@ SM.ShowSlide = slideNumber => {
   SM.slideList.map(slide => {
     if (slideNumber == slide.GetSlideId()) {
       slide.Show();
-      Engine.DOM.insertAfter(SM._elmt.fakeSpace, slide._elmt);
     } else slide.Hide();
   });
-  SM.SetFakeSpace();
 };
 
 SM.SetSlideHeight = value => {
@@ -294,7 +345,58 @@ SM.SetFakeSpace = () => {
   const totalHeight = Engine.MATH.WithUnit.Multiply(hidedSlideNb, SM.GetSlideHeight());
   SM._elmt.fakeSpace.style.height = totalHeight;
 };
-const slideHeightCssVar = '--page-height';
+
+SM.LastSlideReach = () => {
+  return SM.currentSlide == SM.slideList.length - 1;
+};
+const Init = {};
+
+Init.JSOnFlag = () => {
+  document.body.classList.add("js-on");
+};
+
+Init.CenterBodyBkground = () => {
+  const bkgroundElmt = Engine.Q("#body-background");
+  const bodyRect = Engine.DOM.getRect(document.body);
+  const centerPos = bodyRect.height / 2;
+  bkgroundElmt.style.top = centerPos + "px";
+};
+
+Init.AnchorLinkScrollManaged = () => {
+  const targetIdAnchor = "pre-inscription";
+  const targetElmt = Engine.Q("#" + targetIdAnchor);
+  let buttonList = Engine.QAll(`a[href="#${targetIdAnchor}"]`);
+  buttonList = Array.from(buttonList);
+  buttonList.forEach(btt => {
+    btt.addEventListener("click", e => {
+      e.preventDefault();
+      targetElmt.scrollIntoView({
+        block: "start",
+        inline: "nearest",
+        behavior: "smooth"
+      });
+      SlideManager.ignoringLastSlideScroll = true;
+    });
+  });
+};
+
+Init.IgnoringLastSlideScroll = () => {
+  if (document.location.hash != "") SlideManager.ignoringLastSlideScroll = true;
+};
+
+const InitManual = {};
+
+InitManual.AssignAnimationWhenVisible = () => {
+  const animBox = Array.from(Engine.QAll('.anim-box'));
+  const className = {
+    _ON_VISIBLE: 'show',
+    _ON_HIDE: 'hide'
+  };
+  animBox.forEach(box => {
+    if (Engine.DOM.IsVisible(box) === true) Engine.DOM.ClassSwitch(box, className._ON_VISIBLE, className._ON_HIDE, true);else Engine.DOM.ClassSwitch(box, className._ON_VISIBLE, className._ON_HIDE, false);
+  });
+};
+const slideHeightCssVar = "--page-height";
 
 const CSSHeightResize = () => Engine.CSS.SetVar(slideHeightCssVar, window.innerHeight + "px");
 
@@ -303,9 +405,31 @@ Engine.OnReady(() => {
   if (Engine.CheckCompatibility() === false || !Engine.JSEnable) return;
   const _E = Engine;
   const _Log = Engine.Console.Log;
+
+  for (let initFunc in Init) {
+    try {
+      Init[initFunc]();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   SlideManager.Init({
     slideHeightCssVar: slideHeightCssVar
   });
-  window.addEventListener('resize', CSSHeightResize);
-  window.addEventListener('scroll', SlideManager.OnScroll);
+
+  function OnResize() {
+    CSSHeightResize();
+    SlideManager.OnResize();
+  }
+
+  function OnScroll(e) {
+    SlideManager.OnScroll(e);
+    InitManual.AssignAnimationWhenVisible();
+  }
+
+  window.addEventListener("resize", OnResize);
+  window.addEventListener("scroll", OnScroll);
 });
+
+function CenterBodyBackground() {}

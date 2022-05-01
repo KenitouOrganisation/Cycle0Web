@@ -141,9 +141,27 @@ Engine.DOM.ClassSwitch = (elmt, class1, class2, force1 = null) => {
     elmt.classList.remove(temp2);
 };
 
-Engine.DOM.insertAfter = (newNode, referenceNode) => {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+Engine.DOM.insertBefore = (newNode, referenceNode) => {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode);
 };
+
+Engine.DOM.insertAfter = (newNode, referenceNode) => {
+    Engine.DOM.insertBefore(newNode, referenceNode.nextSibling);
+};
+
+Engine.DOM.getRect = (elmt) => {
+    const clientRect = elmt.getBoundingClientRect();
+    return clientRect ? clientRect : {};
+};
+
+Engine.DOM.IsVisible = (elmt, strict = false) => {
+    const clientRect = Engine.DOM.getRect(elmt);
+    const isAbove = clientRect.top < 0;
+    const isUnder = clientRect.top > window.innerHeight;
+
+    return !isAbove && !isUnder;
+};
+
 
 Engine.MATH.WithUnit.SplitValue = (valStr) => {
     return valStr.split(/([0-9.]+)/); // return ["", "number", "unit"]

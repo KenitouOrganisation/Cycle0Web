@@ -27,12 +27,30 @@
             rel="stylesheet"
         />
     </head>
+
+    <!--
+        Code adapted to show without Javascript, so we put all first in html 
+        (where we have a heavy HTML code instead of using JS to have less repeat code)
+    -->
+
     <body>
+        <div id="body-background">
+            <img src="./src/img/big-c.png" alt="">
+        </div>
         <header>
             <nav>
                 <div id="logo">
-                    <a href="/" class="image">
-                        <!-- <img src="./src/img/logo_white.png" alt="Cycle Zéro" /> -->
+                    <a href="" class="image">
+                        <img
+                            src="./src/img/logo_white.png"
+                            alt="Cycle Zéro"
+                            class="top"
+                        />
+                        <img
+                            src="./src/img/logo.png"
+                            alt="Cycle Zéro"
+                            class="scroll"
+                        />
                     </a>
                 </div>
                 <div id="header-buttons">
@@ -45,7 +63,11 @@
 
         <div id="view">
             <!-- 1rst view -->
-            <div class="container slider _dark spec_bloc" data-view="0" id="introduction">
+            <div
+                class="container slider _dark spec_bloc ignore-header"
+                data-view="0"
+                id="introduction"
+            >
                 <div class="vertical center-box">
                     <div class="horizontal-box">
                         <div class="center-elmt-box">
@@ -72,7 +94,7 @@
                                 >
                             </div>
                             <div class="inline-box">
-                                <div class="illustration">
+                                <div class="illustration img-box">
                                     <img
                                         src="./src/img/illustrations/app1.png"
                                         alt="Illustration 1"
@@ -119,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="inline-box">
-                                <div class="illustration">
+                                <div class="illustration img-box">
                                     <img
                                         src="./src/img/illustrations/app1.png"
                                         alt="Illustation 2"
@@ -156,7 +178,7 @@
                                 </div>
                             </div>
                             <div class="inline-box">
-                                <div class="illustration">
+                                <div class="illustration img-box">
                                     <img
                                         src="./src/img/illustrations/app2.png"
                                         alt="Illustation 2"
@@ -194,7 +216,7 @@
                                 </div>
                             </div>
                             <div class="inline-box">
-                                <div class="illustration">
+                                <div class="illustration img-box">
                                     <img
                                         src="./src/img/illustrations/app3.png"
                                         alt="Illustation 2"
@@ -231,7 +253,7 @@
                                 </div>
                             </div>
                             <div class="inline-box">
-                                <div class="illustration">
+                                <div class="illustration img-box">
                                     <img
                                         src="./src/img/illustrations/app4.png"
                                         alt="Illustation 2"
@@ -266,13 +288,13 @@
                                 </div>
                             </div>
                             <div class="inline-box panorama-box">
-                                <div class="square-img">
+                                <div class="square-img img-box">
                                     <img src="" alt="Photo réemploi 1" />
                                 </div>
-                                <div class="square-img">
+                                <div class="square-img img-box">
                                     <img src="" alt="Photo réemploi 2" />
                                 </div>
-                                <div class="square-img">
+                                <div class="square-img img-box">
                                     <img src="" alt="Photo réemploi 3" />
                                 </div>
                             </div>
@@ -291,7 +313,7 @@
                     style="width: 60%; margin: auto"
                 />
                 <div class="bottom">
-                    <div class="citation">
+                    <div class="citation anim-box">
                         <p class="quote">
                             <span
                                 >Dans la confusion, trouver la simplicité</span
@@ -317,7 +339,7 @@
                     </div>
                     <div class="center-elmt-box">
                         <!-- Content -->
-                        <div class="inline-box _w60">
+                        <div class="inline-box _w60 anim-box">
                             <form action="" method="POST">
                                 <h3>Pré-inscription</h3>
                                 <p>
@@ -339,7 +361,7 @@
                                 />
                             </form>
                         </div>
-                        <div class="inline-box">
+                        <div class="inline-box anim-box priority _2">
                             <div class="border-box">
                                 <p class="p_number_1">1432</p>
                                 <p class="p_3">Pré-inscrits</p>
@@ -351,7 +373,7 @@
         </div>
 
         <footer>
-            <div class="img-box">
+            <div class="img-box anim-box">
                 <img
                     src="./src/img/logo_white.png"
                     alt="Cycle Zéro"
@@ -359,7 +381,7 @@
                 />
             </div>
             <div class="text-box _right">
-                <a href="mailto:cycle0zero@gmail.com" class="p_3 color_1">
+                <a href="mailto:cycle0zero@gmail.com" class="p_4 color_1">
                     cycle0zero@gmail.com
                 </a>
             </div>
