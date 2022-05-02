@@ -12,7 +12,7 @@ body {
     );
 }
 
-#body-background {
+#body-background, #introduction-bkg{
     opacity: 0;
     position: absolute;
     top: 0;
@@ -29,6 +29,11 @@ body {
     opacity: 0.2;
 }
 
+.js-on .slide-show #introduction-bkg{
+    opacity: 1;
+    transform: scale(1);
+}
+
 /* #logo .image {
     background-size: contain;
     background-position: center;
@@ -37,12 +42,58 @@ body {
     transition: background-image 500ms ease;
 } */
 
-#introduction {
-    background-color: #171717; /*#254039;*/
+#introduction, #introduction-bkg {
+    background-color: transparent;/*#171717; #254039;*/
     /* background-image: url("./img/first-slide.png"); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#introduction-bkg{
+    height: 100%;
+    transform: scale(1.4);
+    transition-duration: 6s;
+}
+
+@media (min-width: 3024px) {
+    #introduction-bkg {
+        background-image: url("./img/introduction/3024.png");
+    }
+}
+
+@media (max-width: 3024px) {
+    #introduction-bkg {
+        background-image: url("./img/introduction/1850.png");
+    }
+}
+
+@media (max-width: 1850px) {
+    #introduction-bkg {
+        background-image: url("./img/introduction/1295.png");
+    }
+}
+
+@media (max-width: 1295px) {
+    #introduction-bkg {
+        background-image: url("./img/introduction/1036.png");
+    }
+}
+
+@media (max-width: 1036px) {
+    #introduction-bkg {
+        background-image: url("./img/introduction/725.png");
+    }
+}
+
+@media (max-width: 725px) {
+    #introduction-bkg {
+        background-image: url("./img/introduction/485.png");
+    }
+}
+
+.center-box.vertical{
+    z-index: 20;
 }
 
 .center-box.vertical .horizontal-box {
@@ -59,7 +110,7 @@ body {
 }
 
 .illustration {
-    width: 60%;
+    width: 48%;
 }
 
 .container .vertical.center-box {
@@ -116,44 +167,10 @@ body {
     margin-left: 10%;
 }
 
-@media (min-width: 3024px) {
-    #introduction {
-        background-image: url("./img/introduction/3024.png");
-    }
-}
 
-@media (max-width: 3024px) {
-    #introduction {
-        background-image: url("./img/introduction/1850.png");
-    }
-}
-
-@media (max-width: 1850px) {
-    #introduction {
-        background-image: url("./img/introduction/1295.png");
-    }
-}
-
-@media (max-width: 1295px) {
-    #introduction {
-        background-image: url("./img/introduction/1036.png");
-    }
-}
-
-@media (max-width: 1036px) {
-    #introduction {
-        background-image: url("./img/introduction/725.png");
-    }
-}
-
-@media (max-width: 725px) {
-    #introduction {
-        background-image: url("./img/introduction/485.png");
-    }
-}
 
 header {
-    transition: all 150ms ease;
+    transition: all 150ms ease-out;
 }
 
 header.top {
@@ -252,4 +269,13 @@ header.scroll .top {
 .js-on .anim-box.show {
     bottom: 0px;
     opacity: 1;
+}
+
+
+
+
+
+
+.normal-box{
+    margin-left: 18%;
 }
