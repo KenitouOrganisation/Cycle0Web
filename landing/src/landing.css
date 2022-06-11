@@ -32,6 +32,7 @@ body {
 .js-on .slide-show #introduction-bkg{
     opacity: 1;
     transform: scale(1);
+    filter: brightness(0.7);
 }
 
 /* #logo .image {
@@ -92,7 +93,7 @@ body {
     }
 }
 
-.center-box.vertical{
+.center-box.vertical, .bottom{
     z-index: 20;
 }
 
