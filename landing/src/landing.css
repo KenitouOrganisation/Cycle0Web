@@ -32,7 +32,6 @@ body {
 .js-on .slide-show #introduction-bkg{
     opacity: 1;
     transform: scale(1);
-    filter: brightness(0.7);
 }
 
 /* #logo .image {
@@ -55,6 +54,7 @@ body {
     height: 100%;
     transform: scale(1.4);
     transition-duration: 6s;
+    filter: brightness(0.3);
 }
 
 @media (min-width: 3024px) {
@@ -118,11 +118,23 @@ body {
     width: 100%;
 }
 
+.table-box.text-box{
+    /* Anchor bottom */
+    position: relative;
+    width: 100%;
+}
+
 .table-box.text-box .h2_2 {
-    vertical-align: middle;
+    /*vertical-align: middle;*/
     padding-left: 10px;
     font-size: 30px;
     color: var(--color-1);
+    /* Anchor bottom */
+    position: absolute;
+    width: 100%;
+    left: 45px;
+    bottom: 0;
+    margin: 16px;
 }
 
 .index {
@@ -149,7 +161,7 @@ body {
 }
 
 #pre-inscription {
-    padding: 50px 0;
+    /*padding: 50px 0;*/
 }
 
 #pre-inscription table {
@@ -164,10 +176,18 @@ body {
 }
 
 #pre-inscription form {
-    width: 50%;
-    margin-left: 10%;
+    width: 75%;
+    margin-left: 13px;
 }
 
+#form_container{
+    margin-top: 50px;
+}
+
+#form_container .indicator-box{
+    width: 170px;
+    transform: translateX(50%);
+}
 
 
 header {
@@ -180,7 +200,7 @@ header.top {
 }
 
 header.scroll {
-    background: #fff;
+    background: rgb(255 255 255 / 90%);
 }
 
 /* Hidding the black logo only (when the JS is not interferring the DOM class = meaning JS disable)*/
@@ -196,6 +216,10 @@ header.scroll .scroll {
 header.top .scroll,
 header.scroll .top {
     opacity: 0;
+}
+
+.scroll ._btt._orange._transparent{
+    color : var(--secondary-color);
 }
 
 #logo img {
@@ -221,6 +245,12 @@ header.scroll .top {
     position: absolute;
     /* the margin-bottom is not working */
     margin-top: calc(var(--page-height) * -1);
+}
+
+#pre-inscription{
+    /* TODO to be improved */
+    height: calc(var(--page-height)/1.5);
+    margin-top : calc(var(--page-height)/3.5);
 }
 
 /* Animation on slide show */

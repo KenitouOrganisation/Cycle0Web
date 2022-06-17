@@ -32,6 +32,7 @@ Engine.Alert = class _Alert {
 };
 
 (function () {
+    // FIXME obsolete
     // protected env for defining static/const attribute in Engine (make them not rewritable for safety)
     "use strict";
 
@@ -88,6 +89,7 @@ Engine.Elmt = function (name, attr, ...children) {
 
     children.forEach((child) => {
         if (child instanceof Node) elmt.appendChild(child);
+        if (typeof child == 'string') elmt.innerHTML += child;
     });
     return elmt;
 };

@@ -73,6 +73,7 @@ Engine.Elmt = function (name, attr, ...children) {
 
   children.forEach(child => {
     if (child instanceof Node) elmt.appendChild(child);
+    if (typeof child == 'string') elmt.innerHTML += child;
   });
   return elmt;
 };
@@ -190,7 +191,13 @@ class ScrollContainer {
   ScrollMenu() {
     return Engine.Elmt("div", {
       class: "scroll_menu"
-    }, Engine.Elmt("p", null, "Hello"), "s ", Engine.Elmt("br", null), Engine.Elmt("p", null, "OK boss"));
+    }, Engine.Elmt("p", null, "Hello"), "s ", Engine.Elmt("br", null), Engine.Elmt("p", null, "OK boss"), Engine.Elmt("div", {
+      class: "scro"
+    }, Engine.Elmt("div", {
+      class: "verti"
+    }, Engine.Elmt("div", {
+      class: "center"
+    }, Engine.Elmt("p", null, "Nice test")))));
   }
 
 }

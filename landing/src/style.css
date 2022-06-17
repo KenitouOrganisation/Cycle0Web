@@ -1,10 +1,10 @@
 :root {
     --page-height-init: 750px;
     --page-height: 750px;
-    --header-height : 90px;
+    --header-height : 100px;
     --main-font: "Montserrat", Arial, sans-serif;
     --primary-color: #153939;/*#3e6060;*/
-    --secondary-color: #ff7033;
+    --secondary-color: #FE4D00;
     --color-1: #fff;
 }
 
@@ -25,16 +25,16 @@ header {
     box-shadow: 0 0 3px #26262645;
 }
 #logo .image {
-    width: 145px;
+    width: 195px;
     left: 55px;
     position: absolute;
-    top: 10%;
+    top: 1%;
 }
 ._btt {
     text-decoration: none;
     background: #282828;
-    border: none;
-    padding: 11px 30px;
+    border: 2px solid;
+    padding: 9px 25px;
     color: var(--color-1);
     border-radius: 3px;
     cursor: pointer;
@@ -44,22 +44,34 @@ header {
     font-family: var(--main-font);
 }
 
-._btt._orange {
+._btt._orange._filled {
     background: var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
-._btt._orange:hover {
+._btt._orange._filled:hover {
     background: var(--color-1);
+    border-color: var(--color-1);
     color: var(--secondary-color);
+}
+
+._btt._transparent{
+    border-radius: 10px;
+    padding: 9px 18px;
+}
+
+._btt._orange._transparent {
+    background: rgba(254, 77, 0, 0.16);
+    border-color: var(--secondary-color);
 }
 
 #header-buttons {
     position: absolute;
-    right: 29px;
+    right: 22px;
     top: 50%;
     transform: translateY(-50%);
 }
-#header-buttons button {
+#header-buttons ._btt {
     display: inline-block;
     margin: 0px 5px;
 }
@@ -83,12 +95,13 @@ header {
 }
 
 .normal-box{
-    margin: 70px 8%;
+    margin: 20px 8%;
 }
 
 .center-box {
     position: absolute;
 }
+
 .vertical {
     top: 50%;
     transform: translateY(-50%);
@@ -113,9 +126,18 @@ header {
     display: inline-block;
     box-sizing: border-box;
 }
+
+.illustration{
+    transform: translate(50%);
+}
+
 .illustration img {
     width: 100%;
     pointer-events: none;
+}
+
+._w40{
+    width: 40%;
 }
 
 ._w60 {
@@ -231,9 +253,9 @@ header {
 }
 
 .p_2 {
-    font-size: 22px;
+    font-size: 21px;
     padding: 0 13px;
-    margin-top: 0;
+    /*margin-top: 0;*/
 }
 
 ._dark .p_2 {
@@ -271,27 +293,34 @@ header {
 
 .border-box {
     /* border: 1px solid var(--primary-color); */
-    padding: 18px 30px;
-    border-radius: 15px;
-    background: #1a1a1a;
+    padding: 12px 30px;
+    border-radius: 16px;
+    background: #6D8788;
 }
 .p_number_1 {
-    color: var(--secondary-color);
-    font-size: 4vw;
-    font-family: var(--main-font);
+    color: #fff;
+    font-size: 3.5vw;
     font-weight: 600;
     margin: 0;
+    text-align: center;
 }
 .p_3, .p_4{
-    color: var(--color-1);
+    color: var(--primary-color);
     font-size: 1.5vw;
-    font-family: var(--main-font);
     font-weight: 600;
     margin: 0;
+    text-align: center;
 }
-
 .p_4{
     font-size: 1.2vw;
+}
+
+.p_number_1,
+.p_2,
+.p_3,
+.p_4
+{
+    font-family: var(--main-font);
 }
 
 table tbody,
@@ -301,12 +330,26 @@ tr {
 }
 
 form input:not(input[type="reset"], input[type="submit"]) {
-    border: 1px solid #6d8788;
+    border: 1px solid #c5d1d2;
+    outline: 0px;
     box-sizing: border-box;
     border-radius: 3px;
-    padding: 10px 20px;
+    padding: 12px 20px;
+    font-size: 17px;
+    transition: all ease 300ms ease;
+    color : var(--primary-color);
 }
 
+form input:not(input[type="reset"], input[type="submit"]):focus {
+    border: 1px solid #ff3900;
+    outline: 3px solid #ffe0d4;
+}
+
+form input:not(input[type="reset"], input[type="submit"])::placeholder{
+    color : var(--primary-color);
+    font-family: var(--main-font);
+    opacity: 0.7;
+}
 
 footer{
     background-color: var(--primary-color);
