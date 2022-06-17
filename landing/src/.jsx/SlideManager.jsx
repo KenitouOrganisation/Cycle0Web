@@ -36,8 +36,8 @@ SM.Init = ({ slideHeightCssVar }) => {
         </div>
     );
     Engine.DOM.insertAfter(
-        SM._elmt.fakeSpace,
-        SM.SlideIndex({ last: true })._elmt
+        newNode = SM._elmt.fakeSpace,
+        referenceNode = SM.SlideIndex({ last: true })._elmt
     );
 
     // Showing the first slide (or the selected side in the url)
@@ -53,6 +53,7 @@ SM.Init = ({ slideHeightCssVar }) => {
             box.classList.add('priority');
             box.classList.add('_' + priority);
 
+            // le premier de la liste des text-box aura une priorité 1, les autres seront 2
             if(priority == 1)
                 priority = 2;
         })
@@ -111,7 +112,7 @@ SM.OnScroll = (e) => {
         // we move the fakeSpace before our slide to position it normally with absolute position
         Engine.DOM.insertBefore(SM._elmt.fakeSpace, lastSlide._elmt);
         // changing the fixed position to absolute of the last slide
-        lastSlide.ChangeToAbsolute();
+        lastSlide.ChangeToAbsolute(true);
         // and we make a focus directly if flag not false
         if(SM.ignoringLastSlideScroll !== true)
             lastSlide._elmt.scrollIntoView(true);

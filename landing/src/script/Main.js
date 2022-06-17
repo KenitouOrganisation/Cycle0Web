@@ -271,7 +271,7 @@ SM.Init = ({
   }, Engine.Elmt("div", {
     class: "vertical center-box"
   }));
-  Engine.DOM.insertAfter(SM._elmt.fakeSpace, SM.SlideIndex({
+  Engine.DOM.insertAfter(newNode = SM._elmt.fakeSpace, referenceNode = SM.SlideIndex({
     last: true
   })._elmt);
   SM.ShowSlide(SM.currentSlide);
@@ -313,7 +313,7 @@ SM.OnScroll = e => {
   if (SM.lastSlideUnlocked != true && SM.LastSlideReach() === true) {
     SM.lastSlideUnlocked = true;
     Engine.DOM.insertBefore(SM._elmt.fakeSpace, lastSlide._elmt);
-    lastSlide.ChangeToAbsolute();
+    lastSlide.ChangeToAbsolute(true);
     if (SM.ignoringLastSlideScroll !== true) lastSlide._elmt.scrollIntoView(true);else SM.ignoringLastSlideScroll = false;
   } else if (SM.lastSlideUnlocked != false && SM.LastSlideReach() !== true) {
     SM.lastSlideUnlocked = false;

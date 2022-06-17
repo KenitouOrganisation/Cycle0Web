@@ -84,6 +84,7 @@ header {
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .container.slider{
@@ -145,6 +146,10 @@ header {
 }
 ._w75 {
     width: 75%;
+}
+
+._w80{
+    width: 80%;
 }
 
 ._w50 {

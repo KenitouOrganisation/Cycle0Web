@@ -5,10 +5,15 @@
 body {
     overflow-y: scroll;
     /* background: linear-gradient(#004c4c var(--page-height), #fff 95%); */
+    /*
+        first color : starting after the first view (before the slide)
+        second color : for the transition
+        thirs color : end color (for the pre_inscriptions form)
+    */
     background-image: linear-gradient(
         #004c4c var(--page-height),
         #00aeae 80%,
-        #fff 90%
+        #fff 94%
     );
 }
 
@@ -146,10 +151,10 @@ body {
     width: 100%;
 }
 
-.container[data-view="5"] .panorama-box {
+#etape_5 .panorama-box {
     margin: 20px 0;
 }
-.container[data-view="5"] .square-img {
+#etape_5 .square-img {
     width: 300px;
     background-color: #171717;
     border-radius: 10px;
@@ -249,8 +254,9 @@ header.scroll .top {
 
 #pre-inscription{
     /* TODO to be improved */
-    height: calc(var(--page-height)/1.5);
-    margin-top : calc(var(--page-height)/3.5);
+    /*height: calc(var(--page-height)/1.5);
+    margin-top : calc(var(--page-height)/3.5);*/
+
 }
 
 /* Animation on slide show */
@@ -309,4 +315,13 @@ header.scroll .top {
 
 .normal-box{
     margin-left: 18%;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 300ms ease;
 }
