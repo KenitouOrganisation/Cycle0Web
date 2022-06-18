@@ -8,8 +8,29 @@ class Slide {
         this.isHided = false;
     }
 
+    GetDataset(key=""){
+        const dataset = this._elmt.dataset;
+        if(key == "")
+            return dataset;
+
+        key = key.toLowerCase();
+
+        try{
+            const val = dataset[key];
+            return val ? val : "";
+        }catch(err){
+            console.error(err);
+            return "";
+        }
+
+    }
+
     GetSlideId(){
         return this._elmt.dataset.view;
+    }
+
+    GetPagingId(){
+        return this._elmt.dataset.paging;
     }
 
     Show() {

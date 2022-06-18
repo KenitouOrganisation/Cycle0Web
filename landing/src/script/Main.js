@@ -211,8 +211,26 @@ class Slide {
     this.isHided = false;
   }
 
+  GetDataset(key = "") {
+    const dataset = this._elmt.dataset;
+    if (key == "") return dataset;
+    key = key.toLowerCase();
+
+    try {
+      const val = dataset[key];
+      return val ? val : "";
+    } catch (err) {
+      console.error(err);
+      return "";
+    }
+  }
+
   GetSlideId() {
     return this._elmt.dataset.view;
+  }
+
+  GetPagingId() {
+    return this._elmt.dataset.paging;
   }
 
   Show() {
@@ -251,6 +269,7 @@ SM.currentSlide = 0;
 SM.lastSlideUnlocked = false;
 SM.Header = {};
 SM.ignoringLastSlideScroll = false;
+SM.Paging = {};
 
 SM.Init = ({
   slideHeightCssVar
@@ -285,6 +304,10 @@ SM.Init = ({
       if (priority == 1) priority = 2;
     });
   });
+  SM.Paging.Init();
+  SM.OnScroll({
+    target: document
+  });
 };
 
 SM.Header.SwitchState = (state = null) => {
@@ -305,8 +328,10 @@ SM.OnScroll = e => {
     max: SM.slideList.length - 1,
     value: slidePosition
   });
-  if (currentSlide != SM.currentSlide) SM.ShowSlide(currentSlide);
+  if (currentSlide == SM.currentSlide) return;
+  SM.ShowSlide(currentSlide);
   SM.currentSlide = currentSlide;
+  SM.Paging.OnScroll();
   if (SM.currentSlide == 0) SM.Header.SwitchState("top");else SM.Header.SwitchState("scroll");
   const lastSlide = SM.slideList[SM.slideList.length - 1];
 
@@ -356,6 +381,93 @@ SM.SetFakeSpace = () => {
 SM.LastSlideReach = () => {
   return SM.currentSlide == SM.slideList.length - 1;
 };
+
+SM.JumpTo = slideIdx => {
+  slideIdx = Engine.MATH.Bounded({
+    min: 0,
+    max: SM.slideList.length - 1,
+    value: slideIdx
+  });
+  const slideHeight = parseInt(SM.GetSlideHeight());
+  const targetScroll = Math.ceil(slideIdx * slideHeight);
+  document.scrollingElement.scrollTo({
+    top: targetScroll,
+    left: 0,
+    behavior: "smooth"
+  });
+};
+
+SM.JumpForward = () => {
+  SM.JumpTo(SM.currentSlide + 1);
+};
+
+SM._elmt._paging = {};
+SM.Paging.list = [];
+
+SM.Paging.Init = () => {
+  let list = Array.from(Engine.QAll(".container"));
+  list = list.filter(container => container.dataset.paging != undefined);
+  SM.Paging.list = list;
+  SM._elmt._paging.dots = Engine.Elmt("div", {
+    id: "dots"
+  });
+
+  for (let i = 0; i < list.length; i++) {
+    const idx = i + 1;
+    const dot = Engine.Elmt("div", {
+      class: "dot",
+      "data-index": idx,
+      "data-js-attr": {
+        onclick: () => {
+          const target = SM.slideList.filter(slide => slide.GetPagingId() == idx);
+          if (target.length < 1) return;
+          SM.JumpTo(target[0].GetSlideId());
+        }
+      }
+    });
+
+    SM._elmt._paging.dots.appendChild(dot);
+  }
+
+  SM._elmt._paging.text = Engine.Elmt("p", {
+    class: "p_2"
+  });
+  SM._elmt._paging.container = Engine.Elmt("div", {
+    id: "paging-box",
+    class: "horizontal _dark"
+  }, SM._elmt._paging.dots, Engine.Elmt("div", {
+    class: "next",
+    title: "Suivant",
+    "data-js-attr": {
+      onclick: () => SM.JumpForward()
+    }
+  }, SM._elmt._paging.text, Engine.Elmt("img", {
+    src: "./src/img/arrow-bottom.png",
+    alt: "\uD83E\uDC73",
+    class: "arrow-bottom",
+    width: "16px"
+  })));
+  document.body.appendChild(SM._elmt._paging.container);
+  SM.Paging.OnScroll();
+};
+
+SM.Paging.OnScroll = (currentSlide = SM.currentSlide) => {
+  const slide = SM.slideList[currentSlide];
+  const _paging = SM._elmt._paging;
+  if (slide.GetDataset("pagingOn") == "false") return Engine.DOM.ClassSwitch(_paging.container, 'hide', 'show', true);
+  Engine.DOM.ClassSwitch(_paging.container, 'hide', 'show', false);
+
+  _paging.text.replaceChildren(Engine.Elmt("span", null, slide.GetDataset("pagingText")));
+
+  const pagingIdx = slide.GetDataset("paging");
+  if (!pagingIdx) return Engine.DOM.ClassSwitch(_paging.dots, 'hide', 'show', true);
+  Engine.DOM.ClassSwitch(_paging.dots, 'hide', 'show', false);
+
+  SM._elmt._paging.dots.childNodes.forEach(dot => {
+    const idx = dot.dataset.index;
+    if (idx != pagingIdx) Engine.DOM.ClassSwitch(dot, 'off', 'on', true);else Engine.DOM.ClassSwitch(dot, 'off', 'on', false);
+  });
+};
 const Init = {};
 
 Init.JSOnFlag = () => {
@@ -377,11 +489,7 @@ Init.AnchorLinkScrollManaged = () => {
   buttonList.forEach(btt => {
     btt.addEventListener("click", e => {
       e.preventDefault();
-      targetElmt.scrollIntoView({
-        block: "start",
-        inline: "nearest",
-        behavior: "smooth"
-      });
+      SlideManager.JumpTo(Infinity);
       SlideManager.ignoringLastSlideScroll = true;
     });
   });

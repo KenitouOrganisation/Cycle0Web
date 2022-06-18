@@ -22,11 +22,13 @@ Init.AnchorLinkScrollManaged = () => {
     buttonList.forEach((btt) => {
         btt.addEventListener("click", (e) => {
             e.preventDefault();
-            targetElmt.scrollIntoView({
+            /*targetElmt.scrollIntoView({
                 block: "start",
                 inline: "nearest",
                 behavior: "smooth",
-            });
+            });*/
+            // Infinity for the last slide, because PreInscription is the last one
+            SlideManager.JumpTo(Infinity);
             SlideManager.ignoringLastSlideScroll = true;
         });
     });

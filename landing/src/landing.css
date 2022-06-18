@@ -12,8 +12,7 @@ body {
     */
     background-image: linear-gradient(
         #004c4c var(--page-height),
-        #00aeae 80%,
-        #fff 94%
+        #00aeae 80%
     );
 }
 
@@ -159,6 +158,7 @@ body {
     background-color: #171717;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 10%;
 }
 
 .quote span {
@@ -166,7 +166,9 @@ body {
 }
 
 #pre-inscription {
-    /*padding: 50px 0;*/
+    /* to hide the paging box when he is fading off */
+    z-index: 1010;
+    background-image: linear-gradient(#00aeae, #ffffff 40%);
 }
 
 #pre-inscription table {
@@ -256,7 +258,6 @@ header.scroll .top {
     /* TODO to be improved */
     /*height: calc(var(--page-height)/1.5);
     margin-top : calc(var(--page-height)/3.5);*/
-
 }
 
 /* Animation on slide show */
@@ -324,4 +325,72 @@ footer{
     width: 100%;
     box-sizing: border-box;
     transition: all 300ms ease;
+}
+
+
+#paging-box {
+    position: fixed;
+    bottom: 5px;
+    z-index: 1000;
+    padding: 10px;
+    transition: all 600ms ease;
+}
+
+#paging-box .next{
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 400ms ease;
+}
+
+#paging-box .next:hover{
+    transform: scale(0.9);
+}
+
+#paging-box, #paging-box .next{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#paging-box.hide{
+    opacity: 0;
+    bottom: -10%;
+}
+#paging-box.show{
+    opacity: 1;
+}
+
+#paging-box .p_2{
+    margin: 8px;
+}
+
+#dots {
+    display: inline-flex;
+    transition: opacity 300ms ease;
+    cursor: pointer;
+}
+
+#dots .dot {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    box-sizing: border-box;
+    margin: 0 7px;
+    transition: background 400ms ease;
+}
+
+#dots .dot:hover{
+    background: var(--primary-color);
+}
+
+#dots .dot.on{
+    background: var(--secondary-color);
+}
+
+#dots.hide{
+    opacity: 0;
+}
+#dots.show{
+    opacity: 1;
 }

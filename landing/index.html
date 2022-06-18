@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Cycle Zéro - Recyclage Chantier</title>
+        <title>Cycle Zéro - Réemploi Chantier</title>
         <link rel="stylesheet" href="./src/style.css" />
         <link rel="stylesheet" href="./src/landing.css" />
         <link rel="icon" type="image/png" href="./src/img/icon.png" />
@@ -69,6 +69,7 @@
             <div
                 class="container slider _dark spec_bloc ignore-header"
                 data-view="0"
+                data-pagingText="En savoir plus"
                 id="introduction"
             >
                 <div id="introduction-bkg" class="img-box"></div>
@@ -112,7 +113,11 @@
                 </div>
             </div>
 
-            <div class="container slider _light" data-view="1">
+            <div 
+                class="container slider _light"
+                data-view="1"
+                data-pagingText=""
+            >
                 <!-- FIXME Style problem -->
 
                 <!-- Content -->
@@ -124,7 +129,7 @@
                                 src="./src/img/schema-slide.png"
                                 alt="Schéma fonctionnement Cycle Zéro"
                                 style="
-                                    width: 60%;
+                                    width: 75%;
                                     margin: auto;
                                     background: white;
                                     border-radius: 8px;
@@ -140,6 +145,9 @@
             <div
                 class="container slider _dark spec_bloc"
                 data-view="2"
+                data-paging="1"
+                data-pagingText="Faire défiler"
+                data-pagingDot="true"
                 id="etape_1"
             >
                 <div class="vertical center-box">
@@ -182,6 +190,9 @@
             <div
                 class="container slider _dark spec_bloc"
                 data-view="3"
+                data-paging="2"
+                data-pagingText="Faire défiler"
+                data-pagingDot="true"
                 id="etape_2"
             >
                 <div class="vertical center-box">
@@ -223,6 +234,9 @@
             <div
                 class="container slider _dark spec_bloc"
                 data-view="4"
+                data-paging="3"
+                data-pagingText="Faire défiler"
+                data-pagingDot="true"
                 id="etape_3"
             >
                 <div class="vertical center-box">
@@ -263,6 +277,9 @@
             <div
                 class="container slider _dark spec_bloc"
                 data-view="5"
+                data-paging="4"
+                data-pagingText="Faire défiler"
+                data-pagingDot="true"
                 id="etape_4"
             >
                 <div class="vertical center-box">
@@ -303,6 +320,9 @@
             <div
                 class="container slider _dark spec_bloc"
                 data-view="6"
+                data-paging="5"
+                data-pagingText="Se pré-inscrire"
+                data-pagingDot="true"
                 id="etape_5"
             >
                 <div class="vertical center-box">
@@ -338,7 +358,12 @@
                 </div>
             </div>
 
-            <div class="container slider _light" id="pre-inscription" data-view="7">
+            <div 
+                class="container slider _light"
+                id="pre-inscription"
+                data-view="7"
+                data-pagingOn="false"
+            >
                 <div class="normal-box">
                     <div class="text-box">
                         <p class="p_2">
