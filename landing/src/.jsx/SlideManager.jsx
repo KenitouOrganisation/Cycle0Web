@@ -8,6 +8,7 @@ SM._const = {
 };
 SM.slideList = [];
 SM.currentSlide = 0;
+SM.previousScroll = 0;
 SM.lastSlideUnlocked = false;
 SM.Header = {};
 SM.ignoringLastSlideScroll = false;
@@ -93,7 +94,12 @@ SM.OnScroll = (e) => {
     const currentScroll = scrollingElmt.scrollTop;
     const totalScroll = scrollingElmt.scrollHeight;
     const slideHeight = parseInt(SM.GetSlideHeight());
-    const slidePosition = Math.floor(currentScroll / slideHeight);
+    const scrollDelta = currentScroll - SM.previousScroll;
+    let slidePosition = currentScroll / slideHeight;
+
+    // due to a mobile version problem for the last slide not showing, we have to use different rounding depending of the scroll direction
+    slidePosition = scrollDelta >= 0 ? Math.ceil(slidePosition) : Math.floor(slidePosition);
+    SM.previousScroll = currentScroll;
 
     // slide selecting by setting min and max limit
     const currentSlide = Engine.MATH.Bounded({

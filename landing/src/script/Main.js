@@ -266,6 +266,7 @@ SM._const = {
 };
 SM.slideList = [];
 SM.currentSlide = 0;
+SM.previousScroll = 0;
 SM.lastSlideUnlocked = false;
 SM.Header = {};
 SM.ignoringLastSlideScroll = false;
@@ -322,7 +323,10 @@ SM.OnScroll = e => {
   const currentScroll = scrollingElmt.scrollTop;
   const totalScroll = scrollingElmt.scrollHeight;
   const slideHeight = parseInt(SM.GetSlideHeight());
-  const slidePosition = Math.floor(currentScroll / slideHeight);
+  const scrollDelta = currentScroll - SM.previousScroll;
+  let slidePosition = currentScroll / slideHeight;
+  slidePosition = scrollDelta >= 0 ? Math.ceil(slidePosition) : Math.floor(slidePosition);
+  SM.previousScroll = currentScroll;
   const currentSlide = Engine.MATH.Bounded({
     min: 0,
     max: SM.slideList.length - 1,

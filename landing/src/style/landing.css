@@ -63,25 +63,25 @@ body {
 
 @media (min-width: 3024px) {
     #introduction-bkg {
-        background-image: url("./img/introduction/3024.png");
+        background-image: url("../img/introduction/3024.png");
     }
 }
 
 @media (max-width: 3024px) {
     #introduction-bkg {
-        background-image: url("./img/introduction/1850.png");
+        background-image: url("../img/introduction/1850.png");
     }
 }
 
 @media (max-width: 1850px) {
     #introduction-bkg {
-        background-image: url("./img/introduction/1295.png");
+        background-image: url("../img/introduction/1295.png");
     }
 }
 
 @media (max-width: 1295px) {
     #introduction-bkg {
-        background-image: url("./img/introduction/1036.png");
+        background-image: url("../img/introduction/1036.png");
     }
 }
 
@@ -192,7 +192,7 @@ body {
 }
 
 #form_container .indicator-box{
-    width: 170px;
+    width: 155px;
     transform: translateX(50%);
 }
 
@@ -340,6 +340,7 @@ footer{
     cursor: pointer;
     transform: scale(1);
     transition: transform 400ms ease;
+    text-align: center;
 }
 
 #paging-box .next:hover{
