@@ -1,0 +1,157 @@
+/* STYLE.CSS */
+:root{
+    --header-height: 72px;
+}
+
+#header-buttons{
+    right: 8px;
+}
+
+#header-buttons ._btt:first-child{
+    visibility: hidden;
+}
+
+._btt{
+    margin: 0px;
+    font-size: 14px;
+}
+
+.h2_1{
+    font-size: 14px;
+}
+
+.h2_2{
+    font-size: 21px!important;
+}
+
+.p_2, .p_1{
+    font-size: 14px;
+}
+
+.center-elmt-box{
+    flex-direction: column;
+}
+
+.inline-box{
+    width: 100%;
+}
+
+.p_number_1{
+    font-size: 40px;
+}
+
+.p_3, .p_4{
+    font-size: 17px;
+}
+
+.normal-box{
+    margin: 10%!important;
+}
+
+form input:not(input[type="reset"], input[type="submit"]) {
+    font-size: 16px;
+}
+
+footer img#logo_footer {
+    width: 105px;
+}
+
+/* LANDING.CSS */
+
+#body-background img{
+    height: 80%;
+}
+
+#logo .image{
+    width: 115px;
+    left: 8px;
+    top: 8px;
+}
+
+
+.container.spec_bloc .inline-box:first-child {
+    margin-right: 0;
+}
+
+#paging-box .text {
+    transform: rotate(270deg);
+    margin: revert;
+    position: relative;
+    bottom: 50px;
+}
+
+#dots {
+    transform: rotate(90deg);
+    position: relative;
+    right: 28px;
+}
+
+#paging-box {
+    left: -56px;
+    transform: scale(0.9);
+}
+
+#introduction .inline-box:last-child{
+    /* FIXME : what cause the imae on the introduction be closer to the text ? */
+    top: 55px;
+    position: relative;
+}
+
+#pre-inscription-2{
+    position: relative;
+    top : 15px;
+}
+
+
+.index{
+    font-size: 85px;
+}
+
+#vid-fonctionnement-1{
+    width: 100%;
+}
+
+#form_container .indicator-box {
+    width: 100px;
+    margin: 0px;
+    transform: translateX(50%);
+}
+
+#pre-inscription form {
+    width: auto;
+}
+
+.container .vertical.center-box {
+    height: 85%;
+}
+
+.center-box.vertical .horizontal-box, .center-elmt-box{
+    height: 100%;
+}
+
+#pre-inscription .center-elmt-box,
+#pre-inscription .normal-box{
+    height: 80%;
+}
+
+#form_container {
+    margin-top: 0px;
+}
+
+.inline-box.panorama-box {
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.square-img.img-box {
+    margin: auto;
+}
+
+#etape_5 .panorama-box{
+    width: 80%;
+}
+
+#etape_5 .square-img {
+    width: 95%;
+}

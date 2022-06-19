@@ -134,7 +134,7 @@ header {
 }
 
 .illustration{
-    transform: translate(50%);
+    margin: auto;
 }
 
 .illustration img {
@@ -182,24 +182,24 @@ header {
     font-weight: 600;
 }
 
+.h2_2{
+    font-size: 21px;
+}
+
 .p_1 {
     color: var(--color-1);
-    font-size: 1.8vw;
+    font-size: 24px;
+}
+
+.p_2{
+    font-size: 14px;
 }
 
 .center-elmt-box {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    -webkit-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -moz-box-direction: normal;
-    -moz-box-orient: horizontal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
     align-items: center;
+    display: flex;
+    justify-content: space-around;
 }
 
 .flex-direction-col {

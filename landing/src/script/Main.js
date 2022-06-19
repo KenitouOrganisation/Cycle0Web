@@ -434,7 +434,7 @@ SM.Paging.Init = () => {
   }
 
   SM._elmt._paging.text = Engine.Elmt("p", {
-    class: "p_2"
+    class: "p_2 text"
   });
   SM._elmt._paging.container = Engine.Elmt("div", {
     id: "paging-box",
@@ -502,6 +502,8 @@ Init.AnchorLinkScrollManaged = () => {
 Init.IgnoringLastSlideScroll = () => {
   if (document.location.hash != "") SlideManager.ignoringLastSlideScroll = true;
 };
+
+Init.MobileInputUnfocusScrollFixed = () => {};
 
 const InitManual = {};
 

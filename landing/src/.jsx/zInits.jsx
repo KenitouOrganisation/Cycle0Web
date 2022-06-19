@@ -41,6 +41,17 @@ Init.IgnoringLastSlideScroll = ()=> {
         SlideManager.ignoringLastSlideScroll = true;
 };
 
+Init.MobileInputUnfocusScrollFixed = ()=>{
+
+    /*const inputs = Array.from(Engine.QAll('#pre-inscription input'));
+    inputs.forEach(ipt => {
+        ipt.addEventListener('focusout', ()=>{
+            document.scrollingElement.scrollTo(0, document.scrollingElement.scrollHeight);
+        });
+    });
+    */
+};
+
 const InitManual = {};
 
 InitManual.AssignAnimationWhenVisible = ()=>{

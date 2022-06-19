@@ -256,7 +256,7 @@ SM.Paging.Init = ()=>{
     }
 
     // creating the paging box
-    SM._elmt._paging.text = ( <p class="p_2"></p> );
+    SM._elmt._paging.text = ( <p class="p_2 text"></p> );
     SM._elmt._paging.container = (
         <div
             id="paging-box"
