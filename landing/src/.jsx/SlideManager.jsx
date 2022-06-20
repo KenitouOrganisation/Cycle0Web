@@ -96,7 +96,9 @@ SM.OnScroll = (e) => {
         // if an element is set to be on screen, we block the autoscroll (specially on mobile version for input unfocus event)
         e.preventDefault();
         if(SM.ignoringSlideChanging instanceof Node)
-            SM.ignoringSlideChanging.scrollIntoView();
+            //SM.ignoringSlideChanging.scrollIntoView();
+            // FIXME this is a temporary fix, considering there's only one form only at the last slide (end of the html page)
+            document.scrollingElement.scrollTo(0, document.scrollingElement.scrollHeight)
         SM.ignoringSlideChanging = false;
         return;
     }
