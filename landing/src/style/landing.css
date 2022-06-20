@@ -180,6 +180,7 @@ body {
 #pre-inscription {
     /* to hide the paging box when he is fading off */
     z-index: 1010;
+    top: 0px; /* FIXME why only preinscription slide need this and no others ?*/
     background-image: linear-gradient(#00aeae, #ffffff 40%);
 }
 
@@ -204,7 +205,7 @@ body {
 }
 
 #form_container .indicator-box{
-    width: 155px;
+    /*width: 155px;*/
 }
 
 

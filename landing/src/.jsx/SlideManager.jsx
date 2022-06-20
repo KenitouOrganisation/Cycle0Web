@@ -11,7 +11,8 @@ SM.currentSlide = 0;
 SM.previousScroll = 0;
 SM.lastSlideUnlocked = false;
 SM.Header = {};
-SM.ignoringLastSlideScroll = false;
+SM.ignoringLastSlideScroll = false; // this is for when if a hash is used in the url
+SM.ignoringSlideChanging = false;   // this is used when an unfocus happen on input mobile version to block the lside changing
 SM.Paging = {};
 
 SM.Init = ({ slideHeightCssVar }) => {
@@ -90,6 +91,16 @@ SM.Header.SwitchState = (state = null) => {
 };
 
 SM.OnScroll = (e) => {
+
+    if(SM.ignoringSlideChanging != false){
+        e.preventDefault();
+        //SM.ignoringSlideChanging.scrollIntoView();
+        SM.ignoringSlideChanging = false;
+        return;
+    }
+
+    Engine.Console.Log(">Passed");
+
     const scrollingElmt = e.target.scrollingElement;
     const currentScroll = scrollingElmt.scrollTop;
     const totalScroll = scrollingElmt.scrollHeight;
@@ -129,7 +140,7 @@ SM.OnScroll = (e) => {
         // we move the fakeSpace before our slide to position it normally with absolute position
         Engine.DOM.insertBefore(SM._elmt.fakeSpace, lastSlide._elmt);
         // changing the fixed position to absolute of the last slide
-        lastSlide.ChangeToAbsolute(true);
+        //lastSlide.ChangeToAbsolute(true);
         // and we make a focus directly if flag not false
         if(SM.ignoringLastSlideScroll !== true)
             lastSlide._elmt.scrollIntoView(true);
@@ -138,7 +149,7 @@ SM.OnScroll = (e) => {
             
     } else if (SM.lastSlideUnlocked != false && SM.LastSlideReach() !== true) {
         SM.lastSlideUnlocked = false;
-        lastSlide.ChangeToAbsolute(false);
+        //lastSlide.ChangeToAbsolute(false);
     }
 };
 
