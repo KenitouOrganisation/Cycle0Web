@@ -43,12 +43,12 @@ Init.IgnoringLastSlideScroll = ()=> {
 
 Init.MobileInputUnfocusScrollFixed = ()=>{
 
-    /*const inputs = Array.from(Engine.QAll('#pre-inscription input'));
+    const inputs = Array.from(Engine.QAll('#pre-inscription input'));
     inputs.forEach(ipt => {
         ipt.addEventListener('focusout', ()=>{
             SlideManager.ignoringSlideChanging = ipt;
         });
-    });*/
+    });
     
 };
 

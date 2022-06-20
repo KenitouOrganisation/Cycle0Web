@@ -93,8 +93,10 @@ SM.Header.SwitchState = (state = null) => {
 SM.OnScroll = (e) => {
 
     if(SM.ignoringSlideChanging != false){
+        // if an element is set to be on screen, we block the autoscroll (specially on mobile version for input unfocus event)
         e.preventDefault();
-        //SM.ignoringSlideChanging.scrollIntoView();
+        if(SM.ignoringSlideChanging instanceof Node)
+            SM.ignoringSlideChanging.scrollIntoView();
         SM.ignoringSlideChanging = false;
         return;
     }
