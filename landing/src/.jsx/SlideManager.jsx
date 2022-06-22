@@ -103,14 +103,14 @@ SM.OnScroll = (e) => {
         return;
     }
 
-    Engine.Console.Log(">Passed");
-
     const scrollingElmt = e.target.scrollingElement;
     const currentScroll = scrollingElmt.scrollTop;
     const totalScroll = scrollingElmt.scrollHeight;
     const slideHeight = parseInt(SM.GetSlideHeight());
     const scrollDelta = currentScroll - SM.previousScroll;
     let slidePosition = currentScroll / slideHeight;
+
+    console.log(currentScroll)
 
     // due to a mobile version problem for the last slide not showing, we have to use different rounding depending of the scroll direction
     slidePosition = scrollDelta >= 0 ? Math.ceil(slidePosition) : Math.floor(slidePosition);
@@ -199,7 +199,7 @@ SM.GetSlideHeight = () => {
 SM.SetFakeSpace = () => {
     const hidedSlideNb = SM.slideList.length;
     const totalHeight = Engine.MATH.WithUnit.Multiply(
-        hidedSlideNb,
+        hidedSlideNb+1,
         SM.GetSlideHeight()
     );
 
