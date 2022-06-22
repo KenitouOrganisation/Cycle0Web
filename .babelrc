@@ -3,5 +3,5 @@
         ["@babel/preset-react", { "pragma" : "Engine.Elmt" }]
     ],
     "comments": false,
-    "compact": true
+    //"compact": true
 }

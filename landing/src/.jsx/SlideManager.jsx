@@ -11,6 +11,7 @@ SM.currentSlide = 0;
 SM.previousScroll = 0;
 SM.lastSlideUnlocked = false;
 SM.Header = {};
+SM.onfirstload = true;      // to counter auto scroll bug on load page
 SM.ignoringLastSlideScroll = false; // this is for when if a hash is used in the url
 SM.ignoringSlideChanging = false;   // this is used when an unfocus happen on input mobile version to block the lside changing
 SM.Paging = {};
@@ -91,6 +92,12 @@ SM.Header.SwitchState = (state = null) => {
 };
 
 SM.OnScroll = (e) => {
+
+    if(SM.onfirstload == true){
+        document.scrollingElement.scrollTo(0, 0);
+        SM.onfirstload = false;
+        return;
+    }
 
     if(SM.ignoringSlideChanging != false){
         // if an element is set to be on screen, we block the autoscroll (specially on mobile version for input unfocus event)
