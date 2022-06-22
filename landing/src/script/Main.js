@@ -179,7 +179,6 @@ Engine.MATH.Bounded = ({
 Engine.Ajax = class _Ajax {
   static async Fetch(url, options = {}) {
     try {
-      console.log(url, options);
       return await fetch(url, options);
     } catch (err) {
       Engine.Console.Error(err);
@@ -190,20 +189,33 @@ Engine.Ajax = class _Ajax {
   static async FetchText(url, options = {}) {
     const req = await _Ajax.Fetch(url, options);
     if (req == null) return {};
-    return await req.text();
+    return {
+      req: req,
+      text: await req.text()
+    };
   }
 
   static async FetchJSON(url, options = {}) {
-    const repText = await _Ajax.FetchText(url, options);
+    const rep = await _Ajax.FetchText(url, options);
+    const req = rep.req;
+    const repText = rep.text;
 
     try {
-      return JSON.parse(repText);
+      return {
+        req: req,
+        json: JSON.parse(repText)
+      };
     } catch (err) {
       if (repText == '') return {
+        req: req,
         message: repText
       };
       return {
+        req: req,
         error: err,
+        json: {
+          message: repText
+        },
         message: repText
       };
     }
@@ -212,7 +224,7 @@ Engine.Ajax = class _Ajax {
 };
 const PreInscription = {};
 const PI = PreInscription;
-PI.prefix = './pre-registration/';
+PI.prefix = './pre-registration';
 PI._elmt = {};
 
 PI.Init = () => {
@@ -233,10 +245,11 @@ PI.Init = () => {
 };
 
 PI.Count = async () => {
-  let result = await Engine.Ajax.FetchText(PI.prefix + 'count', {
+  let result = await Engine.Ajax.FetchText(PI.prefix + '/count', {
     method: 'GET'
   });
-  result = isNaN(result) ? 0 : parseInt(result);
+  result = result.text;
+  result = !result || isNaN(result) ? 0 : parseInt(result);
 
   PI._elmt.counters.forEach(counter => {
     counter.innerHTML = result;
@@ -246,17 +259,18 @@ PI.Count = async () => {
 PI.Submit = async () => {
   const data = {
     email: PI._elmt.iptMail ? PI._elmt.iptMail.value : '',
-    postalCode: PI._elmt.iptPostal ? PI._elmt.iptMail.value : ''
+    postalCode: PI._elmt.iptPostal ? PI._elmt.iptPostal.value : ''
   };
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
-  const req = await Engine.Ajax.FetchJSON(PI.prefix, {
+  const repFetch = await Engine.Ajax.FetchJSON(PI.prefix, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: headers
   });
+  const req = repFetch.req;
 
-  if (req.err) {
+  if (repFetch.err) {
     Engine.Alert(req.err.toString());
     Engine.Console.Error(req.err.toString());
     return;
@@ -278,10 +292,13 @@ PI.Submit = async () => {
     }));
     const ctn = Engine.Elmt("div", null, popup);
     document.body.appendChild(ctn);
+    PI.Count();
+    PI._elmt.iptMail.value = '';
+    PI._elmt.iptPostal.value = '';
     return;
   }
 
-  alert(req.message);
+  alert(repFetch.json.message);
 };
 
 PI.ThanksPage = async () => {

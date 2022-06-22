@@ -195,7 +195,6 @@ Engine.Ajax = class _Ajax{
 
     static async Fetch(url, options={}){
         try{
-            console.log(url, options)
             return await fetch(url, options);
         }catch(err){
             Engine.Console.Error(err);
@@ -205,24 +204,38 @@ Engine.Ajax = class _Ajax{
 
     static async FetchText(url, options={}){
         const req = await _Ajax.Fetch(url, options);
+
         if(req == null)
             return {};
 
-        return await req.text();
+        return {
+            req : req,
+            text : await req.text()
+        };
     }
 
     static async FetchJSON(url, options={}){
-        const repText = await _Ajax.FetchText(url, options);
+        const rep = await _Ajax.FetchText(url, options);
+        const req = rep.req;
+        const repText = rep.text;
+
         try{
-            return JSON.parse(repText);
+            return {
+                req : req,
+                json : JSON.parse(repText)
+            }
         }catch(err){
 
             // if it's because we have an empty string, we send back the empty message
             if(repText == '')
-                return { message : repText };
+                return { req : req, message : repText };
 
             return {
+                req : req,
                 error : err,
+                json : {
+                    message : repText
+                },
                 message : repText
             };
         }

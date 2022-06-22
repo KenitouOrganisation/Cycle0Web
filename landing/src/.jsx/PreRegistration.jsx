@@ -1,7 +1,7 @@
 const PreInscription = {}
 const PI = PreInscription;
 
-PI.prefix = './pre-registration/'
+PI.prefix = './pre-registration'
 PI._elmt = {};
 
 PI.Init = ()=>{
@@ -25,8 +25,10 @@ PI.Init = ()=>{
 
 PI.Count = async ()=>{
     // we fetch the counter of pre-inscription
-    let result = await Engine.Ajax.FetchText(PI.prefix + 'count', { method : 'GET' });
-    result = isNaN(result) ? 0 : parseInt(result);  // checking if result is a number
+    let result = await Engine.Ajax.FetchText(PI.prefix + '/count', { method : 'GET' });
+
+    result = result.text;
+    result = !result || isNaN(result) ? 0 : parseInt(result);  // checking if result is a number
 
     // TODO : add a number converter like 1455 to 1 455, 1 000 000 to 1M (or both)
 
@@ -40,13 +42,13 @@ PI.Count = async ()=>{
 PI.Submit = async ()=>{
     const data = {
         email : PI._elmt.iptMail ? PI._elmt.iptMail.value : '',
-        postalCode : PI._elmt.iptPostal ? PI._elmt.iptMail.value : ''
+        postalCode : PI._elmt.iptPostal ? PI._elmt.iptPostal.value : ''
     };
 
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json')
+    headers.append('Content-Type', 'application/json');
 
-    const req = await Engine.Ajax.FetchJSON(
+    const repFetch = await Engine.Ajax.FetchJSON(
         PI.prefix,
         {
             method : 'POST',
@@ -54,8 +56,9 @@ PI.Submit = async ()=>{
             headers : headers
         }
     );
+    const req = repFetch.req;
 
-    if(req.err){
+    if(repFetch.err){
         Engine.Alert(req.err.toString());
         Engine.Console.Error(req.err.toString());
         return;
@@ -88,10 +91,14 @@ PI.Submit = async ()=>{
             </div>
         );
         document.body.appendChild(ctn);
+        PI.Count();
+        PI._elmt.iptMail.value = '';
+        PI._elmt.iptPostal.value = '';
+
         return;
     }
-    
-    alert(req.message);
+
+    alert(repFetch.json.message);
 
 };
 
