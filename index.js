@@ -14,7 +14,7 @@ const server = http.createServer((req, res)=>{
     res.end(fileData)
 })
 
-server.listen(8080, '', '', console.log("\x1b[32mServer ready\x1b[0m"))
+server.listen(8081, '', '', console.log("\x1b[32mServer ready\x1b[0m"))
 
 function GetFile(prefix, url){
     try{

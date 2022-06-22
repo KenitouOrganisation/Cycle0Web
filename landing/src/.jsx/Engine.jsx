@@ -19,6 +19,9 @@ Engine.Console = class _Console {
     static Log(...args) {
         if (_Console.__dev__ === true) console.log(...args);
     }
+    static Error(...args){
+        if (_Console.__dev__ === true) console.error(...args);
+    }
 };
 
 Engine.Alert = class _Alert {
@@ -185,4 +188,44 @@ Engine.MATH.Bounded = ({ value, min, max }) => {
     if (min && value < min) return min;
     if (max && value > max) return max;
     return value;
+};
+
+
+Engine.Ajax = class _Ajax{
+
+    static async Fetch(url, options={}){
+        try{
+            console.log(url, options)
+            return await fetch(url, options);
+        }catch(err){
+            Engine.Console.Error(err);
+            return null;
+        }
+    }
+
+    static async FetchText(url, options={}){
+        const req = await _Ajax.Fetch(url, options);
+        if(req == null)
+            return {};
+
+        return await req.text();
+    }
+
+    static async FetchJSON(url, options={}){
+        const repText = await _Ajax.FetchText(url, options);
+        try{
+            return JSON.parse(repText);
+        }catch(err){
+
+            // if it's because we have an empty string, we send back the empty message
+            if(repText == '')
+                return { message : repText };
+
+            return {
+                error : err,
+                message : repText
+            };
+        }
+    }
+
 };

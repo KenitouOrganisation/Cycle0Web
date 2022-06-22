@@ -117,7 +117,7 @@ SM.OnScroll = (e) => {
     const scrollDelta = currentScroll - SM.previousScroll;
     let slidePosition = currentScroll / slideHeight;
 
-    console.log(currentScroll)
+    //console.log(currentScroll)
 
     // due to a mobile version problem for the last slide not showing, we have to use different rounding depending of the scroll direction
     slidePosition = scrollDelta >= 0 ? Math.ceil(slidePosition) : Math.floor(slidePosition);

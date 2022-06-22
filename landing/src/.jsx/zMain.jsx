@@ -26,7 +26,7 @@ Engine.OnReady(() => {
     SlideManager.Init({
         slideHeightCssVar: slideHeightCssVar,
     });
-
+    PreInscription.Init();
 
     // grouping instructions
     function OnResize() {

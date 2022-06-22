@@ -429,3 +429,37 @@ footer{
     background: white;
     border-radius: 8px;
 }
+
+
+/* popup et close button provisoire */
+#popup{
+    position: fixed;
+    z-index: 4000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    min-height: 355px;
+    height: 50%;
+    background: #e4eef0;
+    border-radius: 8px;
+    box-shadow: 0 0 2px #979797;
+}
+
+#popup .close{
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    box-sizing: border-box;
+    border: none;
+    background: #212121;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}

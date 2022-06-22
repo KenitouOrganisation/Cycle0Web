@@ -14,6 +14,10 @@ Engine.Console = class _Console {
     if (_Console.__dev__ === true) console.log(...args);
   }
 
+  static Error(...args) {
+    if (_Console.__dev__ === true) console.error(...args);
+  }
+
 };
 Engine.Alert = class _Alert {
   static Show({
@@ -170,6 +174,118 @@ Engine.MATH.Bounded = ({
   if (min && value < min) return min;
   if (max && value > max) return max;
   return value;
+};
+
+Engine.Ajax = class _Ajax {
+  static async Fetch(url, options = {}) {
+    try {
+      console.log(url, options);
+      return await fetch(url, options);
+    } catch (err) {
+      Engine.Console.Error(err);
+      return null;
+    }
+  }
+
+  static async FetchText(url, options = {}) {
+    const req = await _Ajax.Fetch(url, options);
+    if (req == null) return {};
+    return await req.text();
+  }
+
+  static async FetchJSON(url, options = {}) {
+    const repText = await _Ajax.FetchText(url, options);
+
+    try {
+      return JSON.parse(repText);
+    } catch (err) {
+      if (repText == '') return {
+        message: repText
+      };
+      return {
+        error: err,
+        message: repText
+      };
+    }
+  }
+
+};
+const PreInscription = {};
+const PI = PreInscription;
+PI.prefix = './pre-registration/';
+PI._elmt = {};
+
+PI.Init = () => {
+  PI._elmt.counters = Array.from(Engine.QAll('span[data-elmt="preinscription"]'));
+  PI._elmt.iptMail = Engine.Q('#pre-form-email');
+  PI._elmt.iptPostal = Engine.Q('#pre-form-postal');
+  PI._elmt.submit = Engine.Q("#pre-inscription input[type='submit']");
+
+  PI._elmt.submit.addEventListener('click', e => {
+    e.preventDefault();
+    PI.Submit();
+  });
+
+  PI.Count();
+  setInterval(() => {
+    PI.Count();
+  }, 2 * 60 * 1000);
+};
+
+PI.Count = async () => {
+  let result = await Engine.Ajax.FetchText(PI.prefix + 'count', {
+    method: 'GET'
+  });
+  result = isNaN(result) ? 0 : parseInt(result);
+
+  PI._elmt.counters.forEach(counter => {
+    counter.innerHTML = result;
+  });
+};
+
+PI.Submit = async () => {
+  const data = {
+    email: PI._elmt.iptMail ? PI._elmt.iptMail.value : '',
+    postalCode: PI._elmt.iptPostal ? PI._elmt.iptMail.value : ''
+  };
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  const req = await Engine.Ajax.FetchJSON(PI.prefix, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: headers
+  });
+
+  if (req.err) {
+    Engine.Alert(req.err.toString());
+    Engine.Console.Error(req.err.toString());
+    return;
+  }
+
+  if (req.status == 200) {
+    const popup = Engine.Elmt("div", {
+      id: "popup"
+    }, Engine.Elmt("button", {
+      class: "close",
+      "data-js-attr": {
+        onclick: () => {
+          popup.parentNode.removeChild(popup);
+        }
+      }
+    }, "X"), Engine.Elmt("iframe", {
+      src: "./src/page/remerciement_validation_pi.html",
+      style: "\r width: 100%;\r height: 100%;\r border: none;\r "
+    }));
+    const ctn = Engine.Elmt("div", null, popup);
+    document.body.appendChild(ctn);
+    return;
+  }
+
+  alert(req.message);
+};
+
+PI.ThanksPage = async () => {
+  return 'html';
 };
 class ScrollContainer {
   construct({
@@ -340,7 +456,6 @@ SM.OnScroll = e => {
   const slideHeight = parseInt(SM.GetSlideHeight());
   const scrollDelta = currentScroll - SM.previousScroll;
   let slidePosition = currentScroll / slideHeight;
-  console.log(currentScroll);
   slidePosition = scrollDelta >= 0 ? Math.ceil(slidePosition) : Math.floor(slidePosition);
   SM.previousScroll = currentScroll;
   const currentSlide = Engine.MATH.Bounded({
@@ -559,6 +674,7 @@ Engine.OnReady(() => {
   SlideManager.Init({
     slideHeightCssVar: slideHeightCssVar
   });
+  PreInscription.Init();
 
   function OnResize() {
     CSSHeightResize();
