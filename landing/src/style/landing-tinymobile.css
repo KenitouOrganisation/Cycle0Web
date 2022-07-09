@@ -1,0 +1,59 @@
+.center-elmt-box{
+    height: 105%;
+    position: relative;
+    top: 5%;
+}
+
+.index{
+    font-size: 55px;
+}
+
+.table-box.text-box .h2_2 {
+    left: 25px;
+    font-size: 17px!important;
+}
+
+.p_2, .p_1 {
+    font-size: 13px;
+    margin: 8px 0px;
+}
+
+.h2_1 {
+    font-size: 12px;
+}
+
+._btt {
+    font-size: 12px;
+}
+
+footer img#logo_footer {
+    width: 60px;
+}
+
+footer * {
+    font-size: 12px!important;
+}
+
+form input:not(input[type="reset"], input[type="submit"]) {
+    font-size: 12px;
+}
+
+footer form p {
+    margin: 6px 0;
+}
+
+#pre-inscription .center-elmt-box, #pre-inscription .normal-box {
+    height: 70%;
+}
+
+.p_3, .p_4 {
+    font-size: 12px;
+}
+
+.p_number_1 {
+    font-size: 20px;
+}
+
+#form_container .indicator-box {
+    width: 75px;
+}
