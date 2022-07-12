@@ -37,3 +37,21 @@ Il se peut qu'il faut accroder les droits d'éxécution à ce fichier avant :
 `chmod +x ./landing/compile.bat`
 
 Il faut savoir qu'une fois le script `compile` lancer, les modifications dans les fichiers `.jsx` du dossier `./landing/.jsx` seront automatiquement "compiler" vers ./landing/Main.js
+
+
+
+## Push sur server JAVA
+
+<Copie/colle .jar>
+mvn clean install
+/home/apps/cycle0-core
+
+ps aux | grep 443
+kill -9 <id...>
+
+./start.sh
+
+Tomcat started on port(s): 443
+
+## Launche server JAVA local
+mvn spring-boot:run -Dspring-boot.run.profiles=dev,h2
