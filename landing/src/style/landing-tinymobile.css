@@ -43,7 +43,7 @@ footer form p {
 }
 
 #pre-inscription .center-elmt-box, #pre-inscription .normal-box {
-    height: 70%;
+    height: 72%;
 }
 
 .p_3, .p_4 {
@@ -55,5 +55,5 @@ footer form p {
 }
 
 #form_container .indicator-box {
-    width: 75px;
+    /*width: 75px;*/
 }

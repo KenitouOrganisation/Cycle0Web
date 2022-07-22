@@ -167,10 +167,10 @@ body {
 }
 #etape_5 .square-img {
     width: 300px;
-    background-color: #171717;
+    background-color: transparent/*#171717*/;
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 10%;
+    /*margin-bottom: 10%;*/
 }
 
 .quote span {

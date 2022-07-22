@@ -3,6 +3,7 @@ const PI = PreInscription;
 
 PI.prefix = './pre-registration'
 PI._elmt = {};
+PI.previousCount = 0;
 
 PI.Init = ()=>{
     PI._elmt.counters = Array.from( Engine.QAll('span[data-elmt="preinscription"]') );
@@ -28,15 +29,20 @@ PI.Count = async ()=>{
     let result = await Engine.Ajax.FetchText(PI.prefix + '/count', { method : 'GET' });
 
     result = result.text;
-    result = !result || isNaN(result) ? 0 : parseInt(result);  // checking if result is a number
-
-    // TODO : add a number converter like 1455 to 1 455, 1 000 000 to 1M (or both)
+    result = !result || isNaN(result) ? PI.previousCount : parseInt(result);  // checking if result is a number
+    PI.previousCount = result;
+    result = PI.FormatCount(result);
 
     // applying the number to all counters in the page
     PI._elmt.counters.forEach(counter =>{
         counter.innerHTML = result;
     });
     
+};
+
+PI.FormatCount = (val)=>{
+    // format number like : 23421 => 23 421 https://stackoverflow.com/a/30106316/9408443
+    return val.toLocaleString({minimumFractionDigits : 0});
 };
 
 PI.Submit = async ()=>{

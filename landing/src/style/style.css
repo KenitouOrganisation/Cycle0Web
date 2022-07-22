@@ -286,8 +286,19 @@ header {
 }
 
 .panorama-box {
-    flex-direction: row;
+    overflow-x: scroll;
+    width: 118%; /* 100% + 2*9% of margin horizontal-box */
+}
+
+.panorama-box:not(.js-on .panorama-box){
+    background: #232323;
+    border-radius: 14px;
+    box-shadow: 0 0 4px #3c3c3c;
+}
+
+.panorama-box, .vertical-sliding-box{
     display: flex;
+    flex-direction: row;
 }
 
 .square-img,
