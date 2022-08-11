@@ -226,6 +226,7 @@ const PreInscription = {};
 const PI = PreInscription;
 PI.prefix = './pre-registration';
 PI._elmt = {};
+PI.previousCount = 0;
 
 PI.Init = () => {
   PI._elmt.counters = Array.from(Engine.QAll('span[data-elmt="preinscription"]'));
@@ -249,10 +250,18 @@ PI.Count = async () => {
     method: 'GET'
   });
   result = result.text;
-  result = !result || isNaN(result) ? 0 : parseInt(result);
+  result = !result || isNaN(result) ? PI.previousCount : parseInt(result);
+  PI.previousCount = result;
+  result = PI.FormatCount(result);
 
   PI._elmt.counters.forEach(counter => {
     counter.innerHTML = result;
+  });
+};
+
+PI.FormatCount = val => {
+  return val.toLocaleString({
+    minimumFractionDigits: 0
   });
 };
 
