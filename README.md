@@ -46,13 +46,16 @@ Il faut savoir qu'une fois le script `compile` lancer, les modifications dans le
 Step 2 and 3 can be done with an FTP client (with windows instead of script cmd)
 
 1. On local machine build the new jar:
-mvn clean install
+mvn clean install && cd ./target
 
 2. Then copy .jar from ./target folder to /home/apps/cycle0-core (from local folder to remote folder) :
 scp core-0.0.1-SNAPSHOT.jar root@178.170.37.30:/home/apps/cycle0-core
 
+Connecting to the remote
+ssh root@178.170.37.30
+
 3. Rename it on remote folder:
-rm cycle0.jar && mv core....jar cycle0.jar
+cd /home/apps/cycle0-core && rm cycle0.jar && mv core-0.0.1-SNAPSHOT.jar cycle0.jar
 
 4. Kill the existing process
 ps aux | grep 443
@@ -60,6 +63,9 @@ kill -9 <id...>
 
 5. Start the new server
 ./start.sh
+
+Step 4 and 5 can be done together like that :
+kill -9 <id...> && ./start.sh
 
 Message when server ready (then exit the remote - not stopping the script !) :
 Tomcat started on port(s): 443
