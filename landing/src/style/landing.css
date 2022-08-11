@@ -164,13 +164,15 @@ body {
 
 #etape_5 .panorama-box {
     margin: 20px 0;
+    justify-content: center; /* PROVISOIRE */
+    overflow: auto; /* PROVISOIRE */
 }
 #etape_5 .square-img {
     width: 300px;
     background-color: transparent/*#171717*/;
     border-radius: 10px;
     overflow: hidden;
-    /*margin-bottom: 10%;*/
+    margin-bottom: 10%; /* PROVISOIRE */
 }
 
 .quote span {
@@ -462,4 +464,18 @@ footer{
     font-family: Arial, sans-serif;
     font-weight: bold;
     cursor: pointer;
+}
+
+
+#_footer_links{
+    text-align: center;    
+}
+
+#_footer_links a{
+    display: inline-block;
+    margin: 4px 8px;
+}
+
+#_footer_links #mentions_legales{
+    color : var(--secondary-color);
 }

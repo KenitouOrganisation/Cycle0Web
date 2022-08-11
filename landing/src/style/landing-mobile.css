@@ -144,6 +144,12 @@ footer img#logo_footer {
     overflow-x: hidden;
 }
 
+/* PROVISOIRE */
+.vertical-sliding-box {
+    display: flex;
+    flex-direction: column;
+}
+
 .square-img.img-box {
     margin: auto;
 }
