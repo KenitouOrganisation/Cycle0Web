@@ -1,5 +1,7 @@
 const fs = require('fs')
 
+let preRegCount = 53409;
+
 const http = require('http')
 const server = http.createServer((req, res)=>{
 
@@ -8,6 +10,14 @@ const server = http.createServer((req, res)=>{
 
     if(req.url == '/')
         fileData = GetFile(prefix, '/index.html')
+    // simulated request from Java Server
+    else if(req.url == '/pre-registration/count')
+        fileData = '' + preRegCount
+    else if(req.url == '/pre-registration'){
+        fileData = ''
+        preRegCount++;
+    }
+    // end of simulated request
     else
         fileData = GetFile(prefix, req.url)
 
