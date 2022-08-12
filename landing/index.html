@@ -35,7 +35,7 @@
         (where we have a heavy HTML code instead of using JS to have less repeat code)
     -->
 
-    <body>
+    <body class="not_sub">
         <div id="body-background">
             <img src="./src/img/big-c.png" alt="">
         </div>
@@ -361,7 +361,7 @@
                 data-view="7"
                 data-pagingOn="false"
             >
-                <div class="normal-box">
+                <div class="normal-box" id="form_box">
                     <div class="text-box">
                         <p class="p_2">
                             <b>L’action locale est essentielle</b>.
@@ -373,7 +373,7 @@
                     </div>
                     <div class="center-elmt-box" id="form_container">
                         <!-- Content -->
-                        <div class="inline-box _w60 anim-box">
+                        <div class="inline-box _w60 anim-box" id="form_preinscription">
                             <form action="" method="POST">
                                 <h3 class="p_2" style="padding : 0; text-decoration : underline;">Pré-inscription</h3>
                                 <p>
@@ -381,6 +381,7 @@
                                         type="email"
                                         id="pre-form-email"
                                         required
+                                        autocomplete="off"
                                         placeholder="Adresse E-mail"
                                     />
                                 </p>
@@ -389,6 +390,7 @@
                                         type="text"
                                         id="pre-form-postal"
                                         required
+                                        autocomplete="off"
                                         placeholder="Code postal"
                                     />
                                 </p>
@@ -402,7 +404,7 @@
                         <div class="inline-box anim-box priority _2">
                             <div class="border-box indicator-box">
                                 <p class="p_number_1"><span data-elmt="preinscription">0</span></p>
-                                <p class="p_3">Pré-inscrits</p>
+                                <p class="p_3 color_1">Pré-inscrits</p>
                             </div>
                         </div>
                     </div>
@@ -420,6 +422,7 @@
                         <a 
                             href="./src/page/mentions_legales.html"
                             id="mentions_legales"
+                            class="p_4"
                         >
                             Mentions Légales
                         </a>

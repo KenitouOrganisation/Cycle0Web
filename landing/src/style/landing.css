@@ -440,12 +440,12 @@ footer{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 90%;
     min-height: 355px;
-    height: 50%;
-    background: #e4eef0;
+    height: 45%;
+    /*background: #e4eef0;*/
     border-radius: 8px;
-    box-shadow: 0 0 2px #979797;
+    /*box-shadow: 0 1px 2px #979797;*/
 }
 
 #popup .close{

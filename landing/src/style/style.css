@@ -315,7 +315,7 @@ header {
 .border-box {
     /* border: 1px solid var(--primary-color); */
     padding: 12px 30px;
-    border-radius: 16px;
+    border-radius: 3px;
     background: #6D8788;
 }
 .p_number_1 {

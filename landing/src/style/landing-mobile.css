@@ -7,10 +7,13 @@
     right: 8px;
 }
 
-#header-buttons ._btt:first-child{
-    visibility: hidden;
+.not_sub #header-buttons ._btt:first-child{
+    display: none;
 }
 
+.alrd_sub #header-buttons ._btt:last-child{
+    display: none;
+}
 ._btt{
     margin: 0px;
     font-size: 14px;

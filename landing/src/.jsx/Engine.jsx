@@ -154,6 +154,10 @@ Engine.DOM.insertAfter = (newNode, referenceNode) => {
     Engine.DOM.insertBefore(newNode, referenceNode.nextSibling);
 };
 
+Engine.DOM.removeElmt = (elmt) => {
+    elmt.parentNode.removeChild(elmt);
+};
+
 Engine.DOM.getRect = (elmt) => {
     const clientRect = elmt.getBoundingClientRect();
     return clientRect ? clientRect : {};

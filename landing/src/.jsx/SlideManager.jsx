@@ -14,6 +14,7 @@ SM.Header = {};
 SM.onfirstload = true;      // to counter auto scroll bug on load page
 SM.ignoringLastSlideScroll = false; // this is for when if a hash is used in the url
 SM.ignoringSlideChanging = false;   // this is used when an unfocus happen on input mobile version to block the lside changing
+SM.totalHeightScroll = 0;
 SM.Paging = {};
 
 SM.Init = ({ slideHeightCssVar }) => {
@@ -69,6 +70,7 @@ SM.Init = ({ slideHeightCssVar }) => {
     // When reloading the page in browser, it keeps the same scroll, so the same slide should be showed
     SM.OnScroll({target : document});
 
+    SM.totalHeightScroll = document.scrollingElement.scrollHeight;
 };
 
 SM.Header.SwitchState = (state = null) => {
@@ -105,7 +107,7 @@ SM.OnScroll = (e) => {
         if(SM.ignoringSlideChanging instanceof Node)
             //SM.ignoringSlideChanging.scrollIntoView();
             // FIXME this is a temporary fix, considering there's only one form only at the last slide (end of the html page)
-            document.scrollingElement.scrollTo(0, document.scrollingElement.scrollHeight)
+            document.scrollingElement.scrollTo(0, SM.totalHeightScroll);
         SM.ignoringSlideChanging = false;
         return;
     }
@@ -115,12 +117,9 @@ SM.OnScroll = (e) => {
     const totalScroll = scrollingElmt.scrollHeight;
     const slideHeight = parseInt(SM.GetSlideHeight());
     const scrollDelta = currentScroll - SM.previousScroll;
-    let slidePosition = currentScroll / slideHeight;
+    const slidePosition =  Math.round(currentScroll / slideHeight);
 
     //console.log(currentScroll)
-
-    // due to a mobile version problem for the last slide not showing, we have to use different rounding depending of the scroll direction
-    slidePosition = scrollDelta >= 0 ? Math.ceil(slidePosition) : Math.floor(slidePosition);
     SM.previousScroll = currentScroll;
 
     // slide selecting by setting min and max limit
@@ -217,7 +216,7 @@ SM.LastSlideReach = () => {
     return SM.currentSlide == SM.slideList.length - 1;
 };
 
-SM.JumpTo = (slideIdx) => {
+SM.JumpTo = (slideIdx, smooth=true) => {
     // setting the limit in case
     slideIdx = Engine.MATH.Bounded({
         min: 0,
@@ -232,7 +231,7 @@ SM.JumpTo = (slideIdx) => {
     document.scrollingElement.scrollTo({
         top : targetScroll,
         left : 0,
-        behavior: "smooth"
+        behavior: smooth ? "smooth" : "auto"
     });
 
 };
