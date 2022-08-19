@@ -172,7 +172,7 @@ body {
     background-color: transparent/*#171717*/;
     border-radius: 10px;
     overflow: hidden;
-    transition: all 2s ease;
+    transition: all 1s ease;
     opacity: 1;
 }
 

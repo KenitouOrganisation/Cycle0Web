@@ -59,6 +59,7 @@ Init.Step5Showcase = ()=>{
 
     SlideManager.Step5Showcase = controller;
     InitManual.Step5Showcase_OnResize();
+    controller.Show(0);
 };
 
 const InitManual = {};

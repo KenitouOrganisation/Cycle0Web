@@ -159,6 +159,8 @@ footer img#logo_footer {
 
 #etape_5 .panorama-box{
     width: 80%;
+    position: relative;
+    top: -10%;
 }
 
 #etape_5 .square-img {
