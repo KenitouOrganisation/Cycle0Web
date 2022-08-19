@@ -52,6 +52,15 @@ Init.MobileInputUnfocusScrollFixed = ()=>{
     
 };
 
+Init.Step5Showcase = ()=>{
+
+    const controller = new Showcase('#diapo5', '.square-img', 1);
+    controller.Animate();
+
+    SlideManager.Step5Showcase = controller;
+    InitManual.Step5Showcase_OnResize();
+};
+
 const InitManual = {};
 
 InitManual.AssignAnimationWhenVisible = ()=>{
@@ -68,4 +77,14 @@ InitManual.AssignAnimationWhenVisible = ()=>{
             Engine.DOM.ClassSwitch(box, className._ON_VISIBLE, className._ON_HIDE, false);
         
     });
+};
+
+InitManual.Step5Showcase_OnResize = ()=>{
+
+    // version mobile et version pc
+    if(window.innerWidth <= 800)
+        SlideManager.Step5Showcase.childPerView = 1;
+    else
+        SlideManager.Step5Showcase.childPerView = 3
+    
 };

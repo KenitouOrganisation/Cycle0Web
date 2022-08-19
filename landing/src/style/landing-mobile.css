@@ -147,10 +147,10 @@ footer img#logo_footer {
     overflow-x: hidden;
 }
 
-/* PROVISOIRE */
 .vertical-sliding-box {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .square-img.img-box {
@@ -163,4 +163,5 @@ footer img#logo_footer {
 
 #etape_5 .square-img {
     width: 95%;
+    margin-bottom: 10px;
 }

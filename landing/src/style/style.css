@@ -299,6 +299,7 @@ header {
 .panorama-box, .vertical-sliding-box{
     display: flex;
     flex-direction: row;
+    overflow: hidden;
 }
 
 .square-img,

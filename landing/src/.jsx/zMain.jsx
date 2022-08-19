@@ -32,6 +32,7 @@ Engine.OnReady(() => {
     function OnResize() {
         CSSHeightResize();
         SlideManager.OnResize();
+        InitManual.Step5Showcase_OnResize();
     }
 
     function OnScroll(e){
