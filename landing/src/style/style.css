@@ -393,3 +393,11 @@ footer .text-box._right{
 footer a{
     text-decoration: none;
 }
+
+body .need-js-elmt:not(.js-on .need-js-elmt){
+    display: none;
+}
+
+.js-on .no-js-elmt{
+    display: none;
+}

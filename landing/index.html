@@ -18,6 +18,9 @@
         <!--
             Mettre ici les meta pour le SEO
         -->
+        <meta name="description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !" >
+        <meta name="og:description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !" >
+        <meta name="og:title" content="Cycle Zéro - Réemploi chantier">
 
         <!--
             Google Fonts
@@ -57,7 +60,7 @@
                 </div>
                 <div id="header-buttons">
                     <a href="#pre-inscription" class="_btt _orange _transparent"
-                        ><span data-elmt="preinscription">0</span> Pré-inscrits</a
+                        ><span data-elmt="preinscription">?</span> Pré-inscrits</a
                     >
                     <a href="#pre-inscription" class="_btt _orange _filled"
                         >Pré-inscription</a
@@ -376,34 +379,44 @@
                         <div class="inline-box _w60 anim-box" id="form_preinscription">
                             <form action="" method="POST">
                                 <h3 class="p_2" style="padding : 0; text-decoration : underline;">Pré-inscription</h3>
-                                <p>
+                                <div class="no-js-elmt">
+                                    <p class="p_4" style="text-align : justify; color: #d53636;">
+                                        Il semble que votre JavaScript n'est pas activé ou que votre navigateur n'est pas à jour.
+                                        <br> Veuillez mettre à jour votre navigateur web ou activer JavaScript afin de pouvoir vous préinscrire, merci.
+                                    </p>
+    
+                                </div>
+                                <div class="need-js-elmt">
+                                   <p>
+                                        <input
+                                            type="email"
+                                            id="pre-form-email"
+                                            required
+                                            autocomplete="off"
+                                            placeholder="Adresse E-mail"
+                                        />
+                                    </p>
+                                    <p>
+                                        <input
+                                            type="text"
+                                            id="pre-form-postal"
+                                            required
+                                            autocomplete="off"
+                                            placeholder="Code postal"
+                                        />
+                                    </p>
                                     <input
-                                        type="email"
-                                        id="pre-form-email"
-                                        required
-                                        autocomplete="off"
-                                        placeholder="Adresse E-mail"
-                                    />
-                                </p>
-                                <p>
-                                    <input
-                                        type="text"
-                                        id="pre-form-postal"
-                                        required
-                                        autocomplete="off"
-                                        placeholder="Code postal"
-                                    />
-                                </p>
-                                <input
-                                    type="submit"
-                                    value="Valider"
-                                    class="_btt _orange _filled"
-                                />
+                                        type="submit"
+                                        value="Valider"
+                                        class="_btt _orange _filled"
+                                    /> 
+                                </div>
+                                
                             </form>
                         </div>
                         <div class="inline-box anim-box priority _2">
                             <div class="border-box indicator-box">
-                                <p class="p_number_1"><span data-elmt="preinscription">0</span></p>
+                                <p class="p_number_1"><span data-elmt="preinscription">?</span></p>
                                 <p class="p_3 color_1">Pré-inscrits</p>
                             </div>
                         </div>
