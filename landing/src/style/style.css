@@ -318,7 +318,13 @@ header {
     padding: 12px 30px;
     border-radius: 3px;
     background: #6D8788;
+    transition: all 500ms ease;
 }
+
+.border-box.highlight{
+    background: var(--primary-color);
+}
+
 .p_number_1 {
     color: #fff;
     font-size: 3.5vw;
@@ -334,7 +340,7 @@ header {
     text-align: center;
 }
 .p_4{
-    font-size: 1.2vw;
+    font-size: 17px;
 }
 
 .p_number_1,
@@ -379,6 +385,7 @@ footer{
     flex-direction: row;
     align-items: center;
     padding: 12px 8%;
+    padding-right: 3%;
 }
 
 footer img#logo_footer{

@@ -134,7 +134,7 @@ footer img#logo_footer {
 
 #pre-inscription .center-elmt-box,
 #pre-inscription .normal-box{
-    height: 80%;
+    height: 72%;
 }
 
 #form_container {
@@ -166,4 +166,8 @@ footer img#logo_footer {
 #etape_5 .square-img {
     width: 95%;
     margin-bottom: 10px;
+}
+
+.mobile-br{
+    display: block;
 }

@@ -9,6 +9,7 @@ PI.Init = ()=>{
     PI._elmt.box = Engine.Q('#form_box');
     PI._elmt.form = Engine.Q('#form_preinscription');
     PI._elmt.formContainer = Engine.Q('#form_container');
+    PI._elmt.counterForm = Engine.Q('#form_box .border-box');
     PI._elmt.counters = Array.from( Engine.QAll('span[data-elmt="preinscription"]') );
     PI._elmt.iptMail = Engine.Q('#pre-form-email');
     PI._elmt.iptPostal = Engine.Q('#pre-form-postal');
@@ -56,12 +57,18 @@ PI.Count = async ()=>{
     PI.previousCount = result;
     result = PI.FormatCount(result);
 
+    Engine.DOM.ClassSwitch(PI._elmt.counterForm, 'highlight', '_', true);
+
     // applying the number to all counters in the page
     PI._elmt.counters.forEach(counter =>{
         if(counter)
             counter.innerHTML = result;
     });
     
+    setTimeout(()=>{
+        Engine.DOM.ClassSwitch(PI._elmt.counterForm, '_', 'highlight', true);
+    }, 800);
+
 };
 
 PI.FormatCount = (val)=>{

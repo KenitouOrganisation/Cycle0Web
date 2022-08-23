@@ -62,6 +62,11 @@ Init.Step5Showcase = ()=>{
     controller.Show(0);
 };
 
+Init.CounterMobileKeyboardResize = ()=>{
+    /*const vw = Engine.Q('meta[name=viewport]');
+    vw.setAttribute('content', `${vw.content}, height=${window.innerHeight}`);*/
+};
+
 const InitManual = {};
 
 InitManual.AssignAnimationWhenVisible = ()=>{
