@@ -25,7 +25,7 @@ Engine.Console = class _Console {
 };
 
 Engine.Alert = class _Alert {
-    static Show({ title, message, style }) {
+    static Show({ title='', message, style }) {
         alert(title + "\n\n" + message);
     }
 

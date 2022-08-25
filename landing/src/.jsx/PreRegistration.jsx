@@ -85,6 +85,7 @@ PI.Submit = async ()=>{
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
+
     const repFetch = await Engine.Ajax.FetchJSON(
         PI.prefix,
         {
@@ -93,7 +94,15 @@ PI.Submit = async ()=>{
             headers : headers
         }
     );
+
     const req = repFetch.req;
+
+    if(!req){
+        return Engine.Alert.Error({
+            title : 'Erreur serveur',
+            message : 'Le serveur est inaccessible pour le moment, veuillez réessayer dans quelques instants ...'
+        });
+    }
 
     if(repFetch.err){
         Engine.Alert(req.err.toString());
