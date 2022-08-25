@@ -63,3 +63,12 @@ footer form p {
 footer .text-box._right {
     margin: auto;
 }
+
+#introduction .inline-box:last-child {
+    top: 0px;
+}
+
+.illustration{
+    overflow: hidden;
+    height: 210px;
+}
