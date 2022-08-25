@@ -8,18 +8,21 @@ const server = http.createServer((req, res)=>{
     let fileData = null
     const prefix = './landing'
 
-    if(req.url == '/')
+    // removing versionning data/parameters ?v=999
+    const url = req.url.replace(/\?v=(.+)/, '')
+
+    if(url == '/')
         fileData = GetFile(prefix, '/index.html')
     // simulated request from Java Server
-    else if(req.url == '/pre-registration/count')
+    else if(url == '/pre-registration/count')
         fileData = '' + preRegCount
-    else if(req.url == '/pre-registration'){
+    else if(url == '/pre-registration'){
         fileData = ''
         preRegCount++;
     }
     // end of simulated request
     else
-        fileData = GetFile(prefix, req.url)
+        fileData = GetFile(prefix, url)
 
     res.end(fileData)
 })
