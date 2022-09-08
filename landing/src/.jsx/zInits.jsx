@@ -69,6 +69,7 @@ Init.CounterMobileKeyboardResize = ()=>{
 
 const InitManual = {};
 
+// trigger on page scroll
 InitManual.AssignAnimationWhenVisible = ()=>{
     const animBox = Array.from(Engine.QAll('.anim-box'));
     const className = {
@@ -77,6 +78,7 @@ InitManual.AssignAnimationWhenVisible = ()=>{
     };
 
     animBox.forEach(box => {
+
         if(Engine.DOM.IsVisible(box) === true)
             Engine.DOM.ClassSwitch(box, className._ON_VISIBLE, className._ON_HIDE, true);
         else

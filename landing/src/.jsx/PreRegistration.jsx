@@ -112,7 +112,9 @@ PI.Submit = async ()=>{
 
     if(req.status == 200){
         const popup = (
-            <div id="popup">
+            <div id="popup" class="anim-box">
+                {/*
+                FIXME this button create a bug on horizontal scrolling on other slide (we can delete the button)
                 <button
                     style="visibility:hidden"
                     class="close"
@@ -121,7 +123,7 @@ PI.Submit = async ()=>{
                             popup.parentNode.removeChild(popup);
                         }
                     }}
-                >X</button>
+                >X</button>*/}
                 <iframe
                     src="./src/page/remerciement_validation.html"
                     style="

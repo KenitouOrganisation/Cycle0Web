@@ -3,7 +3,7 @@
 }
 
 .index{
-    font-size: 55px;
+    font-size: 65px;
 }
 
 .table-box.text-box .h2_2 {
@@ -20,12 +20,17 @@
     font-size: 12px;
 }
 
+.table-box.text-box .h2_2.long{
+    font-size: 15px!important;
+    bottom: -5px;
+}
+
 ._btt {
     font-size: 12px;
 }
 
-footer img#logo_footer {
-    width: 90px;
+footer #logo_footer *{
+    width: 90px!important;
 }
 
 footer * {

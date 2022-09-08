@@ -442,14 +442,14 @@ footer{
 
 /* popup et close button provisoire */
 #popup{
-    position: fixed;
+    position: absolute;
     z-index: 4000;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
+    width: 100%;
     min-height: 355px;
-    height: 45%;
+    height: 65%;
     /*background: #e4eef0;*/
     border-radius: 8px;
     /*box-shadow: 0 1px 2px #979797;*/
@@ -473,6 +473,9 @@ footer{
     cursor: pointer;
 }
 
+.slide-hide #popup{
+    display: ;
+}
 
 #_footer_links{
     text-align: center;    
@@ -494,4 +497,8 @@ footer{
 
 .mobile-br{
     display: inline-block;
+}
+
+footer #logo_footer img{
+    margin-bottom: 5px;
 }

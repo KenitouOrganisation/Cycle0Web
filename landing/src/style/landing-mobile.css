@@ -27,6 +27,10 @@
     font-size: 21px!important;
 }
 
+.h2_2.long{
+    font-size: 18px!important;
+}
+
 .p_2, .p_1{
     font-size: 14px;
 }
@@ -56,8 +60,8 @@ form input:not(input[type="reset"], input[type="submit"]) {
     font-size: 16px;
 }
 
-footer img#logo_footer {
-    width: 105px;
+footer #logo_footer * {
+    width: 105px!important;
 }
 
 /* LANDING.CSS */
