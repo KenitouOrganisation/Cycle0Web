@@ -90,3 +90,12 @@ footer .text-box._right {
 #etape_5 .panorama-box {
     top: -5%;
 }
+
+.social_link, .social_link img {
+    height: 40px;
+    margin-bottom: 25px;
+}
+
+#intro-store-links {
+    top: 0px;
+}

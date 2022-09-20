@@ -175,3 +175,18 @@ footer #logo_footer * {
 .mobile-br{
     display: block;
 }
+
+#intro-store-links{
+    top : 40px;
+    display: flex;
+}
+
+.social_link {
+    display: inline-block;
+    margin-left: 0px;
+}
+
+.social_link, .social_link img {
+    height: 46px;
+    margin: 0 5px;
+}

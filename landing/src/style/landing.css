@@ -502,3 +502,22 @@ footer{
 footer #logo_footer img{
     margin-bottom: 5px;
 }
+
+.social_link, .social_link img {
+    height: 50px;
+}
+
+.social_link {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+#intro-store-links {
+    display: inline-flex;
+    position: relative;
+    top: 18px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+}
