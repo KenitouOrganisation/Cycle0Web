@@ -24,6 +24,9 @@ const server = http.createServer((req, res)=>{
     else
         fileData = GetFile(prefix, url)
 
+    if(url.endsWith(".svg"))
+        res.setHeader('Content-type', 'image/svg+xml')
+
     res.end(fileData)
 })
 
