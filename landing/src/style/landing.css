@@ -252,7 +252,6 @@ header.scroll .top {
 
 #logo img {
     transition: all 1s ease;
-    width: 100%;
     position: absolute;
 }
 
@@ -474,42 +473,7 @@ footer{
 }
 
 .slide-hide #popup{
-    display: ;
-}
-
-#_footer_links{
-    text-align: center;    
-}
-
-#_footer_links a{
-    display: inline-block;
-    margin: 4px 8px;
-}
-
-#_footer_links .icon-social img {
-    width: 17px;
-    vertical-align: text-top;
-}
-
-#_footer_links #mentions_legales{
-    color : var(--secondary-color);
-}
-
-.mobile-br{
-    display: inline-block;
-}
-
-footer #logo_footer img{
-    margin-bottom: 5px;
-}
-
-.social_link, .social_link img {
-    height: 50px;
-}
-
-.social_link {
-    display: inline-block;
-    margin-left: 10px;
+    display: none;
 }
 
 #intro-store-links {
