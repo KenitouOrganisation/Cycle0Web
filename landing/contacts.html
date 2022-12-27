@@ -1,0 +1,139 @@
+<!--
+
+    Copyright 2022-2023 / Cycle Zéro
+    Toutes copies même partielles de n'importe qu'elle partie du code du site Cycle Zéro sont strictement interdites.
+
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <base href=".">
+        <link rel="stylesheet" href="./src/style/style.css?v=2508222238" />
+        <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" />
+        <link rel="stylesheet" href="./src/style/landing-mobile.css?v=2508222238" media="screen and (max-width : 800px)" />
+        <link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
+        <link rel="icon" type="image/png" href="./src/img/icon.png" />
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0"> -->
+        <!--
+            Mettre ici les meta pour le SEO
+        -->
+         <!-- HTML Meta Tags -->
+
+        <title>Cycle Zéro - Réemploi chantier</title>
+        <meta name="description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
+
+        <!-- Facebook Meta Tags -->
+        <meta property="og:url" content="https://cyclezero.fr/">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Cycle Zéro - Réemploi chantier">
+        <meta property="og:description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
+        <meta property="og:image" content="https://cyclezero.fr/src/img/og_img.jpg">
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="cyclezero.fr">
+        <meta property="twitter:url" content="https://cyclezero.fr/">
+        <meta name="twitter:title" content="Cycle Zéro - Réemploi chantier">
+        <meta name="twitter:description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
+        <meta name="twitter:image" content="https://cyclezero.fr/src/img/og_img.jpg">
+
+        <!--
+            Google Fonts
+        -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <!--
+        Code adapted to show without Javascript, so we put all first in html 
+        (where we have a heavy HTML code instead of using JS to have less repeat code)
+    -->
+
+    <body class="not_sub">
+
+<style>
+form * {
+    display: block;
+    width: 75%;
+    box-sizing: border-box;
+    margin: 30px auto;
+}
+form input, form textarea {
+    padding: 17px 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+}
+</style>
+
+        <header>
+            <nav>
+                <div id="logo" class="frame">
+                    <a href="" class="image">
+                        <span class="helper"></span>
+                        <img
+                            src="./src/img/logo.png"
+                            alt="Cycle Zéro - Accueil"
+                        />
+                    </a>
+                </div>
+                <div id="header-buttons">
+                    <ul>
+                        <li><a href="./chantiers.html">Chantiers</a></li>
+                        <li><a href="./equipe.html">L'équipe</a></li>
+                        <li><a href="./contacts.html" class="on">Contacts</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="wrap-content">
+
+            <section>
+                <form action="" method="POST">
+                    <h2 class="h2">Formulaire de contact</h2>
+                    <input type="email" placeholder="Votre adresse mail">
+                    <input type="text" placeholder="Le sujet">
+                    <textarea name="" id="" cols="30" rows="7" placeholder="Votre message"></textarea>
+                    <button class="_btt _orange">Envoyer</button>
+                </form>
+            </section>
+
+            <footer>
+                <div class="box left-box">
+                    <img
+                        width="160"
+                        src="./src/img/logo.png"
+                        alt="Cycle Zéro"
+                    />
+                    <div class="intro-store-links">
+                        <a class="social_link" target="_blank" href="https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200">
+                            <img src="./src/img/stores/app-store-black.svg" alt="Télécharger dans l'App Store">  
+                        </a>
+                        <a class="social_link" target="_blank" href="https://play.google.com/store/apps/details?id=com.cycle0.cycle0app">
+                            <img alt="Disponible sur Google Play" src="./src/img/stores/google-play-badge.png">
+                        </a>
+                    </div>
+                </div>
+                <div class="box right-box">
+                    <ul class="footer-links">
+                        <li><a href="./chantiers.html">Chantiers</a></li>
+                        <li><a href="./equipe.html">L'équipe</a></li>
+                        <li><a href="./contacts.html">Contacts</a></li>
+                    </ul>
+                    <ul class="social-links">
+                        <li><a href="#"><img src="./src/img/icons/social-fbook.png" alt="Page Facebook"></a></li>
+                        <li><a href="#"><img src="./src/img/icons/social-lkdin.png" alt="Page LinkedIn"></a></li>
+                        <li><a href="#"><img src="./src/img/icons/social-insta.png" alt="Compte Instagram"></a></li>
+                    </ul>
+                </div>
+            </footer>
+
+        </div>
+
+    </body>
+</html>

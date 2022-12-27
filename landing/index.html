@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2022 - Cycle Zéro
+    Copyright 2022-2023 / Cycle Zéro
     Toutes copies même partielles de n'importe qu'elle partie du code du site Cycle Zéro sont strictement interdites.
 
 -->
@@ -8,12 +8,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <base href=".">
         <link rel="stylesheet" href="./src/style/style.css?v=2508222238" />
-        <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" />
+        <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" />
         <link rel="stylesheet" href="./src/style/landing-mobile.css?v=2508222238" media="screen and (max-width : 800px)" />
-        <link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" />
+        <link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
         <link rel="icon" type="image/png" href="./src/img/icon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">-->
         <!--
             Mettre ici les meta pour le SEO
         -->
@@ -43,7 +44,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap"
             rel="stylesheet"
         />
     </head>
@@ -54,472 +55,264 @@
     -->
 
     <body class="not_sub">
-        <div id="body-background">
-            <img src="./src/img/big-c.png" alt="">
-        </div>
+
         <header>
             <nav>
-                <div id="logo">
+                <div id="logo" class="frame">
                     <a href="" class="image">
-                        <img
-                            src="./src/img/logo_white.png"
-                            alt="Cycle Zéro"
-                            class="top"
-                        />
+                        <span class="helper"></span>
                         <img
                             src="./src/img/logo.png"
-                            alt="Cycle Zéro"
-                            class="scroll"
+                            alt="Cycle Zéro - Accueil"
                         />
                     </a>
                 </div>
                 <div id="header-buttons">
-                    <a href="#pre-inscription" class="_btt _orange _transparent"
-                        ><span data-elmt="preinscription">?</span> Pré-inscrits</a
-                    >
-                    <a href="#pre-inscription" class="_btt _orange _filled"
-                        >Pré-inscription</a
-                    >
+                    <ul>
+                        <li><a href="./chantiers.html">Chantiers</a></li>
+                        <li><a href="./equipe.html">L'équipe</a></li>
+                        <li><a href="./contacts.html">Contacts</a></li>
+                    </ul>
                 </div>
             </nav>
         </header>
 
-        <div id="view">
-            <!-- 1rst view -->
-            <div
-                class="container slider _dark spec_bloc ignore-header"
-                data-view="0"
-                data-pagingText="En savoir plus"
-                id="introduction"
-            >
-                <div id="introduction-bkg" class="img-box"></div>
-                <div class="vertical center-box">
-                    <div class="horizontal-box">
-                        <div class="center-elmt-box">
-                            <!-- Content -->
-                            <div class="inline-box _w65">
-                                <div class="text-box h2_1">
-                                    <h2>
-                                        <span class="color_1">Cycle Zéro,</span>
-                                        <span class="secondary_color">
-                                            l’application qui permet de donner
-                                            ou de récupérer gratuitement des
-                                            matériaux de chantier.
-                                        </span>
-                                    </h2>
-                                </div>
-                                <div class="text-box">
-                                    <p class="p_1">
-                                        Une solution pour réduire vos dépenses
-                                        et votre impact environnemental
-                                    </p>
-                                </div>
-                                <a href="#pre-inscription" class="_btt _orange _filled" id="pre-inscription-2"
-                                    >Pré-inscription</a
-                                >
-                                <div id="intro-store-links">
-                                    <a
-                                        class="social_link"
-                                        target="_blank"
-                                        href='https://play.google.com/store/apps/details?id=com.cycle0.cycle0app'
-                                    >
-                                        <img alt='Disponible sur Google Play' src='./src/img/stores/google-play-badge.png'/>
-                                    </a>
-                                    <a
-                                        class="social_link"
-                                        target="_blank"
-                                        href="https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200"
-                                    >
-                                        <img
-                                            src="./src/img/stores/app-store-black.svg"
-                                            alt="Télécharger dans l'App Store"
-                                        >
-                                            
-                                    </a>
-                                </div>
-                                
+        <div class="wrap-content">
+   
+            <div class="o-hidden">
+                <section style="margin-top: 0; margin-bottom: 0;">
+                    <div class="sub_section" style="max-width : 55%; margin-bottom: 350px;">
+                        <div>                  
+                            <h1 class="h1">Récupérez gratuitement des matériaux sur les chantiers</h1>
+                            <p>Une solution pour réduire vos dépenses et votre impact environnemental</p>
+    
+                        </div>
+                        <div class="intro-store-links">
+                            <a class="social_link" target="_blank" href="https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200">
+                                <img src="./src/img/stores/app-store-black.svg" alt="Télécharger dans l'App Store">  
+                            </a>
+                            <a class="social_link" target="_blank" href="https://play.google.com/store/apps/details?id=com.cycle0.cycle0app">
+                                <img alt="Disponible sur Google Play" src="./src/img/stores/google-play-badge.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sub_section" style="float : right;">
+                        <div id="big-c">
+                            <img src="./src/img/illustrations/illustration1.png" alt="Illustration de l'application Cycle Zéro">
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="txt-center" style="margin-top: 0;">
+                <h1 class="h1" style="margin-bottom: 78px;">Vous êtes la solution !</h1>
+                <div class="gallery-container">
+                    <div class="gallery-box">
+                        <img src="./src/img/illustrations/landing-chantier-1.png" alt="Les chantiers" class="gallery-img">
+                        <h3>Les chantiers</h3>
+                        <p class="description">
+                            Les matériaux sont référencés directement sur l’application
+                        </p>
+                        <div class="next-img"></div>
+                    </div>
+    
+                    <div class="gallery-box">
+                        <img src="./src/img/illustrations/landing-application-1.png" alt="L'application" class="gallery-img">
+                        <h3>L'application</h3>
+                        <p class="description">
+                            Le particulier peut consulter les matériaux disponibles autour de chez lui
+                        </p>
+                        <div class="next-img"></div>
+                    </div>
+    
+                    <div class="gallery-box">
+                        <img src="./src/img/illustrations/landing-particuliers-1.png" alt="Les particuliers" class="gallery-img">
+                        <h3>Les particuliers</h3>
+                        <p class="description">
+                            Une fois sa réservation validée, le particulier peut se rendre sur le chantier
+                        </p>
+                    </div>    
+                </div>
+            </section>
+
+            <section>
+                <div class="inline-box" id="les-chiffres">
+
+                    <div class="left-box">
+                        <div class="inline-box">
+                            <div>
+                                <p class="h1-label">3203</p>
+                                <p class="h2-label">Chantiers</p>
                             </div>
-                            <div class="inline-box">
-                                <div class="illustration img-box">
-                                    <img
-                                        src="./src/img/illustrations/app1.png"
-                                        alt="Illustration 1"
-                                    />
-                                </div>
+                            <div>
+                                <p class="h3-label">673</p>
+                                <p class="h4-label">M3 de déchets</p>
+                            </div>
+                            <div>
+                                <p class="h3-label">78%</p>
+                                <p class="h4-label">Taux de réemploi</p>
+                            </div>
+                            <div>
+                                <p class="h3-label">738 293</p>
+                                <p class="h4bis-label">Kg de Co2 économisés</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="middle-box">
+                        <div id="playground">
+                            <video
+                                type="video/mp4"
+                                src="./src/img/illustrations/illustration-simpson.mp4"
+                                autoplay
+                                muted
+                                loop
+                            ></video>
+                        </div>
+                        <a href="#" class="_btt _orange" style="max-width: 52%;">Voir les chantiers</a>
+                    </div>
+
+                    <div class="right-box">
+                        <div class="inline-box">
+                            <div>
+                                <p class="h1-label">L'équivalent</p>
+                                <p class="h2-label">de</p>
+                            </div>
+                            <div>
+                                <p class="h3-label">7823</p>
+                                <p class="h4-label">Kilos d'ordures</p>
+                            </div>
+                            <div>
+                                <p class="h3-label">283</p>
+                                <p class="h4-label">Jours de chauffage</p>
+                            </div>
+                            <div>
+                                <p class="h3-label">893 893 903</p>
+                                <p class="h4bis-label">Litres d'eau potable</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bottom">
-                </div>
-            </div>
+            </section>
 
-            <div 
-                class="container slider _light"
-                data-view="1"
-                data-pagingText=""
-            >
-                <!-- FIXME Style problem -->
-
-                <!-- Content -->
-                <div class="vertical center-box">
-                    <div class="horizontal-box">
-                        <div class="center-elmt-box">
-                            <img
-                                class="img-box"
-                                src="./src/img/schema-slide.png"
-                                alt="Schéma fonctionnement Cycle Zéro"
-                                id="vid-fonctionnement-1"
-                            />
-                        </div>
+            <section>
+                <div class="bandeau-box">
+                    <div class="bandeau-elmt">
+                        <img src="" alt="">
+                        <p>#économiecirculaire</p>
+                    </div>
+                    <div class="bandeau-elmt">
+                        <img src="" alt="">
+                        <p>#sobriété</p>
+                    </div>
+                    <div class="bandeau-elmt">
+                        <img src="" alt="">
+                        <p>#réemploi</p>
                     </div>
                 </div>
+            </section>
 
+            <section id="les-chiffres-map">
+                <div class="sub_section">
 
-            </div>
-
-            <div
-                class="container slider _dark spec_bloc"
-                data-view="2"
-                data-paging="1"
-                data-pagingText="Faire défiler"
-                data-pagingDot="true"
-                id="etape_1"
-            >
-                <div class="vertical center-box">
-                    <div class="horizontal-box">
-                        <div class="center-elmt-box">
-                            <!-- Content -->
-                            <div class="inline-box _w65">
-                                <div class="text-box table-box">
-                                    <h2 class="index">1</h2>
-                                    <h2 class="h2_2" style="/* FIXME bug */margin-left: 0;">
-                                        Recherchez selon vos besoins et à proximité
-                                    </h2>
-                                </div>
-                                <div class="text-box">
-                                    <p class="p_2">
-                                        Nous privilégions les échanges locaux.
-                                    </p>
-                                    <p class="p_2">
-                                        Pas besoin de se déplacer trop loin, on vous 
-                                        propose les annonces près de chez vous.
-                                    </p>
-                                    <p class="p_2">
-                                        Une bonne action pour la planète et le porte-monnaie.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="inline-box">
-                                <div class="illustration img-box">
-                                    <img
-                                        src="./src/img/illustrations/app1.png"
-                                        alt="Illustation 1"
-                                    />
-                                </div>
-                            </div>
+                    <div>
+                        <h1 class="h1">L'action locale est essentielle</h1>
+                        <div id="les-chiffres-map-txt">
+                            <p>
+                                Notre communauté compte déjà <span class="h3-label">3654</span> inscrits partout en France métropolitaine. 
+                            </p>
+                            <p>
+                                Votre inscription nous permet de connaître votre localisation afin d’avoir un pouvoir d’action plus fort près de chez vous !
+                            </p>
+                            <p>
+                                Inscription :
+                            </p>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <div
-                class="container slider _dark spec_bloc"
-                data-view="3"
-                data-paging="2"
-                data-pagingText="Faire défiler"
-                data-pagingDot="true"
-                id="etape_2"
-            >
-                <div class="vertical center-box">
-                    <div class="horizontal-box">
-                        <div class="center-elmt-box">
-                            <!-- Content -->
-                            <div class="inline-box _w65">
-                                <div class="text-box table-box">
-                                    <h2 class="index">2</h2>
-                                    <h2 class="h2_2">
-                                        Envoyez votre demande au chantier
-                                    </h2>
-                                </div>
-                                <div class="text-box">
-                                    <p class="p_2">
-                                        Sélectionner les annonces qui correspondent à vos besoins.
-                                    </p>
-                                    <p class="p_2">
-                                        Vous bénéficiez d’une recherche intuitive par catégorie ou mots-clés.
-                                    </p>
-                                    <p class="p_2">
-                                        Cliquez sur l’annonce et l'invitation est envoyée.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="inline-box">
-                                <div class="illustration img-box">
-                                    <img
-                                        src="./src/img/illustrations/app2.png"
-                                        alt="Illustation 2"
-                                    />
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div
-                class="container slider _dark spec_bloc"
-                data-view="4"
-                data-paging="3"
-                data-pagingText="Faire défiler"
-                data-pagingDot="true"
-                id="etape_3"
-            >
-                <div class="vertical center-box">
-                    <div class="horizontal-box">
-                        <div class="center-elmt-box">
-                            <!-- Content -->
-                            <div class="inline-box _w65">
-                                <div class="text-box table-box">
-                                    <h2 class="index">3</h2>
-                                    <h2 class="h2_2">
-                                        Le chantier a 24h pour valider votre
-                                        demande
-                                    </h2>
-                                </div>
-                                <div class="text-box">
-                                    <p class="p_2">
-                                        Une fois votre sélection réalisée, l'entreprise se charge
-                                        de vous répondre au plus vite pour valider votre demande !
-                                    </p>
-                                    <p class="p_2">
-                                        Vous recevrez une notification pour la confirmation.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="inline-box">
-                                <div class="illustration img-box">
-                                    <img
-                                        src="./src/img/illustrations/app3.png"
-                                        alt="Illustation 3"
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                    <div class="intro-store-links">
+                        <a class="social_link" target="_blank" href="https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200">
+                            <img src="./src/img/stores/app-store-black.svg" alt="Télécharger dans l'App Store">  
+                        </a>
+                        <a class="social_link" target="_blank" href="https://play.google.com/store/apps/details?id=com.cycle0.cycle0app">
+                            <img alt="Disponible sur Google Play" src="./src/img/stores/google-play-badge.png">
+                        </a>
                     </div>
-                </div>
-            </div>
 
-            <div
-                class="container slider _dark spec_bloc"
-                data-view="5"
-                data-paging="4"
-                data-pagingText="Faire défiler"
-                data-pagingDot="true"
-                id="etape_4"
-            >
-                <div class="vertical center-box">
-                    <div class="horizontal-box">
-                        <div class="center-elmt-box">
-                            <!-- Content -->
-                            <div class="inline-box _w65">
-                                <div class="text-box table-box">
-                                    <h2 class="index">4</h2>
-                                    <h2 class="h2_2">
-                                        Venez récupérer vos matériaux sur place
-                                    </h2>
-                                </div>
-                                <div class="text-box">
-                                    <p class="p_2">
-                                        Votre demande est validée !
-                                    </p>
-                                    <p class="p_2">
-                                        Vous n'avez plus qu'à
-                                        convenir d'un rendez-vous pour récupérer vos matériaux
-                                        sur le chantier !
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="inline-box">
-                                <div class="illustration img-box">
-                                    <img
-                                        src="./src/img/illustrations/app4.png"
-                                        alt="Illustation 4"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-
-            <div
-                class="container slider _dark spec_bloc"
-                data-view="6"
-                data-paging="5"
-                data-pagingText="Se pré-inscrire"
-                data-pagingDot="true"
-                id="etape_5"
-            >
-                <div class="vertical center-box">
-                    <div class="horizontal-box">
-                        <div class="center-elmt-box flex-direction-col">
-                            <!-- Content -->
-                            <div class="block-box">
-                                <div class="text-box table-box">
-                                    <h2 class="index">5</h2>
-                                    <h2 class="h2_2 long">Des matériaux gratuits sont déjà disponibles avant le lancement !</h2>
-                                </div>
-                                <div class="text-box">
-                                    <p class="p_2">
-                                        Inscrivez-vous afin de recevoir par mail les offres de matériaux près de chez vous.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="inline-box panorama-box">
-                                <div class="vertical-sliding-box" id="diapo5">
-                                    <div class="square-img img-box">
-                                        <img src="./src/img/articles/1.png" alt="Photo réemploi 1" />
-                                    </div>
-                                    <div class="square-img img-box">
-                                        <img src="./src/img/articles/2.png" alt="Photo réemploi 2" />
-                                    </div>
-                                    <div class="square-img img-box">
-                                        <img src="./src/img/articles/3.png" alt="Photo réemploi 3" />
-                                    </div>
-                                    <div class="square-img img-box">
-                                        <img src="./src/img/articles/4.png" alt="Photo réemploi 4" />
-                                    </div>
-                                    <div class="square-img img-box">
-                                        <img src="./src/img/articles/5.png" alt="Photo réemploi 5" />
-                                    </div>
-                                    <div class="square-img img-box">
-                                        <img src="./src/img/articles/6.png" alt="Photo réemploi 6" />
-                                    </div>
-                                    <div class="square-img img-box">
-                                        <img src="./src/img/articles/7.png" alt="Photo réemploi 7" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="les-chiffres-map-carte">
+                    <img src="./src/img/illustrations/carte-france.png" alt="Carte de la France">
                 </div>
-            </div>
+            </section>
 
-            <div 
-                class="container slider _light"
-                id="pre-inscription"
-                data-view="7"
-                data-pagingOn="false"
-            >
-                <div class="normal-box" id="form_box">
-                    <div class="text-box">
-                        <p class="p_2">
-                            <b>L’action locale est essentielle</b>.
-                            Plus il y aura de pré-inscrits, plus nous pourrons agir près de chez vous.
+            <section class="txt-center">
+                <h1 class="h1">Nos partenaires</h1>
+                <div class="bandeau-box">
+                    <img src="./src/img/brands/innopolis.png" alt="">
+                    <img src="./src/img/brands/ville-de-paris.png" alt="">
+                    <img src="./src/img/brands/ademe.png" alt="">
+                    <img src="./src/img/brands/fayat.png" alt="">
+                    <img src="./src/img/brands/occitanie.png" alt="">
+                </div>
+
+                <a href="#" class="_btt _orange"">Devenir partenaire</a>
+                
+            </section>
+
+            <div id="landing-foot">
+                <section class="txt-center">
+
+                    <div class="txt-container">
+                        <h1 class="h1">Le mouvement de Cycle Zéro vous appartient</h1>
+                        <p>
+                            Cycle zéro est un mouvement qui vise à se diffuser partout en France. 
+                            <span class="_txt_orange">Notre structure est ouverte</span> à tous ceux qui souhaiterait propager notre modèle d’économie circulaire. 
                             <br>
-                            <br>
-                            C’est à vous de jouer !
+                            <span class="_txt_orange">Contactez-nous pour collaborer dans vos régions !</span>
                         </p>
                     </div>
-                    <div class="center-elmt-box" id="form_container">
-                        <!-- Content -->
-                        <div class="inline-box _w60 anim-box" id="form_preinscription">
-                            <form action="" method="POST">
-                                <h3 class="p_2" style="padding : 0; text-decoration : underline;">Pré-inscription</h3>
-                                <div class="no-js-elmt">
-                                    <p class="p_4" style="text-align : justify; color: #d53636;">
-                                        Il semble que votre JavaScript n'est pas activé ou que votre navigateur n'est pas à jour.
-                                        <br> Veuillez mettre à jour votre navigateur web ou activer JavaScript afin de pouvoir vous préinscrire, merci.
-                                    </p>
-    
-                                </div>
-                                <div class="need-js-elmt">
-                                   <p>
-                                        <input
-                                            type="email"
-                                            id="pre-form-email"
-                                            required
-                                            autocomplete="off"
-                                            placeholder="Adresse E-mail"
-                                        />
-                                    </p>
-                                    <p>
-                                        <input
-                                            type="text"
-                                            id="pre-form-postal"
-                                            required
-                                            autocomplete="off"
-                                            placeholder="Code postal"
-                                        />
-                                    </p>
-                                    <input
-                                        type="submit"
-                                        value="Valider"
-                                        class="_btt _orange _filled"
-                                    /> 
-                                </div>
-                                
-                            </form>
-                        </div>
-                        <div class="inline-box anim-box priority _2">
-                            <div class="border-box indicator-box">
-                                <p class="p_number_1"><span data-elmt="preinscription">?</span></p>
-                                <p class="p_3 color_1">Pré-inscrits</p>
-                            </div>
-                        </div>
+        
+                    <a href="#" class="_btt _orange"">Rejoindre l'équipe</a>
+                    
+                    <div class="picto-container">
+                        <div class="anim-picto picto1"></div>
+                        <div class="anim-picto picto2"></div>
+                        <div class="anim-picto picto4"></div>
+                        <div class="anim-picto picto8"></div>
+                    </div>
+
+                </section>
+            </div>
+            <footer>
+                <div class="box left-box">
+                    <img
+                        width="160"
+                        src="./src/img/logo.png"
+                        alt="Cycle Zéro"
+                    />
+                    <div class="intro-store-links">
+                        <a class="social_link" target="_blank" href="https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200">
+                            <img src="./src/img/stores/app-store-black.svg" alt="Télécharger dans l'App Store">  
+                        </a>
+                        <a class="social_link" target="_blank" href="https://play.google.com/store/apps/details?id=com.cycle0.cycle0app">
+                            <img alt="Disponible sur Google Play" src="./src/img/stores/google-play-badge.png">
+                        </a>
                     </div>
                 </div>
-
-                <footer>
-                    <div class="img-box anim-box" id="logo_footer">
-                        <img
-                            src="./src/img/logo_white.png"
-                            alt="Cycle Zéro"
-                        />
-                        <p style="
-                            margin: 0;
-                            font-size: 9px!important;
-                            line-height: 1;
-                            text-align: center;"
-                        >©2022 Cycle Zéro - Tous droits réservés</p>
-                    </div>
-                    <div class="text-box _right" id="_footer_links">
-                        <a 
-                            href="./legals.html"
-                            id="mentions_legales"
-                            class="p_4"
-                        >
-                            Mentions Légales
-                        </a>
-                        <div class="mobile-br"></div>
-                        <a href="mailto:contact@cyclezero.fr" class="p_4 color_1">
-                            contact@cyclezero.fr
-                        </a>
-
-                        <div class="mobile-br"></div>
-
-                        <a class="icon-social" target="_blank" href="https://www.linkedin.com/company/cycle-zero/">
-                            <img src="./src/img/icons/linkedin.png" alt="LinkedIn">
-                        </a>
-                        <a class="icon-social" target="_blank" href="https://www.instagram.com/cyclezero.app/">
-                            <img src="./src/img/icons/instagram.png" alt="Instagram">
-                        </a>
-                        <a class="icon-social" target="_blank" href="https://www.facebook.com/Cycle-Z%C3%A9ro-107479335338932/">
-                            <img src="./src/img/icons/facebook.png" alt="Facebook">
-                        </a>
-
-                    </div>
-                </footer>
-        
-
-            </div>
+                <div class="box right-box">
+                    <ul class="footer-links">
+                        <li><a href="./chantiers.html">Chantiers</a></li>
+                        <li><a href="./equipe.html">L'équipe</a></li>
+                        <li><a href="./contacts.html">Contacts</a></li>
+                    </ul>
+                    <ul class="social-links">
+                        <li><a href="#"><img src="./src/img/icons/social-fbook.png" alt="Page Facebook"></a></li>
+                        <li><a href="#"><img src="./src/img/icons/social-lkdin.png" alt="Page LinkedIn"></a></li>
+                        <li><a href="#"><img src="./src/img/icons/social-insta.png" alt="Compte Instagram"></a></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
 
-        <script src="./src/script/Main.js?v=2508222238"></script>
-        <div id="ready"></div>
-        <script>
-            //alert(window.innerWidth + ' --- ' + window.innerHeight);
-        </script>
     </body>
 </html>
