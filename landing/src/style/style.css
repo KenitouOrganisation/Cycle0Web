@@ -358,6 +358,7 @@ footer{
 
 #les-chiffres video{
     width: 100%;
+    max-width: 655px;
 }
 
 #les-chiffres > div {
