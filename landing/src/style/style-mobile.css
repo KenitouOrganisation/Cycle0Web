@@ -1,0 +1,272 @@
+:root{
+    --header-height: 80px;
+    --page-side-margin: 3%;
+}
+
+body *{
+    font-size: 16px;
+}
+
+section{
+    margin: 70px var(--page-side-margin);
+}
+
+.h1-label{
+    font-size: 30px;
+}
+
+.h2-label{
+    font-size: 24px;
+}
+
+.h3-label{
+    font-size: 22px;
+}
+
+.h1{
+    font-size: 22px;
+}
+
+.h2 {
+    font-size: 24px;
+}
+
+.h4-label, .description {
+    font-size: 16px;
+}
+
+.wrap-content {
+    min-width: auto;
+    margin: calc(var(--header-height) + 15px) auto;
+}
+
+.mob-only{
+    display: unset;
+    visibility: visible;
+}
+
+.mob-hide{
+    display: none;
+    visibility: hidden;
+}
+
+#header-buttons .indicator{
+    position: relative;
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    right: 50%;
+}
+
+#header-buttons .indicator:after {
+    content: '';
+    background-image: url("../img/icons/dropdownlist.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 18px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -25px;
+}
+
+#header-buttons ul {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    position: absolute;
+    top: 52px;
+    right: 0;
+    background: #fbfbfb;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: 3px solid #303030;
+    padding: 0;
+    box-shadow: 0 0 8px #545454;
+}
+
+#header-buttons:hover ul{
+    pointer-events: all;
+    opacity: 1;
+}
+
+#header-buttons ul li{
+    padding: 14px 11px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#header-buttons ul li:not(:last-child){
+    border-bottom: 2px solid #e5e5e5;
+}
+
+#header-buttons ul li a{
+    font-size: 18px;
+}
+
+#logo img{
+    width: 110px;
+}
+
+#landing-first-slide-left{
+    max-width : 100%;
+    margin-bottom: 0;    
+}
+
+#landing-first-slide-right{
+    float: unset;
+}
+
+#big-c{
+    top: 30px;
+    left: -30px;
+}
+
+#big-c:before{
+    width: 210%;
+    top: -45px;
+    left: -60px;
+}
+
+#landing-h1-slide2{
+    margin-bottom: 40px;
+}
+
+#les-chiffres {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#les-chiffres, #les-chiffres .right-box{
+    text-align: center;
+}
+
+#les-chiffres .data{
+    display: flex;
+    justify-content: center;
+}
+
+#les-chiffres-map{
+    padding: 0;
+}
+
+#les-chiffres-map p {
+    margin-top: 25px;
+}
+
+#les-chiffres-map-txt {
+    width: 100%;
+}
+
+#les-chiffres-map-carte{
+    position: relative;
+    width: 90%;
+    margin: 35px auto;
+}
+
+.bandeau-box img{
+    margin: 0;
+    width: 125px;
+}
+
+.bandeau-elmt p{
+    font-size: 24px;
+}
+
+._btt{
+    font-size: 20px;
+}
+
+#landing-foot .picto-container{
+    display: none;
+    visibility: hidden;
+}
+
+#landing-foot .txt-container{
+    width: 100%;
+}
+
+#landing-foot .txt-container{
+    line-height: 25px;
+}
+
+.bandeau-box{
+    margin-top: 30px;
+}
+
+.gallery-box h3 {
+    font-size: 22px;
+}
+
+footer{
+    justify-content: center;
+    margin: 45px var(--page-side-margin);
+}
+
+footer ul{
+    justify-content: center;
+}
+
+footer .intro-store-links{
+    position: relative;
+    margin: 30px auto;
+}
+
+footer .logo{
+    margin: auto;
+    display: block;
+    width: 122px;
+}
+
+footer .social-links a{
+    width: 58px;
+}
+
+footer .social-links a img {
+    max-height: 29px;
+    max-width: 29px;
+}
+
+
+/*
+    chantiers
+*/
+
+form#search-chantiers > * {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+}
+
+#search-chantiers {
+    border-bottom: 2px solid #0000000F;
+    margin-bottom: 42px;
+}
+
+#search-chantiers ._btt {
+    margin: 15px 0;
+}
+
+
+.search-content-box .logo {
+    max-width: 124px;
+    max-height: 56px;
+}
+
+.search-content-box .data {
+    margin-left: 0px;
+}
+
+.search-content-box .cell {
+    flex-direction: column;
+    white-space: nowrap;
+}
+
+.search-content-box .table.left-box {
+    padding-right: 10px;
+}
+
