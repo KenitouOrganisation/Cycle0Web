@@ -169,8 +169,8 @@ section{
 }
 
 .bandeau-box img{
-    margin: 0;
-    width: 125px;
+    margin: 0px 20px;
+    width: 60px;
 }
 
 .bandeau-elmt p{
@@ -198,8 +198,32 @@ section{
     margin-top: 30px;
 }
 
+.gallery-container{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
 .gallery-box h3 {
     font-size: 22px;
+}
+
+.gallery-box .next-img{
+    top: 40%;
+}
+
+.gallery-box{
+    opacity: 0;
+    display: none;
+    top: 0;
+}
+
+.gallery-box.show{
+    display: block;
+    opacity: 1;
 }
 
 footer{

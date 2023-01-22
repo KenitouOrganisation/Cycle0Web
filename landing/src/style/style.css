@@ -19,6 +19,20 @@
     font-weight: 700;
 }
 
+@font-face {
+    font-family: 'Roboto';
+    src: url("../font/RobotoMono-Regular.ttf");
+    font-weight: 400;
+}
+
+.mono, .gallery-box .description, .h4-label, .mono span{
+    font-family: 'Roboto', 'Montserrat';
+}
+
+.txt-special-opacity, .gallery-box .description, #les-chiffres-map-txt p{
+    opacity: 70%;
+}
+
 .mob-only{
     display: none;
     visibility: hidden;
@@ -197,6 +211,7 @@ header nav{
     margin: var(--header-height) auto;
     max-width: 2000px;
     min-width: 1400px;
+    overflow: hidden;
 }
 
 .inline-b, .sub_section{
@@ -340,6 +355,15 @@ footer{
     min-width: 345px;
     box-sizing: border-box;
     padding: 0 4%;
+
+    top: 50px;
+    opacity: 0;
+    transition: all 1.5s ease;
+}
+
+.gallery-box.show{
+    top: 0px;
+    opacity: 1;
 }
 
 .gallery-img {
@@ -347,6 +371,7 @@ footer{
 }
 
 .gallery-box h3{
+    white-space: nowrap;
     font-size: 32px;
     color: var(--primary-color);
 }
@@ -414,10 +439,10 @@ footer{
 
 .bandeau-elmt {
     display: inline-block;
-    margin: 0 16px;
+    margin-left: 8px;
 }
 
-.next-img {
+.gallery-box .next-img {
     background-image: url("../img/icons/arrow.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -430,16 +455,24 @@ footer{
 
 
 .bandeau-box img {
-    width: 200px;
-    margin: 20px 0;
+    width: 70px;
+    margin: 0px 32px;
+}
+
+.bandeau-box *{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 .bandeau-box {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
     margin: 70px 0;
+    transform: translateX(0);
+    transition: transform 2.1s linear;
 }
 
 #landing-foot {
@@ -656,4 +689,28 @@ CHANTIERS.HTML
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.switcher{
+    display: block;
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.switcher-btt {
+    display: inline-block;
+    background: transparent;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 1px solid var(--primary-color);
+    margin: 0 4px;
+    transition: background 400ms ease;
+}
+
+.switcher-btt.on{
+    background: var(--primary-color);
 }

@@ -1,5 +1,7 @@
 const Engine = {};
 Engine.JSEnable = true;
+Engine.VERSION = { NUMBER : '1.0.1', DATE : '2023-01-22' };
+Engine.isMobileScreen = ()=>window.matchMedia("(max-width: 900px)").matches;
 
 Engine.CheckCompatibility = function () {
     const value = !Object.defineProperty || !document.addEventListener;
@@ -97,8 +99,8 @@ Engine.Elmt = function (name, attr, ...children) {
     return elmt;
 };
 
-Engine.Q = (selector) => document.querySelector(selector);
-Engine.QAll = (selector) => document.querySelectorAll(selector);
+Engine.Q = (selector, parent=null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
+Engine.QAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
 
 Engine.CSS._root = null;
 Engine.CSS.InitRoot = function () {
@@ -243,6 +245,74 @@ Engine.Ajax = class _Ajax{
                 message : repText
             };
         }
+    }
+
+};
+
+Engine.WaitFor = function(ms=0){
+    return new Promise((res, rej)=>{
+        setTimeout(()=>{
+            res();
+        }, ms);
+    });
+};
+
+Engine.Observer = {};
+Engine.Observer.Intersection = class{
+    
+    /**
+     * Create a scroll into view of 1 or multiple element targetted
+     * 
+     * https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#a_simple_example
+     * 
+     * view-source:https://yari-demos.prod.mdn.mozit.cloud/en-US/docs/Web/API/Intersection_Observer_API/_sample_.a_simple_example.html
+     * 
+     * @param {Array<Element>} elmt 
+     * @param {function} handleIntersect callback event observer
+     */
+    constructor(elmts, handleIntersect){
+        this.elmts = elmts instanceof Element ? [elmts] : elmts;
+        this.callback = handleIntersect;
+        this.prevRatio = 0.0;
+
+        const options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: this.buildThresholdList()
+        };
+        this.obs = new IntersectionObserver(
+            (entries, observer)=>this.handleIntersect(entries, observer),
+            options);
+        for(let elmt of this.elmts){
+            this.obs.observe(elmt);
+        }   
+    }
+
+    handleIntersect(entries, observer){
+
+        entries.forEach((entry) => {
+
+            this.callback({
+                isPrevious: entry.intersectionRatio > this.prevRatio, 
+                target: entry.target, 
+                entry: entry
+            });
+
+            this.prevRatio = entry.intersectionRatio;
+        });
+    }
+    
+    buildThresholdList(){
+        let thresholds = [];
+        let numSteps = 20;
+      
+        for (let i=1.0; i<=numSteps; i++) {
+            let ratio = i/numSteps;
+            thresholds.push(ratio);
+        }
+      
+        thresholds.push(0);
+        return thresholds;
     }
 
 };
