@@ -228,6 +228,10 @@ section{
     margin: 200px var(--page-side-margin);
 }
 
+.wrap-content > section{
+    margin-top: 62px;
+}
+
 footer{
     position: relative;
     margin: 90px var(--page-side-margin);
