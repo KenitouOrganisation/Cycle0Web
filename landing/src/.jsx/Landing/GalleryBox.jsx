@@ -70,14 +70,14 @@ class GalleryBox_Switcher {
             // we determine the larger height, so when we swipe the container will always have the same size
             this.childs[i].classList.add('show');
             const height = Engine.DOM.getRect(this.childs[i]).height;
-            //console.log(height)
+            console.log(height)
             if(height > this.boxHeight)
-                this.boxHeight = height;
+                this.boxHeight = height + 40;
 
             this.childs[i].classList.remove('show');
 
         }
-
+        this.boxHeight = this.boxHeight < 320 ? 320 : this.boxHeight;
         this.elmt.style.height = this.boxHeight + 'px';
 
         // adding swipe event to box

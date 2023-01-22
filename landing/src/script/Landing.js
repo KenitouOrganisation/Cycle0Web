@@ -420,10 +420,12 @@ class GalleryBox_Switcher {
       if (nextImg) nextImg.addEventListener('click', () => this.ShowSlide(i + 1));
       this.childs[i].classList.add('show');
       const height = Engine.DOM.getRect(this.childs[i]).height;
-      if (height > this.boxHeight) this.boxHeight = height;
+      console.log(height);
+      if (height > this.boxHeight) this.boxHeight = height + 40;
       this.childs[i].classList.remove('show');
     }
 
+    this.boxHeight = this.boxHeight < 320 ? 320 : this.boxHeight;
     this.elmt.style.height = this.boxHeight + 'px';
     new Engine.SwipeHandle(elmt, direction => this.OnSwipe(direction));
     this.elmt.style.overflow = "hidden";
