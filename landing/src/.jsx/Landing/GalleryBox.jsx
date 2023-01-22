@@ -9,10 +9,11 @@ class GalleryBox {
 
         // when on computer, we show all the gallery when scrolling into view
         if (!Engine.isMobileScreen())
-            new Engine.Observer.Intersection(elmt, (obj) =>
+            new Engine.Observer.Intersection(elmts, (obj) =>
                 this.HandleIntersect(obj)
             );
         else {
+            console.log("?")
             // else we show up a manual scroll system view (one by one)
             for (const elmt of elmts) {
                 new GalleryBox_Switcher(elmt);
@@ -69,6 +70,7 @@ class GalleryBox_Switcher {
             // we determine the larger height, so when we swipe the container will always have the same size
             this.childs[i].classList.add('show');
             const height = Engine.DOM.getRect(this.childs[i]).height;
+            //console.log(height)
             if(height > this.boxHeight)
                 this.boxHeight = height;
 

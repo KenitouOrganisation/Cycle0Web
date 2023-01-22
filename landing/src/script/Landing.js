@@ -367,7 +367,9 @@ class GalleryBox {
   constructor(elmts) {
     this.elmts = elmts;
     this.isShown = false;
-    if (!Engine.isMobileScreen()) new Engine.Observer.Intersection(elmt, obj => this.HandleIntersect(obj));else {
+    if (!Engine.isMobileScreen()) new Engine.Observer.Intersection(elmts, obj => this.HandleIntersect(obj));else {
+      console.log("?");
+
       for (const elmt of elmts) {
         new GalleryBox_Switcher(elmt);
       }
