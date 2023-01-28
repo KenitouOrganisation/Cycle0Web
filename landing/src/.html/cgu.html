@@ -1,87 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Conditions Générales d'Utilisation - Cycle Zéro</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
-        <link rel="stylesheet" href="./src/style/style.css?v=1010221148">
-        <link rel="stylesheet" href="./src/style/landing-mobile.css?v=1010221148" media="screen and (max-width : 800px)" />
-        <link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=1010221148" media="screen and (max-width : 800px) and (max-height : 640px)" />
-        <!--
-            Google Fonts
-        -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap"
-            rel="stylesheet"
-        />
+        <<{__head.html}>>
     </head>
     <body class="js-on">
-        <header>
-            <nav>
-                <div id="logo">
-                    <a href="/" class="image">
-                        <img
-                            src="./src/img/logo_white.png?v=1010221148"
-                            alt="Cycle Zéro"
-                            class="scroll"
-                        />
-                    </a>
-                </div>
-                <div id="header-buttons">
-                    <a href="#pre-inscription" class="_btt _orange _transparent"
-                        ><span data-elmt="preinscription">?</span> Pré-inscrits</a
-                    >
-                </div>
-            </nav>
-        </header>
+        <style>
+            .frame_container {
+                display: block;
+                width: 100vw;
+                height: 100vh;
+                margin-top: var(--header-height);
+            }
+        </style>
+        <<{__header.html}>>
         <iframe
-            src="./src/page/cgu_plain.htm?v=1010221148"
+            src="./src/page/cgu_plain.htm?v=$filetimestamp$"
             class="frame_container"
         ></iframe>
-        <footer>
-            <div class="img-box anim-box" id="logo_footer">
-                <img
-                    src="./src/img/logo_white.png"
-                    alt="Cycle Zéro"
-                />
-                <p style="
-                    margin: 0;
-                    font-size: 9px!important;
-                    line-height: 1;
-                    text-align: center;"
-                >©2022 Cycle Zéro - Tous droits réservés</p>
-            </div>
-            <div class="text-box _right" id="_footer_links">
-                <a 
-                    href="./legals.html"
-                    id="mentions_legales"
-                    class="p_4"
-                >
-                    Mentions Légales
-                </a>
-                <div class="mobile-br"></div>
-                <a href="mailto:contact@cyclezero.fr" class="p_4 color_1">
-                    contact@cyclezero.fr
-                </a>
 
-                <div class="mobile-br"></div>
-
-                <a class="icon-social" target="_blank" href="https://www.linkedin.com/company/cycle-zero/">
-                    <img src="./src/img/icons/linkedin.png" alt="LinkedIn">
-                </a>
-                <a class="icon-social" target="_blank" href="https://www.instagram.com/cyclezero.app/">
-                    <img src="./src/img/icons/instagram.png" alt="Instagram">
-                </a>
-                <a class="icon-social" target="_blank" href="https://www.facebook.com/Cycle-Z%C3%A9ro-107479335338932/">
-                    <img src="./src/img/icons/facebook.png" alt="Facebook">
-                </a>
-
-            </div>
-        </footer>
-
-        <script src="./src/script/PreRegristration.js"></script>
+        <<{__footer.html}>>
 
     </body>
 </html>

@@ -1,32 +1,26 @@
-<!--
-
-    Copyright 2022-2023 / Cycle Zéro
-    Toutes copies même partielles de n'importe qu'elle partie du code du site Cycle Zéro sont strictement interdites.
-
--->
 <!DOCTYPE html>
 <html>
     <head>
                 <meta charset="utf-8" />
         <base href=".">
-        <link rel="stylesheet" href="./src/style/style.css?v=1674920614599" />
+        <link rel="stylesheet" href="./src/style/style.css?v=1674920911877" />
         <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
-        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1674920614599" media="screen and (max-width : 900px)" />
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1674920911877" media="screen and (max-width : 900px)" />
         <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
-        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1674920614599" />
+        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1674920911877" />
         <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
         <!--
             Mettre ici les meta pour le SEO
         -->
             <!-- HTML Meta Tags -->
 
-        <title>Contact - Cycle Zéro</title>
+        <title>Conditions Générales d'Utilisation - Cycle Zéro</title>
         <meta name="description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
 
         <!-- Facebook Meta Tags -->
         <meta property="og:url" content="https://cyclezero.fr/">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Contact - Cycle Zéro">
+        <meta property="og:title" content="Conditions Générales d'Utilisation - Cycle Zéro">
         <meta property="og:description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
         <meta property="og:image" content="https://cyclezero.fr/src/img/og_img.jpg">
 
@@ -34,7 +28,7 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="cyclezero.fr">
         <meta property="twitter:url" content="https://cyclezero.fr/">
-        <meta name="twitter:title" content="Contact - Cycle Zéro">
+        <meta name="twitter:title" content="Conditions Générales d'Utilisation - Cycle Zéro">
         <meta name="twitter:description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
         <meta name="twitter:image" content="https://cyclezero.fr/src/img/og_img.jpg">
 
@@ -49,36 +43,15 @@
         />-->
 
     </head>
-
-    <!--
-        Code adapted to show without Javascript, so we put all first in html 
-        (where we have a heavy HTML code instead of using JS to have less repeat code)
-    -->
-
-    <body class="not_sub">
-
-<style>
-form * {
-    display: block;
-    width: 75%;
-    box-sizing: border-box;
-    margin: 30px auto;
-}
-form input, form textarea {
-    padding: 17px 20px;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.23);
-}
-
-@media screen and (max-width : 900px){
-    form *{
-        width: 90%;
-        margin: 20px auto;
-    }
-}
-
-</style>
-
+    <body class="js-on">
+        <style>
+            .frame_container {
+                display: block;
+                width: 100vw;
+                height: 100vh;
+                margin-top: var(--header-height);
+            }
+        </style>
                 <header>
             <nav>
                 <div id="logo" class="frame">
@@ -98,20 +71,12 @@ form input, form textarea {
                 </div>
             </nav>
         </header>
+        <iframe
+            src="./src/page/cgu_plain.htm?v=1674920911877"
+            class="frame_container"
+        ></iframe>
 
-        <div class="wrap-content">
-
-            <section>
-                <form action="" method="POST">
-                    <h2 class="h2">Formulaire de contact</h2>
-                    <input type="email" placeholder="Votre adresse mail">
-                    <input type="text" placeholder="Objet">
-                    <textarea name="" id="" cols="30" rows="5" placeholder="Votre message"></textarea>
-                    <button class="_btt _orange">Envoyer</button>
-                </form>
-            </section>
-
-                    <footer>
+                <footer>
             <div class="box left-box">
                 <img
                     class="logo"
@@ -155,8 +120,6 @@ form input, form textarea {
         </footer>
 
         <div id="ready"></div>
-
-        </div>
 
     </body>
 </html>

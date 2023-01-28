@@ -13,12 +13,17 @@ LaunchHTTPServer();
 
     new FileManager(
         "contacts.html",
-        "Cycle Zéro - Contact"
+        "Contact - Cycle Zéro"
     ).WatchCompile();
 
     new FileManager(
         "index.html",
         "Cycle Zéro - Réemploi chantier"
+    ).WatchCompile();
+
+    new FileManager(
+        "cgu.html",
+        "Conditions Générales d'Utilisation - Cycle Zéro"
     ).WatchCompile();
     
 })();

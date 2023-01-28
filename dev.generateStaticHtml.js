@@ -58,6 +58,9 @@ class FileManager {
         // reading all existing include on the html file
         let importList = this.fileDatas.match(rgx);
 
+        if(!importList || importList.length < 1)
+            return console.log(`✅ No file to import from ${this.sourcePath + this.fileName}`);
+
         console.log("Import file from HTML detected :", importList.length);
 
         // no duplicata https://stackoverflow.com/a/9229821/9408443
