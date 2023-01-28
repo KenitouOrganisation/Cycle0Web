@@ -1,4 +1,4 @@
-## Prérequis
+# Prérequis
 
 Node.js (version utilisée si jamais c'est pas compatible : 16.X LTS)
 
@@ -76,3 +76,47 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev,h2
 ## informatison
 
 - iPhone SE Safari browser windows size : 375 x 540
+
+
+# Custom Landing Dev Tools
+
+## Custom Dynamic HTML
+
+### Compile
+
+To generate static HTML from the dynamic html folder ./src/.html/*
+
+Command can be found inside `./tools/dev.pushDynamicHtml.js`
+
+### Import file
+
+To import file inside the HTML, just type `<<{filename}>>` with filename that are under `.html` folder
+
+### To put dynamic variable inside HTML file
+
+Some common variable are defined : 
+
+- `$filetimestamp$` for compile current time in unix ms
+- `$title$` for the page title tags
+
+To add new variable inside HTML, just type the variable name as follow inside your HTML page `$myvar$`, such as `<img src="my_img.png?v=$timestamp$`
+
+Then in dev.generatedStaticHTML.js, add the new rules inside **FileManager.CustomCompile** function as wanted
+
+
+## Javascript JSX Babel Compiler
+
+JSX Files are located in `./src/.jsx` folder. This will allow us to use "html" syntaxes like react/JSX inside Javascript instead of typing functions call
+and allow us to minify/compress our code
+
+Just launch `./compileLanding.bat` script which generate one single file inside `./src/script/Landing.js`
+
+## Copy/Paste all landing files expect .filename for the Java Server
+
+- Make sure that all JSX files are compiled into js files, and that compress/minify tag are on
+
+- Make sure all static HTML are generated
+
+- Launch the script that will copy paste all the landing page script to the folder specified (by default `./landing_clean/`)
+
+`node ./tools/dev.copyCleanCodeToServer.js`

@@ -86,16 +86,29 @@ class FileManager {
         }
     }
 
-    async Compile() {
-        await this.Read();
-        await this.ReplaceVarByFile();
+    async CustomCompile(){
+        /*
+            ###########################################
+            ### Here put your custom variable rules ###
+            ###########################################
+        */
 
+        // replacing timestamp
         this.fileDatas = this.ReplaceVar(
             "\\$filetimestamp\\$",
             Date.now() + ""
         );
-        this.fileDatas = this.ReplaceVar("\\$title\\$", this.pageTitle);
 
+        // adding title value (parsed from this constructor)
+        this.fileDatas = this.ReplaceVar("\\$title\\$", this.pageTitle);
+    }
+
+    async Compile() {
+        await this.Read();
+        await this.ReplaceVarByFile();
+
+        this.CustomCompile();
+        
         await this.Write();
     }
 

@@ -27,6 +27,12 @@ Engine.Console = class _Console {
 };
 
 Engine.Alert = class _Alert {
+    /**
+     * 
+     * @param {Object} obj
+     * @param {string} obj.title
+     * @param {string} message 
+     */
     static Show({ title='', message, style }) {
         alert(title + "\n\n" + message);
     }

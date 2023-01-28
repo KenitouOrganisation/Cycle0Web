@@ -1,6 +1,0 @@
-#!/bin/bash
-parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-cd $parent_path
-
-rm -r ./src/script/*
-npx babel ./src/.jsx/Global ./src/.jsx/OldMain --watch --out-file ./src/script/Main.js
