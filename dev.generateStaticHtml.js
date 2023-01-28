@@ -108,16 +108,4 @@ class FileManager {
     }
 }
 
-(async () => {
-
-    new FileManager(
-        "contacts.html",
-        "Cycle Zéro - Contact"
-    ).WatchCompile();
-
-    new FileManager(
-        "index.html",
-        "Cycle Zéro - Réemploi chantier"
-    ).WatchCompile();
-    
-})();
+module.exports.FileManager = FileManager;
