@@ -161,7 +161,9 @@ Engine.DOM.IsVisible = (elmt, strict = false) => {
   const clientRect = Engine.DOM.getRect(elmt);
   const isAbove = clientRect.top < 0;
   const isUnder = clientRect.top > window.innerHeight;
-  return !isAbove && !isUnder;
+  const isLeft = clientRect.x < 0;
+  const isRight = clientRect.x > window.innerWidth;
+  return !isAbove && !isUnder && !isLeft && !isRight;
 };
 
 Engine.MATH.WithUnit.SplitValue = valStr => {
@@ -283,11 +285,20 @@ Engine.Observer.Intersection = class {
     return thresholds;
   }
 
+  Destroy() {
+    for (let elmt of this.elmts) {
+      this.obs.unobserve(elmt);
+    }
+
+    Engine.Console.Log("Destroy observer");
+  }
+
 };
 Engine.SwipeHandle = class {
-  constructor(elmt, onSwipeCallback) {
+  constructor(elmt, onSwipeEnd, onSwipeMove) {
     this.elmt = elmt;
-    this.onSwipeCallback = onSwipeCallback;
+    this.onSwipeEnd = onSwipeEnd;
+    this.onSwipeMove = onSwipeMove;
     this.touchstart = {
       x: 0,
       y: 0
@@ -296,19 +307,31 @@ Engine.SwipeHandle = class {
       x: 0,
       y: 0
     };
+    this.isDestroyed = false;
     elmt.addEventListener('touchstart', e => this.SwipeStart(e));
     elmt.addEventListener('touchend', e => this.SwipeEnd(e));
+    elmt.addEventListener('touchmove', e => this.SwipeMove(e));
   }
 
   SwipeStart(e) {
+    if (this.isDestroyed) return e.stopImmediatePropagation();
     this.touchstart.x = e.changedTouches[0].screenX;
     this.touchstart.y = e.changedTouches[0].screenY;
   }
 
   SwipeEnd(e) {
+    if (this.isDestroyed) return e.stopImmediatePropagation();
     this.touchend.x = e.changedTouches[0].screenX;
     this.touchend.y = e.changedTouches[0].screenX;
-    this.onSwipeCallback(this.CheckHorizontalDirection());
+    this.onSwipeEnd(this.CheckHorizontalDirection());
+  }
+
+  SwipeMove(e) {
+    if (this.isDestroyed) return e.stopImmediatePropagation();
+    this.onSwipeMove({
+      x: e.changedTouches[0].screenX - this.touchstart.x,
+      y: e.changedTouches[0].screenY - this.touchstart.y
+    });
   }
 
   CheckHorizontalDirection() {
@@ -321,58 +344,35 @@ Engine.SwipeHandle = class {
     if (this.touchend.y > this.touchstart.y) alert('swiped up!');
   }
 
+  Destroy() {}
+
 };
-class Bandeau {
-  constructor(elmt, childElmtName = null, step = 300) {
-    if (!elmt) throw new Error('elmt provide is null');
-    this.step = step;
-    this.elmt = elmt;
-    this.childs = Engine.QAll(childElmtName ? childElmtName : '.bandeau-elmt', this.elmt);
-    this.totalWith = 0;
 
-    for (const child of this.childs) {
-      const rect = Engine.DOM.getRect(child);
-      if (rect) this.totalWith += rect.width;
-    }
-
-    this.resetTrigger = 0;
-    this.currentPos = 0;
-    this.maxPos = this.totalWith / 1.25;
-  }
-
-  Animate() {
-    if (this.resetTrigger == 1) {
-      this.resetTrigger = 2;
-    } else if (this.resetTrigger == 2) {
-      this.elmt.style.opacity = "1";
-      this.elmt.style.transitionDuration = "2s";
-      this.resetTrigger = 0;
-    }
-
-    if (this.currentPos < -this.maxPos) {
-      this.currentPos = this.totalWith;
-      this.elmt.style.opacity = "0";
-      this.elmt.style.transitionDuration = "0s";
-      this.resetTrigger = 1;
-    } else {
-      this.currentPos -= this.step;
-    }
-
-    this.elmt.style.transform = `translateX(${this.currentPos}px)`;
-    setTimeout(() => this.Animate(), 2000);
-  }
-
-}
 class GalleryBox {
   constructor(elmts) {
     this.elmts = elmts;
     this.isShown = false;
-    if (!Engine.isMobileScreen()) new Engine.Observer.Intersection(elmts, obj => this.HandleIntersect(obj));else {
-      console.log("?");
+    this.eventTriggerList = [];
+    this.Init();
+  }
 
-      for (const elmt of elmts) {
-        new GalleryBox_Switcher(elmt);
+  Init() {
+    if (!Engine.isMobileScreen()) {
+      this.eventTriggerList.push(new Engine.Observer.Intersection(this.elmts, obj => this.HandleIntersect(obj)));
+    } else {
+      for (const elmt of this.elmts) {
+        this.eventTriggerList.push(new GalleryBox_Switcher(elmt));
       }
+
+      console.log(this.eventTriggerList);
+    }
+  }
+
+  Destroy() {
+    Engine.Console.Log("Destroy main call");
+
+    for (const event of this.eventTriggerList) {
+      if (event.Destroy) event.Destroy();
     }
   }
 
@@ -401,6 +401,7 @@ class GalleryBox_Switcher {
   constructor(elmt) {
     this.elmt = elmt;
     this.childs = Engine.QAll(".gallery-box", elmt);
+    this.isDestroyed = false;
     this.boxHeight = 0;
     this.currentSlide = 0;
     this.totalSlide = this.childs.length;
@@ -416,26 +417,48 @@ class GalleryBox_Switcher {
       btt.addEventListener('click', () => this.ShowSlide(i));
       this.switcherBtt.push(btt);
       this.buttonsCtn.appendChild(btt);
-      const nextImg = Engine.Q('.next-img', this.childs[i]);
+      const nextImg = Engine.Q('.arrow-next-img', this.childs[i]);
+      const prevImg = Engine.Q('.arrow-prev-img', this.childs[i]);
       if (nextImg) nextImg.addEventListener('click', () => this.ShowSlide(i + 1));
+      if (prevImg) prevImg.addEventListener('click', () => this.ShowSlide(i - 1));
       this.childs[i].classList.add('show');
       const height = Engine.DOM.getRect(this.childs[i]).height;
-      console.log(height);
       if (height > this.boxHeight) this.boxHeight = height + 40;
       this.childs[i].classList.remove('show');
     }
 
     this.boxHeight = this.boxHeight < 320 ? 320 : this.boxHeight;
     this.elmt.style.height = this.boxHeight + 'px';
-    new Engine.SwipeHandle(elmt, direction => this.OnSwipe(direction));
+    this.SwipeHandle = new Engine.SwipeHandle(elmt, direction => this.OnSwipe(direction), diff => this.OnSwipeMove(diff));
     this.elmt.style.overflow = "hidden";
     Engine.DOM.insertAfter(this.buttonsCtn, this.elmt);
     this.ShowSlide(0);
   }
 
+  Destroy() {
+    console.log(this.elmt);
+    const switcher = Engine.Q('.switcher', this.elmt.parentNode);
+    if (switcher) Engine.DOM.removeElmt(switcher);
+    this.elmt.style = "";
+    this.isDestroyed = true;
+    this.SwipeHandle.Destroy();
+
+    for (const child of this.childs) {
+      child.classList.add('show');
+    }
+
+    Engine.Console.Log("Destroy Switcher");
+  }
+
+  get currentBox() {
+    return this.childs[this.currentSlide];
+  }
+
   OnSwipe(direction) {
     if (direction) this.ShowSlide(this.currentSlide - direction);
   }
+
+  OnSwipeMove(diff) {}
 
   ShowSlide(slideNumber) {
     if (slideNumber >= this.totalSlide) slideNumber = this.totalSlide - 1;
@@ -458,11 +481,17 @@ class GalleryBox_Switcher {
 const Init = {};
 
 Init.GalleryContainerShowOnScroll = () => {
-  new GalleryBox(Engine.QAll('.gallery-container'));
-};
+  let mobile = Engine.isMobileScreen();
+  const box = new GalleryBox(Engine.QAll('.gallery-container'));
+  window.addEventListener('resize', () => {
+    const isMobile = Engine.isMobileScreen();
 
-Init.BandeauAnimate = () => {
-  new Bandeau(Engine.Q('.bandeau-box')).Animate();
+    if (mobile != isMobile) {
+      if (!isMobile) box.Destroy();
+      box.Init();
+      mobile = isMobile;
+    }
+  });
 };
 Engine.OnReady(() => {
   if (Engine.CheckCompatibility() === false || !Engine.JSEnable) return;

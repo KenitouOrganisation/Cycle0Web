@@ -176,7 +176,10 @@ Engine.DOM.IsVisible = (elmt, strict = false) => {
     const isAbove = clientRect.top < 0;
     const isUnder = clientRect.top > window.innerHeight;
 
-    return !isAbove && !isUnder;
+    const isLeft = clientRect.x < 0;
+    const isRight = clientRect.x > window.innerWidth;
+
+    return !isAbove && !isUnder && !isLeft && !isRight;
 };
 
 
@@ -319,6 +322,13 @@ Engine.Observer.Intersection = class{
       
         thresholds.push(0);
         return thresholds;
+    }
+
+    Destroy(){
+        for(let elmt of this.elmts){
+            this.obs.unobserve(elmt);
+        }   
+        Engine.Console.Log("Destroy observer")
     }
 
 };

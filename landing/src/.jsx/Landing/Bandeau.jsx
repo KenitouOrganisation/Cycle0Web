@@ -1,4 +1,4 @@
-class Bandeau
+/*class Bandeau
 {
     constructor(elmt, childElmtName=null, step=300){
 
@@ -55,4 +55,4 @@ class Bandeau
 
 
 
-}
+}*/

@@ -7,27 +7,54 @@ Engine.SwipeHandle = class{
      * 
      * @param {Element} elmt 
      */
-    constructor(elmt, onSwipeCallback){
+    constructor(elmt, onSwipeEnd, onSwipeMove){
         this.elmt = elmt;
-        this.onSwipeCallback = onSwipeCallback;
+        this.onSwipeEnd = onSwipeEnd;
+        this.onSwipeMove = onSwipeMove;
         this.touchstart = { x: 0, y: 0 };
         this.touchend = { x: 0, y: 0 };
 
+        /**
+         * @deprecated
+         */
+        this.isDestroyed = false;
+        
         elmt.addEventListener('touchstart', (e)=>this.SwipeStart(e))
         elmt.addEventListener('touchend', (e)=>this.SwipeEnd(e))
+        elmt.addEventListener('touchmove', (e)=>this.SwipeMove(e))
+
     }
 
     SwipeStart(e){
+
+        if(this.isDestroyed)
+            return e.stopImmediatePropagation();
+
         this.touchstart.x = e.changedTouches[0].screenX;
         this.touchstart.y = e.changedTouches[0].screenY;
     }
 
     SwipeEnd(e){
+        
+        if(this.isDestroyed)
+            return e.stopImmediatePropagation();
+
         this.touchend.x = e.changedTouches[0].screenX;
         this.touchend.y = e.changedTouches[0].screenX;
 
-        this.onSwipeCallback(this.CheckHorizontalDirection());
+        this.onSwipeEnd(this.CheckHorizontalDirection());
 
+    }
+
+    SwipeMove(e){
+
+        if(this.isDestroyed)
+            return e.stopImmediatePropagation();
+
+        this.onSwipeMove({
+            x : e.changedTouches[0].screenX - this.touchstart.x,
+            y : e.changedTouches[0].screenY - this.touchstart.y
+        });
     }
 
     /**
@@ -45,6 +72,13 @@ Engine.SwipeHandle = class{
     CheckVerticalDirection(){
         if (this.touchend.y < this.touchstart.y) alert('swiped down!');
         if (this.touchend.y > this.touchstart.y) alert('swiped up!');
+    }
+
+    /**
+     * @deprecated
+     */
+    Destroy(){
+        //this.isDestroyed = true;
     }
 
 };

@@ -72,7 +72,7 @@ section{
     right: -25px;
 }
 
-#header-buttons ul {
+#header-buttons ul.menu {
     pointer-events: none;
     opacity: 0;
     transition: opacity 300ms ease;
@@ -87,7 +87,7 @@ section{
     box-shadow: 0 0 8px #545454;
 }
 
-#header-buttons:hover ul{
+#header-buttons:hover ul.menu{
     pointer-events: all;
     opacity: 1;
 }
@@ -99,7 +99,7 @@ section{
     text-align: center;
 }
 
-#header-buttons ul li:not(:last-child){
+#header-buttons ul.menu li:not(:last-child){
     border-bottom: 2px solid #e5e5e5;
 }
 
@@ -114,6 +114,7 @@ section{
 #landing-first-slide-left{
     max-width : 100%;
     margin-bottom: 0;    
+    top: 0px;
 }
 
 #landing-first-slide-right{
@@ -147,7 +148,24 @@ section{
 
 #les-chiffres .data{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#les-chiffres .data > div{
+    min-height: 80px;
+}
+
+#les-chiffres .left-box .data{
+    transform: rotate(180deg);
+}
+
+#les-chiffres .left-box .data > div{
+    transform: rotate(180deg);
+}
+
+#les-chiffres video {
+    margin-bottom: 25px;
 }
 
 #les-chiffres-map{
@@ -211,19 +229,32 @@ section{
     font-size: 22px;
 }
 
-.gallery-box .next-img{
-    top: 40%;
+.gallery-box .arrow-next-img,
+.gallery-box .arrow-prev-img
+{
+    top: 50%;
+}
+
+.gallery-box .arrow-next-img{
+    right: 15px;
+}
+
+.gallery-box .arrow-prev-img{
+    left: 15px;
 }
 
 .gallery-box{
     opacity: 0;
-    display: none;
-    top: 0;
+    top: 70px;
+    position: absolute;
+    transition: none;
+    pointer-events: none;
 }
 
 .gallery-box.show{
-    display: block;
     opacity: 1;
+    top: 70px;
+    pointer-events: all;
 }
 
 footer{
