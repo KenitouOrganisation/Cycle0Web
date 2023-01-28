@@ -212,6 +212,7 @@ header nav{
     max-width: 2000px;
     min-width: 1400px;
     overflow: hidden;
+    margin-bottom: 10px!important;
 }
 
 .inline-b, .sub_section{
@@ -234,7 +235,7 @@ section{
 
 footer{
     position: relative;
-    margin: 90px var(--page-side-margin);
+    margin: 45px var(--page-side-margin);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

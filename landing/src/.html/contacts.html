@@ -1,0 +1,61 @@
+<!--
+
+    Copyright 2022-2023 / Cycle Zéro
+    Toutes copies même partielles de n'importe qu'elle partie du code du site Cycle Zéro sont strictement interdites.
+
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <<{__head.html}>>
+    </head>
+
+    <!--
+        Code adapted to show without Javascript, so we put all first in html 
+        (where we have a heavy HTML code instead of using JS to have less repeat code)
+    -->
+
+    <body class="not_sub">
+
+<style>
+form * {
+    display: block;
+    width: 75%;
+    box-sizing: border-box;
+    margin: 30px auto;
+}
+form input, form textarea {
+    padding: 17px 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+}
+
+@media screen and (max-width : 900px){
+    form *{
+        width: 90%;
+        margin: 20px auto;
+    }
+}
+
+</style>
+
+        <<{__header.html}>>
+
+        <div class="wrap-content">
+
+            <section>
+                <form action="" method="POST">
+                    <h2 class="h2">Formulaire de contact</h2>
+                    <input type="email" placeholder="Votre adresse mail">
+                    <input type="text" placeholder="Objet">
+                    <textarea name="" id="" cols="30" rows="5" placeholder="Votre message"></textarea>
+                    <button class="_btt _orange">Envoyer</button>
+                </form>
+            </section>
+
+            <<{__footer.html}>>
+
+        </div>
+
+    </body>
+</html>
