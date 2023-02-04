@@ -9,23 +9,23 @@
 
 @font-face {
     font-family: 'Montserrat';
-    src: url("../font/Montserrat-Medium.ttf");
+    src: url("../font/Montserrat-Medium.ttf?v=04022022");
     font-weight: 500;
 }
 
 @font-face {
     font-family: 'Montserrat';
-    src: url("../font/Montserrat-Bold.ttf");
+    src: url("../font/Montserrat-Bold.ttf?v=04022022");
     font-weight: 700;
 }
 
 @font-face {
     font-family: 'Roboto';
-    src: url("../font/RobotoMono-Regular.ttf");
+    src: url("../font/RobotoMono-Regular.ttf?v=04022022");
     font-weight: 400;
 }
 
-.mono, .gallery-box .description, .h4-label, .mono span{
+.mono, .h3-label, .mono span{
     font-family: 'Roboto', 'Montserrat';
 }
 
@@ -52,6 +52,10 @@ body *{
 a{
     text-decoration: none;
     transition: all 300ms ease;
+}
+
+img{
+    pointer-events: none;
 }
 
 ._txt_orange{
@@ -294,6 +298,7 @@ footer{
 .social_link, .social_link img{
     height: 46px;
     margin: 0;
+    display: inline-block;
 }
 
 .h1, .h1-label, .h2{
@@ -411,6 +416,17 @@ footer{
     white-space: nowrap;
 }
 
+#les-chiffres .external-link{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--secondary-color);
+    font-weight: bold;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+
 #les-chiffres-map-txt {
     width: 50%;
 }
@@ -493,6 +509,10 @@ footer{
     transform: translateX(0%);
     animation: scrollTxt 18s linear infinite;
 }
+
+/*.bandeau-box:hover .anim{
+    animation-play-state: paused;
+}*/
 
 @keyframes scrollTxt {
     0%{
