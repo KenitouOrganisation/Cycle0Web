@@ -10,11 +10,11 @@
                 
         <meta charset="utf-8" />
         <base href=".">
-        <link rel="stylesheet" href="./src/style/style.css?v=1675511365910" />
+        <link rel="stylesheet" href="./src/style/style.css?v=1675539043463" />
         <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
-        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1675511365910" media="screen and (max-width : 900px)" />
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1675539043463" media="screen and (max-width : 900px)" />
         <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
-        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1675511365910" />
+        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1675539043463" />
         <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
         <!--
             Mettre ici les meta pour le SEO
@@ -49,6 +49,7 @@
             rel="stylesheet"
         />-->
 
+        <script src="./src/script/Contact.js?v=1675539043463"></script>
     </head>
 
     <!--
@@ -59,13 +60,14 @@
     <body class="not_sub">
 
 <style>
-form * {
+
+form *:not(.not-form *, .not-form-elmt) {
     display: block;
     width: 75%;
     box-sizing: border-box;
     margin: 30px auto;
 }
-form input, form textarea {
+form input:not(input[type="submit"]), form textarea {
     padding: 17px 20px;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.23);
@@ -75,13 +77,27 @@ form textarea{
     resize: vertical;
     min-height: 180px;
     max-height: 500px;
+    margin-bottom: 2px!important;
+}
+
+form .textarea-counter{
+    text-align: right;
+    margin: auto;
+    zoom: 0.8;
+    color: rgb(0 0 0);
+    transition: all 300ms ease;
 }
 
 @media screen and (max-width : 900px){
-    form *{
+    form *:not(.not-form *, .not-form-elmt){
         width: 90%;
         margin: 20px auto;
     }
+    
+    .wrap-content > section{
+        margin-top: 0;
+    }
+
 }
 
 </style>
@@ -111,12 +127,15 @@ form textarea{
         <div class="wrap-content">
 
             <section>
-                <form action="" method="POST">
-                    <h2 class="h2">Formulaire de contact</h2>
-                    <input type="email" placeholder="Votre adresse email">
-                    <input type="text" placeholder="Objet">
-                    <textarea name="" id="" cols="30" rows="5" placeholder="Votre message"></textarea>
-                    <button class="_btt _orange">Envoyer</button>
+                <form action="" method="POST" id="contact_forms">
+                    <div class="not-form">
+                        <h1 class="h1">Formulaire indisponible</h1>
+                        <p>
+                            Le formulaire de contact requis l'utilisation de JavaScript. Il se peut aussi que votre navigateur web est désactivé JavaScript ou qu'il soit obsolète. 
+                            <br><br>
+                            Si vous souhaitez nous contacter, vous pourrez nous contacter par mail à l'adresse suivante : <a href="mailto:contact@cyclezero.fr">contact@cyclezero.fr</a>
+                        </p>
+                    </div>
                 </form>
             </section>
 

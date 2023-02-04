@@ -9,17 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/La-Zou-Entreprise/Cycle0Web.git"
+    "url": "git+https://github.com/KenitouOrganisation/Cycle0Web.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/La-Zou-Entreprise/Cycle0Web/issues"
+    "url": "https://github.com/KenitouOrganisation/Cycle0Web/issues"
   },
-  "homepage": "https://github.com/La-Zou-Entreprise/Cycle0Web#readme",
+  "homepage": "https://github.com/KenitouOrganisation/Cycle0Web#readme",
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
-    "@babel/preset-react": "^7.16.7"
+    "@babel/preset-react": "^7.16.7",
+    "babel-preset-minify": "^0.5.2",
+    "csso": "^5.0.5",
+    "javascript-obfuscator": "^4.0.0"
   }
 }

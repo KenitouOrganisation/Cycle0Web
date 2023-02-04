@@ -109,14 +109,35 @@ Then in dev.generatedStaticHTML.js, add the new rules inside **FileManager.Custo
 JSX Files are located in `./src/.jsx` folder. This will allow us to use "html" syntaxes like react/JSX inside Javascript instead of typing functions call
 and allow us to minify/compress our code
 
-Just launch `./compileLanding.bat` script which generate one single file inside `./src/script/Landing.js`
+Just launch `./tools/compileLanding.bat` script which generate one single file inside `./src/script/Landing.js`
+
+`./tools/compileContact.bat` => `./src/script/Contact.js`
 
 ## Copy/Paste all landing files expect .filename for the Java Server
 
-- Make sure that all JSX files are compiled into js files, and that compress/minify tag are on
+- Make sure that all JSX files are compiled into js files, and that compress/minify tag are on (inside .babelrc file), and recompile it if modified
 
-- Make sure all static HTML are generated
+- Make sure all static HTML are generated (and up to date with the lastest file, to make sure, launch the JS to generate Static HTML once more - with `node index.js`)
 
 - Launch the script that will copy paste all the landing page script to the folder specified (by default `./landing_clean/`)
 
-`node ./tools/dev.copyCleanCodeToServer.js`
+```powershell
+
+# copy this comment too, to start the script
+
+$destFolder = "landing_clean";
+
+# create a clean copy of the landing page
+
+node ./tools/dev.copyCleanCodeToServer.js landing $destFolder;
+
+# Then to obfuscate the JS code and minify CSS
+
+node ./tools/dev.obfuscateJS.js ./$destFolder/src/script/Landing.js;
+node ./tools/dev.obfuscateJS.js ./$destFolder/src/script/Contact.js;
+node ./tools/dev.minifyCss.js ./$destFolder/src/style/style.css;
+node ./tools/dev.minifyCss.js ./$destFolder/src/style/style-mobile.css;
+
+# copy this comment too, to end the script
+
+```

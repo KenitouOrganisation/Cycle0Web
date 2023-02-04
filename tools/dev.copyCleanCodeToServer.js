@@ -4,8 +4,8 @@ const { resolve, dirname } = require("path");
 const fs = require("fs");
 const { readdir } = fs.promises;
 
-const sourceFolder = "landing";
-const destFolder = "landing_clean";
+let sourceFolder = "landing";
+let destFolder = "landing_clean";
 
 async function* getFiles(dir) {
     const dirents = await readdir(dir, { withFileTypes: true });
@@ -44,6 +44,16 @@ function CopyFile(segmented_name) {
 }
 
 function StartCheck() {
+
+    // if this is the main script called inside the cmd, we try to get the source and dest folder from the cmd arguments
+    if(typeof require !== 'undefined' && require.main === module){
+        if(process?.argv && process?.argv[2] && process?.argv[3]) {
+            sourceFolder = process.argv[2];
+            destFolder = process.argv[3];
+        }
+    }
+
+
     /*
         Make sure this script is launch from the root of this project `node ./tools/....js`
         Make sure also the variable sourceFolder match with this project folder name !
@@ -52,9 +62,9 @@ function StartCheck() {
 
     if (!fs.existsSync("./" + sourceFolder))
         throw new Error(
-            "The project folder should be called " +
+            "The project folder called " +
                 sourceFolder +
-                ". Rename it or change sourceFolder variable of this script"
+                " doesn't exist. Rename it or change sourceFolder variable of this script"
         );
 
     return true;
@@ -81,7 +91,7 @@ function Wait(ms){
 
     let countTreated = [];
 
-    for await (const f of getFiles("./landing/")) {
+    for await (const f of getFiles(`./${sourceFolder}/`)) {
         let toBeIgnored = false;
         const segmented_name = f.split("\\");
         segmented_name.forEach((name) => {

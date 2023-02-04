@@ -376,164 +376,286 @@ Engine.SwipeHandle = class {
   Destroy() {}
 
 };
+Engine.extendsVar_banMailList = '';
 
-class GalleryBox {
-  constructor(elmts) {
-    this.elmts = elmts;
-    this.isShown = false;
-    this.eventTriggerList = [];
-    this.Init();
+const FetchBanMailList = async () => {
+  if (Engine.extendsVar_banMailList != '') {
+    return Engine.extendsVar_banMailList;
   }
 
-  Init() {
-    if (!Engine.isMobileScreen()) {
-      this.eventTriggerList.push(new Engine.Observer.Intersection(this.elmts, obj => this.HandleIntersect(obj)));
-    } else {
-      for (const elmt of this.elmts) {
-        this.eventTriggerList.push(new GalleryBox_Switcher(elmt));
-      }
+  const resp = await Engine.Ajax.FetchText('https://disposable-emails.github.io/list.txt', {
+    method: 'GET'
+  });
+  console.clear();
 
-      console.log(this.eventTriggerList);
-    }
+  if (resp?.req?.status == 200 && resp?.req?.text) {
+    const text = resp.text;
+    const lines = text.replace(/\r/ig, '').split('\n');
+    lines.push('crtsec.com');
+    const domainsStr = lines.join('|');
+    Engine.extendsVar_banMailList = domainsStr;
+    return domainsStr;
+  } else {
+    console.log(resp);
+    return '';
   }
+};
 
-  Destroy() {
-    Engine.Console.Log("Destroy main call");
+FetchBanMailList();
 
-    for (const event of this.eventTriggerList) {
-      if (event.Destroy) event.Destroy();
-    }
+const ContactCheckMail = async iptMail => {
+  const domainsStr = await FetchBanMailList();
+  const regex = new RegExp(`@(${domainsStr})$`);
+  const iptMailValue = iptMail.value;
+  const isMailValid = !regex.test(iptMailValue);
+
+  if (!isMailValid) {
+    iptMail.setCustomValidity('Veuillez utiliser une adresse mail valide');
+    iptMail.reportValidity();
+    return false;
+  } else {
+    iptMail.setCustomValidity('');
+    return true;
   }
+};
+const totalCarac = 300;
+const totalObjectCarac = 100;
+const totalMailCarac = 320;
+const ContactForms = {};
+const CF = ContactForms;
+CF.currentCarac = 0;
+CF.reqUrl = "./contact";
 
-  async AnimGallery(target) {
-    const boxes = Engine.QAll(".gallery-box", target);
+CF.Init = () => {
+  CF.InitElmt();
+  CF.Debounce = new Engine.DebounceCall(1000);
+  CF._elmt = Engine.Q("#contact_forms");
 
-    for (const box of boxes) {
-      box.classList.add("show");
-      await Engine.WaitFor(300);
-    }
+  CF._elmt.addEventListener("submit", CF.OnSubmit);
 
-    this.isShown = true;
-  }
+  CF.FormsShow();
+};
 
-  HandleIntersect({
-    isPrevious,
-    target,
-    entry
-  }) {
-    if (!this.isShown && entry.intersectionRatio != 0) return this.AnimGallery(target);
-  }
-
-}
-
-class GalleryBox_Switcher {
-  constructor(elmt) {
-    this.elmt = elmt;
-    this.childs = Engine.QAll(".gallery-box", elmt);
-    this.isDestroyed = false;
-    this.boxHeight = 0;
-    this.currentSlide = 0;
-    this.totalSlide = this.childs.length;
-    this.switcherBtt = [];
-    this.buttonsCtn = Engine.Elmt("div", {
-      class: "switcher"
-    });
-
-    for (let i = 0; i < this.totalSlide; i++) {
-      const btt = Engine.Elmt("div", {
-        class: "switcher-btt"
-      });
-      btt.addEventListener('click', () => this.ShowSlide(i));
-      this.switcherBtt.push(btt);
-      this.buttonsCtn.appendChild(btt);
-      const nextImg = Engine.Q('.arrow-next-img', this.childs[i]);
-      const prevImg = Engine.Q('.arrow-prev-img', this.childs[i]);
-      if (nextImg) nextImg.addEventListener('click', () => this.ShowSlide(i + 1));
-      if (prevImg) prevImg.addEventListener('click', () => this.ShowSlide(i - 1));
-      this.childs[i].classList.add('show');
-      const height = Engine.DOM.getRect(this.childs[i]).height;
-      if (height > this.boxHeight) this.boxHeight = height + 40;
-      this.childs[i].classList.remove('show');
-    }
-
-    this.boxHeight = this.boxHeight < 320 ? 320 : this.boxHeight;
-    this.elmt.style.height = this.boxHeight + 'px';
-    this.SwipeHandle = new Engine.SwipeHandle(elmt, direction => this.OnSwipe(direction), diff => this.OnSwipeMove(diff));
-    this.elmt.style.overflow = "hidden";
-    Engine.DOM.insertAfter(this.buttonsCtn, this.elmt);
-    this.ShowSlide(0);
-  }
-
-  Destroy() {
-    console.log(this.elmt);
-    const switcher = Engine.Q('.switcher', this.elmt.parentNode);
-    if (switcher) Engine.DOM.removeElmt(switcher);
-    this.elmt.style = "";
-    this.isDestroyed = true;
-    this.SwipeHandle.Destroy();
-
-    for (const child of this.childs) {
-      child.classList.add('show');
-    }
-
-    Engine.Console.Log("Destroy Switcher");
-  }
-
-  get currentBox() {
-    return this.childs[this.currentSlide];
-  }
-
-  OnSwipe(direction) {
-    if (direction) this.ShowSlide(this.currentSlide - direction);
-  }
-
-  OnSwipeMove(diff) {}
-
-  ShowSlide(slideNumber) {
-    if (slideNumber >= this.totalSlide) slideNumber = this.totalSlide - 1;
-    if (slideNumber < 0) slideNumber = 0;
-
-    for (const i in Array.from(this.childs)) {
-      if (i == slideNumber) {
-        this.childs[i].classList.add("show");
-        this.switcherBtt[i].classList.add("on");
-      } else {
-        this.childs[i].classList.remove("show");
-        this.switcherBtt[i].classList.remove("on");
-      }
-    }
-
-    this.currentSlide = slideNumber;
-  }
-
-}
-const Init = {};
-
-Init.GalleryContainerShowOnScroll = () => {
-  let mobile = Engine.isMobileScreen();
-  const box = new GalleryBox(Engine.QAll('.gallery-container'));
-  window.addEventListener('resize', () => {
-    const isMobile = Engine.isMobileScreen();
-
-    if (mobile != isMobile) {
-      if (!isMobile) box.Destroy();
-      box.Init();
-      mobile = isMobile;
-    }
+CF.InitElmt = () => {
+  CF.submitBtt = Engine.Elmt("input", {
+    type: "submit",
+    class: "_btt _orange",
+    value: "Envoyer"
+  });
+  CF.inputEmail = Engine.Elmt("input", {
+    type: "email",
+    name: "email",
+    placeholder: "Votre adresse email",
+    required: true,
+    maxLength: totalMailCarac.toString()
+  });
+  CF.inputObject = Engine.Elmt("input", {
+    type: "text",
+    name: "object",
+    placeholder: "Objet",
+    required: true,
+    autocomplete: "off",
+    maxLength: totalObjectCarac.toString()
+  });
+  CF.textarea = Engine.Elmt("textarea", {
+    name: "message",
+    id: "",
+    cols: "30",
+    rows: "5",
+    placeholder: "Votre message",
+    required: true,
+    autocomplete: "off",
+    maxLength: totalCarac.toString()
+  });
+  CF.textareaCounterBox = Engine.Elmt("p", {
+    class: "not-form textarea-counter"
+  }, Engine.Elmt("span", {
+    class: "carac"
+  }, CF.currentCarac.toString()), "/", Engine.Elmt("span", {
+    class: "totalCarac"
+  }, totalCarac.toString()));
+  CF.textareaCounter = Engine.Q(".carac", CF.textareaCounterBox);
+  CF.textarea.addEventListener("keyup", () => {
+    const len = CF.textarea.value.length;
+    if (len > totalCarac) return CF.textarea.value = CF.textarea.value.slice(0, totalCarac);
+    CF.currentCarac = len;
+    CF.textareaCounter.innerText = len.toString();
+    const redDegress = `rgb(${255 * CF.currentCarac / totalCarac}, 0, 0)`;
+    CF.textareaCounterBox.style.color = redDegress;
+  });
+  CF.textarea.addEventListener("keyup", () => {
+    CF.CheckForm.Message();
+  });
+  CF.inputEmail.addEventListener("keyup", () => {
+    CF.CheckForm.Email();
+  });
+  CF.inputObject.addEventListener("keyup", () => {
+    CF.CheckForm.Object();
   });
 };
-Engine.OnReady(() => {
-  if (Engine.CheckCompatibility() === false || !Engine.JSEnable) return;
-  const _E = Engine;
-  const _Log = _E.Console.Log;
 
-  for (let initFunc in Init) {
-    try {
-      Init[initFunc]();
-    } catch (err) {
-      console.error(err);
+CF.FormsRender = () => Engine.Elmt("div", {
+  class: "not-form-elmt"
+}, Engine.Elmt("h2", {
+  class: "h2"
+}, "Formulaire de contact"), CF.inputEmail, CF.inputObject, CF.textarea, CF.textareaCounterBox, CF.submitBtt);
+
+CF.FormsShow = () => {
+  CF._elmt?.replaceChildren(CF.FormsRender());
+};
+
+CF.CheckForm = {
+  ParseCodeData: data => {
+    data.message = data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    data.object = data.object.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    data.email = data.email.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return data;
+  },
+  Email: (data = null) => {
+    let correct = true;
+    data = data ? data : {
+      email: CF.inputEmail.value
+    };
+    const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+
+    if (!emailRegex.test(data.email)) {
+      CF.inputEmail.setCustomValidity("Veuillez utiliser une adresse mail valide");
+      CF.inputEmail.reportValidity();
+      correct = false;
+    } else {
+      correct = ContactCheckMail(CF.inputEmail);
     }
+
+    if (data.email.length > totalMailCarac) {
+      CF.inputEmail.setCustomValidity(`L'adresse mail ne doit pas dépasser ${totalMailCarac} caractères`);
+      CF.inputEmail.reportValidity();
+      correct = false;
+    }
+
+    if (data.email.length > totalMailCarac) {
+      CF.inputEmail.setCustomValidity(`L'adresse mail ne doit pas dépasser ${totalMailCarac} caractères`);
+      CF.inputEmail.reportValidity();
+      correct = false;
+    }
+
+    if (data.email.length < 10) {
+      CF.inputEmail.setCustomValidity(`L'adresse mail doit contenir au moins 10 caractères`);
+      CF.inputEmail.reportValidity();
+      correct = false;
+    }
+
+    if (correct) CF.inputEmail.setCustomValidity("");
+    return correct;
+  },
+  Object: (data = null) => {
+    let correct = true;
+    data = data ? data : {
+      object: CF.inputObject.value
+    };
+
+    if (data.object.length > totalObjectCarac) {
+      CF.inputObject.setCustomValidity(`L'objet ne doit pas dépasser ${totalObjectCarac} caractères`);
+      CF.inputObject.reportValidity();
+      correct = false;
+    }
+
+    if (data.object.length < 10) {
+      CF.inputObject.setCustomValidity(`L'objet doit contenir au moins 10 caractères`);
+      CF.inputObject.reportValidity();
+      correct = false;
+    }
+
+    if (correct) CF.inputObject.setCustomValidity("");
+    return correct;
+  },
+  Message: (data = null) => {
+    let correct = true;
+    data = data ? data : {
+      message: CF.textarea.value
+    };
+
+    if (data.message.length > totalCarac) {
+      CF.textarea.setCustomValidity(`Le message ne doit pas dépasser ${totalCarac} caractères`);
+      CF.textarea.reportValidity();
+      correct = false;
+    }
+
+    if (data.message.length < 10) {
+      CF.textarea.setCustomValidity(`Le message doit contenir au moins 10 caractères`);
+      CF.textarea.reportValidity();
+      correct = false;
+    }
+
+    if (correct) CF.textarea.setCustomValidity("");
+    return correct;
+  },
+  All: data => {
+    const checkEmail = CF.CheckForm.Email(data);
+    const checkObject = CF.CheckForm.Object(data);
+    const checkMessage = CF.CheckForm.Message(data);
+    return checkEmail && checkObject && checkMessage;
+  }
+};
+
+CF.OnSubmit = e => CF.Debounce.InvokeAsync(async () => {
+  e.preventDefault();
+  await CF.OnSubmitDebounceCall(e);
+});
+
+CF.OnSubmitDebounceCall = async e => {
+  CF.submitBtt.disabled = true;
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  const form = e.target;
+  const data = new FormData(form);
+  const dataObj = CF.CheckForm.ParseCodeData(Object.fromEntries(data));
+  const checkForm = CF.CheckForm.All(dataObj);
+
+  if (!dataObj || !checkForm) {
+    CF.submitBtt.disabled = false;
+    return;
   }
 
-  _Log("Ready");
+  console.log(dataObj);
+  const resp = await Engine.Ajax.FetchJSON(CF.reqUrl, {
+    method: "POST",
+    body: JSON.stringify(dataObj),
+    headers: headers
+  });
+  const req = resp.req;
+  console.log(resp);
+
+  if (!req || req?.status != 404) {
+    CF.submitBtt.disabled = false;
+    return Engine.Alert.Error({
+      title: "Erreur serveur",
+      message: "Le serveur est inaccessible pour le moment, veuillez réessayer dans quelques instants ..."
+    });
+  }
+
+  if (req?.status == 200) {
+    CF._elmt.replaceChildren(Engine.Elmt("div", {
+      class: "not-form-elmt"
+    }, Engine.Elmt("h2", {
+      class: "h2"
+    }, "Formulaire de contact"), Engine.Elmt("p", {
+      class: "not-form"
+    }, "Votre message a bien \xE9t\xE9 envoy\xE9, nous allons le traiter dans les plus brefs d\xE9lais."), Engine.Elmt("div", {
+      class: "not-form",
+      style: "margin-top: 60px;"
+    }, Engine.Elmt("a", {
+      href: "/",
+      class: "_btt _orange"
+    }, "Retour \xE0 l'accueil"))));
+  }
+
+  Engine.Alert.Error({
+    title: `Erreur ${req.status}`,
+    message: `Une erreur ${req.status} est survenue.`
+  });
+  CF.submitBtt.disabled = false;
+};
+Engine.OnReady(() => {
+  ContactForms.Init();
+  console.clear();
 });

@@ -7,10 +7,10 @@ function GetFile(prefix, url){
     try{
         const val = fs.readFileSync(prefix + url)
         console.log("\x1b[32m>" + url + "\x1b[0m")
-        return val
+        return {data : val, error : false}
     }catch(err){
         console.log("\x1b[31mX" + url + "\x1b[0m")
-        return err.toString()
+        return {data : err.toString(), error : true}
     }
 }
 
@@ -39,7 +39,10 @@ const server = http.createServer((req, res)=>{
     if(url.endsWith(".svg"))
         res.setHeader('Content-type', 'image/svg+xml')
 
-    res.end(fileData)
+    if(fileData.error)
+        res.statusCode = 404;
+
+    res.end(fileData.data)
 })
 
 function LaunchHTTPServer(PORT=8081){

@@ -1,7 +1,13 @@
 {
     "presets": [
+        /*["minify", {
+            "mangle": true,
+            "keepFnName": false,
+            "keepClassName": false,
+            "removeConsole": true
+        }],*/
         ["@babel/preset-react", { "pragma" : "Engine.Elmt" }]
     ],
     "comments": false,
-    "compact": false
+    //"compact": true
 }

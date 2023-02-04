@@ -1,6 +1,6 @@
 const Engine = {};
 Engine.JSEnable = true;
-Engine.VERSION = { NUMBER : '1.0.1', DATE : '2023-01-22' };
+Engine.VERSION = { NUMBER : '1.0.2', DATE : '2023-02-04' };
 Engine.isMobileScreen = ()=>window.matchMedia("(max-width: 900px)").matches;
 
 Engine.CheckCompatibility = function () {
@@ -39,6 +39,7 @@ Engine.Alert = class _Alert {
 
     static Error(obj) {
         _Alert.Show(obj);
+        return false;
     }
 };
 
