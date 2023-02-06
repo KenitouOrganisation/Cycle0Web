@@ -7,7 +7,7 @@ const CF = ContactForms;
 
 // should be readonly, never use it as a thrustable value
 CF.currentCarac = 0;
-CF.reqUrl = "./contact";
+CF.reqUrl = "./contacts";
 CF.Init = () => {
     CF.InitElmt();
     CF.Debounce = new Engine.DebounceCall(1000);
