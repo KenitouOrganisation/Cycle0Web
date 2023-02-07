@@ -386,10 +386,13 @@ class FetchData {
 
   async Init() {
     this.licenses = await this.getLicenses();
+    console.clear();
     this.licensesGithub = await this.getGithubLicensesList();
+    console.clear();
 
     for (let i = 0; i < this.licensesGithub.length; i++) {
       this.licensesGithubDetails.push(await this.getGithubLicensesDetails(this.licensesGithub[i].key));
+      console.clear();
     }
 
     this.loaded = true;
@@ -410,7 +413,7 @@ class FetchData {
 
   onReady() {
     return new Promise((resolve, reject) => {
-      if (this.loaded) {
+      if (this.loaded && globalThis.fromMobile === 3) {
         resolve();
       } else {
         setTimeout(() => {
@@ -422,18 +425,31 @@ class FetchData {
     });
   }
 
+  onReadyMob() {
+    return new Promise((resolve, reject) => {
+      if (globalThis.fromMobile === 3) {
+        resolve();
+      } else {
+        setTimeout(() => {
+          this.onReadyMob().then(() => {
+            resolve();
+          });
+        }, 100);
+      }
+    });
+  }
+
 }
 class RenderLicenses {
   static renderLicenses(licenseName) {
-    console.log('license', licenseName);
     const targetLicenseDetails = fetcher.licensesGithubDetails.filter(license => license.key.toLowerCase() == licenseName.toLowerCase());
+    const details = targetLicenseDetails[0];
     return Engine.Elmt("div", {
       class: "license-article-item"
-    }, targetLicenseDetails && targetLicenseDetails.length > 0 ? targetLicenseDetails[0].description : 'No description available');
+    }, Engine.Elmt("p", null, details?.description ? details.description : 'No description available'), Engine.Elmt("p", null, details?.body ? details.body : 'No mentions available'), Engine.Elmt("p", null, details?.html_url ? details.html_url : ''));
   }
 
   static renderPackageList(pkgs) {
-    console.log('pkg', pkgs);
     const pkgContainer = Engine.Elmt("ul", null);
     pkgs.forEach(pkgName => {
       pkgContainer.appendChild(Engine.Elmt("li", {
@@ -466,9 +482,15 @@ class RenderLicenses {
 
 }
 const fetcher = new FetchData();
-fetcher.Init();
+fetcher.onReadyMob().then(() => {
+  fetcher.Init();
+});
 Engine.OnReady(async () => {
-  Engine.Console.Log('Ready Licenses', fetcher);
+  Engine.Console.Log('Ready Licenses');
+  const pgr_bar = Engine.Q('#pgr_bar');
+  document.write(Object);
   await fetcher.onReady();
+  Engine.Console.Log('Ready Fetch');
   RenderLicenses.renderAll(fetcher);
+  pgr_bar.style.display = 'none';
 });

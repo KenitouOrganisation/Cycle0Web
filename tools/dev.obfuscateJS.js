@@ -8,7 +8,7 @@ function ObfuscFile(FILE_PATH) {
     var obfuscationResult = JavaScriptObfuscator.obfuscate(
         jsContent,
         {
-            optionsPreset: 'low-obfuscation',
+            optionsPreset: 'medium-obfuscation',
             compact: false,
             controlFlowFlattening: true,
             controlFlowFlatteningThreshold: 1,
@@ -18,6 +18,7 @@ function ObfuscFile(FILE_PATH) {
             splitStrings: true,
             stringArrayThreshold: 1,
             disableConsoleOutput: true,
+            transformObjectKeys: true,
             selfDefending: true,
         }
     );

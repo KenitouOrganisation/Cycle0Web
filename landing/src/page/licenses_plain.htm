@@ -35,6 +35,17 @@ body{
 
 .license-article-item {
     text-align: justify;
+    white-space: pre-wrap;
+}
+
+#prg_bar {
+    height: 16px;
+    width: 100%;
+}
+
+*{
+    pointer-events: none;
+    user-select: none;
 }
 
         </style>
@@ -45,6 +56,7 @@ body{
         <h1>
             Licenses - Mentions tierces
         </h1>
-
+        <p style="text-align: justify;">Les licenses et mentions tierces des projets open-sources suivantes sont affichées à titre indicatif.</p>
+        <progress min="0" max="100" id="pgr_bar"></progress>
     </body>
 </html>

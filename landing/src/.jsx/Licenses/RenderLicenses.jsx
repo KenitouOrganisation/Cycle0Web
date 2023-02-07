@@ -1,25 +1,33 @@
 class RenderLicenses{
 
     static renderLicenses(licenseName){
-        console.log('license', licenseName)
-
         const targetLicenseDetails = fetcher.licensesGithubDetails
                                         .filter((license) => license.key.toLowerCase() == licenseName.toLowerCase());
 
+        const details = targetLicenseDetails[0];
+        /*const linkLicenses = (
+            <a target='_blank'>See license website</a>
+        );
+        
+        if(details?.html_url)
+            linkLicenses.href = details?.html_url;*/
+
         return (
             <div class="license-article-item">
-                {
-                    targetLicenseDetails && targetLicenseDetails.length > 0 
-                        ? targetLicenseDetails[0].description
-                        : 'No description available'
-                }
+                <p>
+                    { details?.description ? details.description : 'No description available' }
+                </p>
+                <p>
+                    { details?.body ? details.body : 'No mentions available' }
+                </p>
+                <p>
+                    {details?.html_url ? details.html_url : ''}
+                </p>
             </div>
         )
     }
 
     static renderPackageList(pkgs){
-        console.log('pkg', pkgs)
-
         const pkgContainer = (
             <ul></ul>
         )
