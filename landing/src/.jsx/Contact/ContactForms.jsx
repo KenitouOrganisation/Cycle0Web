@@ -9,6 +9,13 @@ const CF = ContactForms;
 CF.currentCarac = 0;
 CF.reqUrl = "./contacts";
 CF.Init = () => {
+
+    CF._elmt = Engine.Q("#contact_forms");
+
+    // TODO : remove this
+    CF.TemporaryForms();
+    return;
+
     CF.InitElmt();
     CF.Debounce = new Engine.DebounceCall(1000);
 
@@ -19,6 +26,51 @@ CF.Init = () => {
         CF.inputObject.value = "Objet : Rejoindre l'équipe";
 
     CF.FormsShow();
+};
+
+CF.TemporaryForms = () => {
+
+    CF._elmt.replaceChildren((
+        <div class="not-form" style="text-align: justify; min-height: 60vh;">
+            <div>
+                <h2 class="h2">Nous contacter</h2>
+                <p style="margin-top: 50px;">
+                    Pour nous contacter, vous pouvez nous envoyer un mail à l'adresse suivante : <a href="mailto:contact@cyclezero.fr">contact@cyclezero.fr</a>.
+                </p>
+                <p>
+                    Vous pouvez également nous retrouver sur les réseaux sociaux pour être tenu au courant de nos dernières actualités sur <a target="_blank" href="https://www.instagram.com/cyclezero.app/">Instagram</a>, <a target="_blank" href="https://www.linkedin.com/company/cycle-zero/">LinkedIn</a> et <a target="_blank" href="https://www.linkedin.com/company/cycle-zero/">Facebook</a>.
+                </p>
+                <br />
+                <p>
+                    Toute l'équipe vous remercie de votre intérêt pour Cycle Zéro 😌.
+                </p>
+                <br />
+                <p style="
+                    border-top: 1px solid #dfdfdf;
+                    padding-top: 30px;
+                ">
+                    Vous pouvez dès à présent télécharger notre application sur vos stores préférés ! 🎉
+                    <br />
+                    N'hésitez pas à le consulter et à nous faire part de vos retours.
+                    <br />
+                </p>
+                <p>
+                    <br />
+                    À très vite sur Cycle Zéro !
+                </p>
+                <div class="intro-store-links">
+                    <a class="social_link" target="_blank" href="https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200">
+                        <img src="./src/img/stores/app-store-black.svg" alt="Télécharger dans l'App Store" />  
+                    </a>
+                    <a class="social_link" target="_blank" href="https://play.google.com/store/apps/details?id=com.cycle0.cycle0app">
+                        <img alt="Disponible sur Google Play" src="./src/img/stores/google-play-badge.png" />
+                    </a>
+                </div>
+ 
+            </div>
+        </div>
+    ))
+
 };
 
 CF.InitElmt = () => {

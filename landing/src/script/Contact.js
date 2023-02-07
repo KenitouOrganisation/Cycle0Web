@@ -427,6 +427,9 @@ CF.currentCarac = 0;
 CF.reqUrl = "./contacts";
 
 CF.Init = () => {
+  CF._elmt = Engine.Q("#contact_forms");
+  CF.TemporaryForms();
+  return;
   CF.InitElmt();
   CF.Debounce = new Engine.DebounceCall(1000);
   CF._elmt = Engine.Q("#contact_forms");
@@ -435,6 +438,46 @@ CF.Init = () => {
 
   if (/join_equip/.test(document.location.search)) CF.inputObject.value = "Objet : Rejoindre l'équipe";
   CF.FormsShow();
+};
+
+CF.TemporaryForms = () => {
+  CF._elmt.replaceChildren(Engine.Elmt("div", {
+    class: "not-form",
+    style: "text-align: justify; min-height: 60vh;"
+  }, Engine.Elmt("div", null, Engine.Elmt("h2", {
+    class: "h2"
+  }, "Nous contacter"), Engine.Elmt("p", {
+    style: "margin-top: 50px;"
+  }, "Pour nous contacter, vous pouvez nous envoyer un mail \xE0 l'adresse suivante : ", Engine.Elmt("a", {
+    href: "mailto:contact@cyclezero.fr"
+  }, "contact@cyclezero.fr"), "."), Engine.Elmt("p", null, "Vous pouvez \xE9galement nous retrouver sur les r\xE9seaux sociaux pour \xEAtre tenu au courant de nos derni\xE8res actualit\xE9s sur ", Engine.Elmt("a", {
+    target: "_blank",
+    href: "https://www.instagram.com/cyclezero.app/"
+  }, "Instagram"), ", ", Engine.Elmt("a", {
+    target: "_blank",
+    href: "https://www.linkedin.com/company/cycle-zero/"
+  }, "LinkedIn"), " et ", Engine.Elmt("a", {
+    target: "_blank",
+    href: "https://www.linkedin.com/company/cycle-zero/"
+  }, "Facebook"), "."), Engine.Elmt("br", null), Engine.Elmt("p", null, "Toute l'\xE9quipe vous remercie de votre int\xE9r\xEAt pour Cycle Z\xE9ro \uD83D\uDE0C."), Engine.Elmt("br", null), Engine.Elmt("p", {
+    style: "\r border-top: 1px solid #dfdfdf;\r padding-top: 30px;\r "
+  }, "Vous pouvez d\xE8s \xE0 pr\xE9sent t\xE9l\xE9charger notre application sur vos stores pr\xE9f\xE9r\xE9s ! \uD83C\uDF89", Engine.Elmt("br", null), "N'h\xE9sitez pas \xE0 le consulter et \xE0 nous faire part de vos retours.", Engine.Elmt("br", null)), Engine.Elmt("p", null, Engine.Elmt("br", null), "\xC0 tr\xE8s vite sur Cycle Z\xE9ro !"), Engine.Elmt("div", {
+    class: "intro-store-links"
+  }, Engine.Elmt("a", {
+    class: "social_link",
+    target: "_blank",
+    href: "https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&itscg=30200"
+  }, Engine.Elmt("img", {
+    src: "./src/img/stores/app-store-black.svg",
+    alt: "T\xE9l\xE9charger dans l'App Store"
+  })), Engine.Elmt("a", {
+    class: "social_link",
+    target: "_blank",
+    href: "https://play.google.com/store/apps/details?id=com.cycle0.cycle0app"
+  }, Engine.Elmt("img", {
+    alt: "Disponible sur Google Play",
+    src: "./src/img/stores/google-play-badge.png"
+  }))))));
 };
 
 CF.InitElmt = () => {

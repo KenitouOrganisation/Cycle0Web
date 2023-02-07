@@ -339,7 +339,7 @@ footer{
 }
 
 .description{
-    font-size: 19px;
+    font-size: 20px;
     width: 82%;
     margin: auto;
 }
@@ -404,6 +404,7 @@ footer{
 #les-chiffres video{
     width: 100%;
     max-width: 655px;
+    pointer-events: none;
 }
 
 #les-chiffres > div {
