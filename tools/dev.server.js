@@ -20,8 +20,8 @@ const server = http.createServer((req, res)=>{
     let fileData = null
     const prefix = './landing'
 
-    // removing versionning data/parameters ?v=999
-    const url = req.url.replace(/\?v=(.+)/, '')
+    // removing versionning data/parameters ?v=999 and other args
+    const url = req.url.replace(/\?(.+)/, '')
 
     if(url == '/')
         fileData = GetFile(prefix, '/index.html')

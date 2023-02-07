@@ -30,3 +30,7 @@ Init.GalleryContainerShowOnScroll = ()=>{
     new Bandeau(Engine.Q('.bandeau-box')).Animate()
 
 };*/
+
+Init.CreateHashtagsBandeau = ()=>{
+    new Bandeau().Render();
+}

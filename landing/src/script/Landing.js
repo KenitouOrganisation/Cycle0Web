@@ -376,7 +376,31 @@ Engine.SwipeHandle = class {
   Destroy() {}
 
 };
+class Bandeau {
+  constructor() {
+    this.elmt = Engine.Q('#bandeau-hashtags');
+    this.keywords = ["synergie", "urbanisme bas carbone", "frugalité", "sobriété", "Économie circulaire", "Écologie", "Valorisation", "Sobriété Réemploi", "Construction", "BTP", "Antigaspi", "Innovation ESS", "Chantier", "Zéro déchet"];
+  }
 
+  Render() {
+    const container = Engine.Elmt("div", {
+      class: "anim"
+    });
+    const imgNo = [14, 11, 12, 10, '08', '09'];
+    this.keywords.forEach((keyword, index) => {
+      const elmt = Engine.Elmt("div", {
+        class: "bandeau-elmt"
+      }, Engine.Elmt("img", {
+        src: `./src/img/icons/Picto_Or_${imgNo[index % imgNo.length]}.png`,
+        alt: keyword
+      }), Engine.Elmt("p", null, "#", keyword));
+      container.appendChild(elmt);
+    });
+    this.elmt.appendChild(container);
+    this.elmt.appendChild(container.cloneNode(true));
+  }
+
+}
 class GalleryBox {
   constructor(elmts) {
     this.elmts = elmts;
@@ -521,6 +545,10 @@ Init.GalleryContainerShowOnScroll = () => {
       mobile = isMobile;
     }
   });
+};
+
+Init.CreateHashtagsBandeau = () => {
+  new Bandeau().Render();
 };
 Engine.OnReady(() => {
   if (Engine.CheckCompatibility() === false || !Engine.JSEnable) return;

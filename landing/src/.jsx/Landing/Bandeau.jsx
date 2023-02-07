@@ -1,3 +1,50 @@
+class Bandeau{
+    constructor(){
+        this.elmt = Engine.Q('#bandeau-hashtags');
+        this.keywords = [
+            "synergie",
+            "urbanisme bas carbone",
+            "frugalité",
+            "sobriété",
+            "Économie circulaire",
+            "Écologie",
+            "Valorisation",
+            "Sobriété Réemploi",
+            "Construction",
+            "BTP",
+            "Antigaspi",
+            "Innovation ESS",
+            "Chantier",
+            "Zéro déchet",
+        ];
+    }
+
+    Render(){
+
+        const container = (
+            <div class="anim"></div>
+        )
+
+        const imgNo = [14, 11, 12, 10, '08', '09'];
+        
+
+        this.keywords.forEach((keyword, index)=>{
+            const elmt = (
+                <div class="bandeau-elmt">
+                    <img src={`./src/img/icons/Picto_Or_${imgNo[index%imgNo.length]}.png`} alt={keyword} />
+                    <p>#{keyword}</p>
+                </div>
+            )
+            container.appendChild(elmt);
+        });
+
+        this.elmt.appendChild(container);
+        this.elmt.appendChild(container.cloneNode(true));
+
+    }
+
+}
+
 /*class Bandeau
 {
     constructor(elmt, childElmtName=null, step=300){

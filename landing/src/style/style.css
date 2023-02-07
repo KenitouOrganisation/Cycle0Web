@@ -334,8 +334,14 @@ footer{
     font-weight: 700;
 }
 
-.h4-label, .description{
+.h4-label{
     font-size: 24px;
+}
+
+.description{
+    font-size: 19px;
+    width: 82%;
+    margin: auto;
 }
 
 .h4-label{
@@ -457,6 +463,7 @@ footer{
     text-transform: uppercase;
     font-weight: 700;
     font-style: italic;
+    white-space: nowrap;
 }
 
 .bandeau-elmt {
@@ -507,7 +514,7 @@ footer{
 
 .bandeau-box .anim{
     transform: translateX(0%);
-    animation: scrollTxt 18s linear infinite;
+    animation: scrollTxt 25s linear infinite;
 }
 
 /*.bandeau-box:hover .anim{

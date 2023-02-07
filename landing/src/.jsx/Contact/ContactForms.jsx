@@ -15,6 +15,9 @@ CF.Init = () => {
     CF._elmt = Engine.Q("#contact_forms");
     CF._elmt.addEventListener("submit", CF.OnSubmit);
 
+    if(/join_equip/.test(document.location.search))
+        CF.inputObject.value = "Objet : Rejoindre l'équipe";
+
     CF.FormsShow();
 };
 

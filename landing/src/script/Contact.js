@@ -424,7 +424,7 @@ const totalMailCarac = 320;
 const ContactForms = {};
 const CF = ContactForms;
 CF.currentCarac = 0;
-CF.reqUrl = "./contact";
+CF.reqUrl = "./contacts";
 
 CF.Init = () => {
   CF.InitElmt();
@@ -433,6 +433,7 @@ CF.Init = () => {
 
   CF._elmt.addEventListener("submit", CF.OnSubmit);
 
+  if (/join_equip/.test(document.location.search)) CF.inputObject.value = "Objet : Rejoindre l'équipe";
   CF.FormsShow();
 };
 
