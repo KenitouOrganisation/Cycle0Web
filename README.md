@@ -73,9 +73,13 @@ Tomcat started on port(s): 443
 ## Launche server JAVA local
 mvn spring-boot:run -Dspring-boot.run.profiles=dev,h2
 
-## informatison
+## informations
 
 - iPhone SE Safari browser windows size : 375 x 540
+
+### ROBOTS.TXT
+
+All exposed files to search engine should be outside the ./src folder
 
 
 # Custom Landing Dev Tools
