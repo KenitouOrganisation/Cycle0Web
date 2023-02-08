@@ -50,23 +50,7 @@ CF.TemporaryForms = () => {
                     padding-top: 30px;
                 ">
                     Vous pouvez dès à présent télécharger notre application sur vos stores préférés ! 🎉
-                    <br />
-                    N'hésitez pas à le consulter et à nous faire part de vos retours.
-                    <br />
                 </p>
-                <p>
-                    <br />
-                    À très vite sur Cycle Zéro !
-                </p>
-                <div class="intro-store-links">
-                    <a class="social_link" target="_blank" href="https://apps.apple.com/us/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200">
-                        <img src="./src/img/stores/app-store-black.svg" alt="Télécharger dans l'App Store" />  
-                    </a>
-                    <a class="social_link" target="_blank" href="https://play.google.com/store/apps/details?id=com.cycle0.cycle0app">
-                        <img alt="Disponible sur Google Play" src="./src/img/stores/google-play-badge.png" />
-                    </a>
-                </div>
- 
             </div>
         </div>
     ))

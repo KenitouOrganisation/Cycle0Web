@@ -121,11 +121,13 @@ Just launch `./tools/compileLanding.bat` script which generate one single file i
 
 - Launch the script that will copy paste all the landing page script to the folder specified (by default `./landing_clean/`)
 
+or use `./tools/buildBundle.bat`
+
 ```powershell
 
 # copy this comment too, to start the script
 
-$destFolder = "landing_clean";
+$destFolder = "../cyclezero-core/src/main/resources/static";
 
 # create a clean copy of the landing page
 
