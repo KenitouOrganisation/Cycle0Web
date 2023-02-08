@@ -376,6 +376,8 @@ Engine.SwipeHandle = class {
   Destroy() {}
 
 };
+const _clear = console.clear;
+
 class FetchData {
   constructor() {
     this.licenses = [];
@@ -386,13 +388,17 @@ class FetchData {
 
   async Init() {
     this.licenses = await this.getLicenses();
-    console.clear();
+
+    _clear();
+
     this.licensesGithub = await this.getGithubLicensesList();
-    console.clear();
+
+    _clear();
 
     for (let i = 0; i < this.licensesGithub.length; i++) {
       this.licensesGithubDetails.push(await this.getGithubLicensesDetails(this.licensesGithub[i].key));
-      console.clear();
+
+      _clear();
     }
 
     this.loaded = true;
@@ -488,7 +494,6 @@ fetcher.onReadyMob().then(() => {
 Engine.OnReady(async () => {
   Engine.Console.Log('Ready Licenses');
   const pgr_bar = Engine.Q('#pgr_bar');
-  document.write(Object);
   await fetcher.onReady();
   Engine.Console.Log('Ready Fetch');
   RenderLicenses.renderAll(fetcher);

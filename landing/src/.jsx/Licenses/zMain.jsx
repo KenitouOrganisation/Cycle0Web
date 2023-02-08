@@ -8,9 +8,6 @@ Engine.OnReady(async() =>{
     Engine.Console.Log('Ready Licenses');
     const pgr_bar = Engine.Q('#pgr_bar');
 
-    // FIXME : remove this and compile it
-    document.write(Object)
-
     await fetcher.onReady();
     Engine.Console.Log('Ready Fetch')
 

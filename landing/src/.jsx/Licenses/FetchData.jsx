@@ -1,3 +1,5 @@
+const _clear = console.clear;
+
 class FetchData{
 
     constructor(){
@@ -11,16 +13,16 @@ class FetchData{
     async Init(){
         // fetching our package dependencies licenses list
         this.licenses = await this.getLicenses();
-        console.clear();
+        _clear();
         // fetching github licenses list (the 12 most popular licenses)
         this.licensesGithub = await this.getGithubLicensesList();
-        console.clear();
+        _clear();
         // fetching github licenses details for each license provide by github without API key
         for(let i = 0; i < this.licensesGithub.length; i++){
             this.licensesGithubDetails.push(
                 await this.getGithubLicensesDetails(this.licensesGithub[i].key)
             );
-            console.clear();
+            _clear();
         }
 
         this.loaded = true;
