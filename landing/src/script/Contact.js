@@ -418,6 +418,8 @@ const ContactCheckMail = async iptMail => {
     return true;
   }
 };
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 const totalCarac = 300;
 const totalObjectCarac = 100;
 const totalMailCarac = 320;
@@ -428,75 +430,52 @@ CF.reqUrl = "./contacts";
 
 CF.Init = () => {
   CF._elmt = Engine.Q("#contact_forms");
-  CF.TemporaryForms();
-  return;
   CF.InitElmt();
   CF.Debounce = new Engine.DebounceCall(1000);
   CF._elmt = Engine.Q("#contact_forms");
 
   CF._elmt.addEventListener("submit", CF.OnSubmit);
 
-  if (/join_equip/.test(document.location.search)) CF.inputObject.value = "Objet : Rejoindre l'équipe";
+  if (/join_equip/.test(document.location.search)) CF.inputObject.value = "Rejoindre l'équipe";
   CF.FormsShow();
-};
-
-CF.TemporaryForms = () => {
-  CF._elmt.replaceChildren(Engine.Elmt("div", {
-    class: "not-form",
-    style: "text-align: justify; min-height: 60vh;"
-  }, Engine.Elmt("div", null, Engine.Elmt("h2", {
-    class: "h2"
-  }, "Nous contacter"), Engine.Elmt("p", {
-    style: "margin-top: 50px;"
-  }, "Pour nous contacter, vous pouvez nous envoyer un mail \xE0 l'adresse suivante : ", Engine.Elmt("a", {
-    href: "mailto:contact@cyclezero.fr"
-  }, "contact@cyclezero.fr"), "."), Engine.Elmt("p", null, "Vous pouvez \xE9galement nous retrouver sur les r\xE9seaux sociaux pour \xEAtre tenu au courant de nos derni\xE8res actualit\xE9s sur ", Engine.Elmt("a", {
-    target: "_blank",
-    href: "https://www.instagram.com/cyclezero.app/"
-  }, "Instagram"), ", ", Engine.Elmt("a", {
-    target: "_blank",
-    href: "https://www.linkedin.com/company/cycle-zero/"
-  }, "LinkedIn"), " et ", Engine.Elmt("a", {
-    target: "_blank",
-    href: "https://www.linkedin.com/company/cycle-zero/"
-  }, "Facebook"), "."), Engine.Elmt("br", null), Engine.Elmt("p", null, "Toute l'\xE9quipe vous remercie de votre int\xE9r\xEAt pour Cycle Z\xE9ro \uD83D\uDE0C."), Engine.Elmt("br", null), Engine.Elmt("p", {
-    style: "\r border-top: 1px solid #dfdfdf;\r padding-top: 30px;\r "
-  }, "Vous pouvez d\xE8s \xE0 pr\xE9sent t\xE9l\xE9charger notre application sur vos stores pr\xE9f\xE9r\xE9s ! \uD83C\uDF89"))));
 };
 
 CF.InitElmt = () => {
   CF.submitBtt = Engine.Elmt("input", {
     type: "submit",
-    class: "_btt _orange",
+    class: "_btt _orange center-form",
     value: "Envoyer"
   });
   CF.inputEmail = Engine.Elmt("input", {
+    class: "entryInput",
     type: "email",
     name: "email",
-    placeholder: "Votre adresse email",
+    placeholder: "",
     required: true,
     maxLength: totalMailCarac.toString()
   });
   CF.inputObject = Engine.Elmt("input", {
+    class: "entryInput",
     type: "text",
     name: "object",
-    placeholder: "Objet",
+    placeholder: "",
     required: true,
     autocomplete: "off",
     maxLength: totalObjectCarac.toString()
   });
   CF.textarea = Engine.Elmt("textarea", {
+    class: "entryInput",
     name: "message",
     id: "",
     cols: "30",
     rows: "5",
-    placeholder: "Votre message",
+    placeholder: "",
     required: true,
     autocomplete: "off",
     maxLength: totalCarac.toString()
   });
   CF.textareaCounterBox = Engine.Elmt("p", {
-    class: "not-form textarea-counter"
+    class: "not-form textarea-counter center-form"
   }, Engine.Elmt("span", {
     class: "carac"
   }, CF.currentCarac.toString()), "/", Engine.Elmt("span", {
@@ -522,11 +501,22 @@ CF.InitElmt = () => {
   });
 };
 
+CF.FormsInputsLabelRender = (ipt, label, parentProps = {}) => {
+  return Engine.Elmt("div", _extends({
+    class: "ipt-ctn center-form"
+  }, parentProps), ipt, Engine.Elmt("label", {
+    for: ipt.name,
+    class: "form-label"
+  }, label));
+};
+
 CF.FormsRender = () => Engine.Elmt("div", {
   class: "not-form-elmt"
 }, Engine.Elmt("h2", {
-  class: "h2"
-}, "Formulaire de contact"), CF.inputEmail, CF.inputObject, CF.textarea, CF.textareaCounterBox, CF.submitBtt);
+  class: "h2 center-form"
+}, "Formulaire de contact"), CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email"), CF.FormsInputsLabelRender(CF.inputObject, "Objet"), CF.FormsInputsLabelRender(CF.textarea, "Votre message", {
+  style: "margin-bottom: 0;"
+}), CF.textareaCounterBox, CF.submitBtt);
 
 CF.FormsShow = () => {
   CF._elmt?.replaceChildren(CF.FormsRender());
@@ -650,10 +640,8 @@ CF.OnSubmitDebounceCall = async e => {
     body: JSON.stringify(dataObj),
     headers: headers
   });
-  const req = resp.req;
-  console.log(resp);
 
-  if (!req || req?.status != 404) {
+  if (!resp.req || resp.req?.status == 404) {
     CF.submitBtt.disabled = false;
     return Engine.Alert.Error({
       title: "Erreur serveur",
@@ -661,25 +649,26 @@ CF.OnSubmitDebounceCall = async e => {
     });
   }
 
-  if (req?.status == 200) {
+  if (resp.req?.status == 200) {
     CF._elmt.replaceChildren(Engine.Elmt("div", {
-      class: "not-form-elmt"
+      class: "center-form"
     }, Engine.Elmt("h2", {
       class: "h2"
     }, "Formulaire de contact"), Engine.Elmt("p", {
       class: "not-form"
-    }, "Votre message a bien \xE9t\xE9 envoy\xE9, nous allons le traiter dans les plus brefs d\xE9lais."), Engine.Elmt("div", {
-      class: "not-form",
-      style: "margin-top: 60px;"
+    }, "Votre message a bien \xE9t\xE9 envoy\xE9, nous allons le traiter dans les plus brefs d\xE9lais.", Engine.Elmt("br", null), "Toute l'\xE9quipe vous remercie de votre int\xE9r\xEAt pour Cycle Z\xE9ro \uD83D\uDE0C.", Engine.Elmt("br", null), Engine.Elmt("br", null), "A tr\xE8s bient\xF4t !"), Engine.Elmt("div", {
+      class: "not-form special-end-btn"
     }, Engine.Elmt("a", {
       href: "/",
       class: "_btt _orange"
     }, "Retour \xE0 l'accueil"))));
+
+    return;
   }
 
   Engine.Alert.Error({
-    title: `Erreur ${req.status}`,
-    message: `Une erreur ${req.status} est survenue.`
+    title: `Erreur ${resp.req?.status}`,
+    message: `Une erreur ${resp.req?.status} est survenue.`
   });
   CF.submitBtt.disabled = false;
 };

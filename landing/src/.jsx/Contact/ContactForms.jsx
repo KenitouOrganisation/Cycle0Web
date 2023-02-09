@@ -12,9 +12,9 @@ CF.Init = () => {
 
     CF._elmt = Engine.Q("#contact_forms");
 
-    // TODO : remove this
+    /*// TODO : remove this
     CF.TemporaryForms();
-    return;
+    return;*/
 
     CF.InitElmt();
     CF.Debounce = new Engine.DebounceCall(1000);
@@ -23,11 +23,11 @@ CF.Init = () => {
     CF._elmt.addEventListener("submit", CF.OnSubmit);
 
     if(/join_equip/.test(document.location.search))
-        CF.inputObject.value = "Objet : Rejoindre l'équipe";
+        CF.inputObject.value = "Rejoindre l'équipe";
 
     CF.FormsShow();
 };
-
+/*
 CF.TemporaryForms = () => {
 
     CF._elmt.replaceChildren((
@@ -55,24 +55,26 @@ CF.TemporaryForms = () => {
         </div>
     ))
 
-};
+};*/
 
 CF.InitElmt = () => {
-    CF.submitBtt = <input type="submit" class="_btt _orange" value="Envoyer" />;
+    CF.submitBtt = <input type="submit" class="_btt _orange center-form" value="Envoyer" />;
     CF.inputEmail = (
         <input
+            class="entryInput"
             type="email"
             name="email"
-            placeholder="Votre adresse email"
+            placeholder=""
             required
             maxLength={totalMailCarac.toString()}
         />
     );
     CF.inputObject = (
         <input
+            class="entryInput"
             type="text"
             name="object"
-            placeholder="Objet"
+            placeholder=""
             required
             autocomplete="off"
             maxLength={totalObjectCarac.toString()}
@@ -80,11 +82,12 @@ CF.InitElmt = () => {
     );
     CF.textarea = (
         <textarea
+            class="entryInput"
             name="message"
             id=""
             cols="30"
             rows="5"
-            placeholder="Votre message"
+            placeholder=""
             required
             autocomplete="off"
             maxLength={totalCarac.toString()}
@@ -92,7 +95,7 @@ CF.InitElmt = () => {
     );
 
     CF.textareaCounterBox = (
-        <p class="not-form textarea-counter">
+        <p class="not-form textarea-counter center-form">
             <span class="carac">{CF.currentCarac.toString()}</span>/
             <span class="totalCarac">{totalCarac.toString()}</span>
         </p>
@@ -127,12 +130,26 @@ CF.InitElmt = () => {
     });
 };
 
+CF.FormsInputsLabelRender = (ipt, label, parentProps={})=>{
+    return (
+        <div class="ipt-ctn center-form" {...parentProps}>
+            {ipt}
+            <label for={ipt.name} class="form-label">{label}</label>
+            {/*<span class="form-alert"></span>
+            <span class="form-check">
+               <i class="ion-success ion-md-checkmark-circle"></i>
+               <i class="ion-invalid ion-md-information-circle"></i>
+            </span>*/}
+        </div>
+    )
+}
+
 CF.FormsRender = () => (
     <div class="not-form-elmt">
-        <h2 class="h2">Formulaire de contact</h2>
-        {CF.inputEmail}
-        {CF.inputObject}
-        {CF.textarea}
+        <h2 class="h2 center-form">Formulaire de contact</h2>
+        {CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email")}
+        {CF.FormsInputsLabelRender(CF.inputObject, "Objet")}
+        {CF.FormsInputsLabelRender(CF.textarea, "Votre message", { style : "margin-bottom: 0;" })}
         {CF.textareaCounterBox}
         {CF.submitBtt}
     </div>
@@ -306,12 +323,9 @@ CF.OnSubmitDebounceCall = async (e) => {
         headers: headers,
     });
 
-    const req = resp.req;
+    //Engine.Console.Log(resp);
 
-    console.log(resp);
-
-
-    if (!req || req?.status != 404) {
+    if (!resp.req || resp.req?.status == 404) {
         CF.submitBtt.disabled = false;
 
         return Engine.Alert.Error({
@@ -321,26 +335,33 @@ CF.OnSubmitDebounceCall = async (e) => {
         });
     }
 
-    if (req?.status == 200) {
+    if (resp.req?.status == 200) {
         // replace form with success message
         CF._elmt.replaceChildren(
-            <div class="not-form-elmt">
+            <div class="center-form">
                 <h2 class="h2">Formulaire de contact</h2>
                 <p class="not-form">
                     Votre message a bien été envoyé, nous allons le traiter dans les plus brefs délais.
+                    <br />
+                    Toute l'équipe vous remercie de votre intérêt pour Cycle Zéro 😌.
+                    <br />
+                    <br />
+                    A très bientôt !
                 </p>
-                <div class="not-form" style="margin-top: 60px;">
+                <div class="not-form special-end-btn">
                     <a href="/" class="_btt _orange">
                         Retour à l'accueil
                     </a>
                 </div>
             </div>
         );
+
+        return;
     }
 
     Engine.Alert.Error({
-        title: `Erreur ${req.status}`,
-        message: `Une erreur ${req.status} est survenue.`
+        title: `Erreur ${resp.req?.status}`,
+        message: `Une erreur ${resp.req?.status} est survenue.`
     });
 
     CF.submitBtt.disabled = false;
