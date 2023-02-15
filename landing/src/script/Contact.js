@@ -427,6 +427,7 @@ const ContactForms = {};
 const CF = ContactForms;
 CF.currentCarac = 0;
 CF.reqUrl = "./contacts";
+CF.formSubmitAtLeastOnce = false;
 
 CF.Init = () => {
   CF._elmt = Engine.Q("#contact_forms");
@@ -491,13 +492,13 @@ CF.InitElmt = () => {
     CF.textareaCounterBox.style.color = redDegress;
   });
   CF.textarea.addEventListener("keyup", () => {
-    CF.CheckForm.Message();
+    CF.formSubmitAtLeastOnce === true && CF.CheckForm.Message();
   });
   CF.inputEmail.addEventListener("keyup", () => {
-    CF.CheckForm.Email();
+    CF.formSubmitAtLeastOnce === true && CF.CheckForm.Email();
   });
   CF.inputObject.addEventListener("keyup", () => {
-    CF.CheckForm.Object();
+    CF.formSubmitAtLeastOnce === true && CF.CheckForm.Object();
   });
 };
 
@@ -622,6 +623,7 @@ CF.OnSubmit = e => CF.Debounce.InvokeAsync(async () => {
 
 CF.OnSubmitDebounceCall = async e => {
   CF.submitBtt.disabled = true;
+  CF.formSubmitAtLeastOnce = true;
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
   const form = e.target;

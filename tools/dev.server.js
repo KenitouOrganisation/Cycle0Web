@@ -46,7 +46,18 @@ const server = http.createServer((req, res)=>{
 })
 
 function LaunchHTTPServer(PORT=8081){
-    server.listen(PORT, '', '', console.log(`\x1b[32mServer ready\x1b[0m http://localhost:${PORT}/`))
+
+    // server listen to port 8081, but if it's already used, it will try to use 8082, 8083, etc...
+    server.on('error', (err)=>{
+        if(err.code == 'EADDRINUSE'){
+            console.log(`\x1b[31mPort ${PORT} already in use, trying ${PORT+1}\x1b[0m`);
+
+            if(PORT < 8090)
+                LaunchHTTPServer(PORT+1)
+        }
+    });
+
+    server.listen(PORT, '', '', console.log(`\x1b[32mServer ready\x1b[0m http://localhost:${PORT}/`));
 }
 
 if(require.main === module){

@@ -21,6 +21,11 @@ async function GenerateStaticHTML(){
         "cgu.html",
         "Conditions Générales d'Utilisation - Cycle Zéro"
     ).WatchCompile();
+
+    new FileManager(
+        "privacy.html",
+        "Conditions Générales d'Utilisation - Cycle Zéro"
+    ).WatchCompile();
     
 }
 

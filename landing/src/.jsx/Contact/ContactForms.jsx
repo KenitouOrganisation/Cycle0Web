@@ -8,6 +8,7 @@ const CF = ContactForms;
 // should be readonly, never use it as a thrustable value
 CF.currentCarac = 0;
 CF.reqUrl = "./contacts";
+CF.formSubmitAtLeastOnce = false;   // allow us to show if the inputs set is wrong after only the user press once the from submit button
 CF.Init = () => {
 
     CF._elmt = Engine.Q("#contact_forms");
@@ -118,15 +119,15 @@ CF.InitElmt = () => {
     });
 
     CF.textarea.addEventListener("keyup", () => {
-        CF.CheckForm.Message();
+        CF.formSubmitAtLeastOnce === true && CF.CheckForm.Message();
     });
 
     CF.inputEmail.addEventListener("keyup", () => {
-        CF.CheckForm.Email();
+        CF.formSubmitAtLeastOnce === true && CF.CheckForm.Email();
     });
 
     CF.inputObject.addEventListener("keyup", () => {
-        CF.CheckForm.Object();
+        CF.formSubmitAtLeastOnce === true && CF.CheckForm.Object();
     });
 };
 
@@ -299,6 +300,7 @@ CF.OnSubmit = (e) =>
 
 CF.OnSubmitDebounceCall = async (e) => {
     CF.submitBtt.disabled = true;
+    CF.formSubmitAtLeastOnce = true;
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
