@@ -401,6 +401,81 @@ class Bandeau {
   }
 
 }
+function _CSS_ToString(css) {
+  let str = "";
+
+  for (let key in css) {
+    const keyFormatted = key.replace(/([A-Z])/g, "-$1").toLowerCase();
+    str += `${keyFormatted}: ${css[key]};`;
+  }
+
+  return str;
+}
+
+function CustomAlertOnReady() {
+  const backdropStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 11111
+  };
+  const modalStyle = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "5px",
+    zIndex: 11112,
+    padding: "25px 36px",
+    overflow: "auto",
+    maxHeight: "70%",
+    maxWidth: "700px",
+    width: "70%"
+  };
+  const closeButtonStyle = {
+    position: "absolute",
+    top: "15px",
+    right: "15px",
+    cursor: "pointer",
+    fontSize: "20px",
+    fontWeight: "bold"
+  };
+  const closeButtonImgStyle = {
+    width: "20px",
+    height: "20px"
+  };
+  const modal = document.createElement("div");
+  const message = `
+Chers membres du mouvement Cycle Zéro, nous tenons à vous informer que suite à un problème technique rencontré par notre hébergeur certains comptes ont été supprimés. Nous sommes désolés pour ce désagrément et nous vous conseillons de vérifier que votre compte est toujours actif. Dans le cas contraire, nous vous invitons à en recréer un. 
+
+Nous restons disponibles et à votre écoute. 
+
+La team Cycle Zéro
+
+    `;
+  const popup = Engine.Elmt("div", null, Engine.Elmt("div", {
+    style: _CSS_ToString(backdropStyle)
+  }), Engine.Elmt("div", {
+    style: _CSS_ToString(modalStyle)
+  }, Engine.Elmt("div", null, message.replace(/\n/g, "<br>")), Engine.Elmt("div", {
+    style: _CSS_ToString(closeButtonStyle),
+    "data-js-attr": {
+      onclick: () => {
+        document.body.removeChild(modal);
+      }
+    }
+  }, Engine.Elmt("img", {
+    src: "./src/img/icons/close.png",
+    style: _CSS_ToString(closeButtonImgStyle)
+  }))));
+  modal.appendChild(popup);
+  document.body.appendChild(modal);
+}
 class GalleryBox {
   constructor(elmts) {
     this.elmts = elmts;
@@ -549,6 +624,10 @@ Init.GalleryContainerShowOnScroll = () => {
 
 Init.CreateHashtagsBandeau = () => {
   new Bandeau().Render();
+};
+
+Init.CustomAlert = () => {
+  CustomAlertOnReady ? CustomAlertOnReady() : null;
 };
 Engine.OnReady(() => {
   if (Engine.CheckCompatibility() === false || !Engine.JSEnable) return;

@@ -34,3 +34,7 @@ Init.GalleryContainerShowOnScroll = ()=>{
 Init.CreateHashtagsBandeau = ()=>{
     new Bandeau().Render();
 }
+
+Init.CustomAlert = ()=>{
+    CustomAlertOnReady ? CustomAlertOnReady() : null;
+}
