@@ -55,7 +55,7 @@ Connecting to the remote
 ssh root@178.170.37.30
 
 3. Rename it on remote folder:
-cd /home/apps/cycle0-core && mv cycle0.jar cycle0-previous.jar && mv core-0.0.1-SNAPSHOT.jar cycle0.jar
+cd /home/apps/cycle0-core && mv cyclezero.jar cyclezero-previous.jar && mv core-0.0.1-SNAPSHOT.jar cyclezero.jar
 
 4. Kill the existing process
 ps aux | grep 443
