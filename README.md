@@ -59,6 +59,8 @@ cd /home/apps/cycle0-core && mv cyclezero.jar cyclezero-previous.jar && mv core-
 
 4. Kill the existing process
 ps aux | grep 443
+sudo ss -lptn 'sport = :443'
+
 kill -9 <id...>
 
 5. Start the new server
