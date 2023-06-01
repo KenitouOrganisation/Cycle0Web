@@ -212,6 +212,10 @@ section{
     line-height: 25px;
 }
 
+#landing-foot p{
+    margin-bottom: 40px;
+}
+
 .bandeau-box{
     margin-top: 30px;
     margin-bottom: 0px;

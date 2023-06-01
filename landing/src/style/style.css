@@ -92,10 +92,6 @@ img{
 
 }
 
-._btt:hover{
-    background: var(--primary-color)!important;
-}
-
 ._btt._orange {
     color: #fff;
     background: var(--secondary-color);
@@ -104,6 +100,19 @@ img{
 ._btt._grey {
     color: #fff;
     background: #C4C4C4;
+}
+
+._btt:hover{
+    background: var(--primary-color);
+}
+
+._btt._primary{
+    color: #fff;
+    background: var(--primary-color);
+}
+
+._btt._primary:hover{
+    background: var(--secondary-color)!important;
 }
 
 .o-hidden{
@@ -769,4 +778,21 @@ CHANTIERS.HTML
 
 .switcher-btt.on{
     background: var(--primary-color);
+}
+
+.delayed-appear {
+    opacity: 0;
+    animation-name: delayed-appear;
+    animation-duration: 0.5s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes delayed-appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

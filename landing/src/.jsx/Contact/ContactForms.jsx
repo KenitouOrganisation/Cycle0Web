@@ -23,8 +23,8 @@ CF.Init = () => {
     CF._elmt = Engine.Q("#contact_forms");
     CF._elmt.addEventListener("submit", CF.OnSubmit);
 
-    if(/work_with_us/.test(document.location.search))
-        CF.inputObject.value = "Travailler avec Cycle Zéro";
+    if(/colab_pro/.test(document.location.search))
+        CF.inputObject.value = "Collaborer avec Cycle Zéro";
 
     CF.FormsShow();
 };
