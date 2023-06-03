@@ -10,11 +10,11 @@
                 
         <meta charset="utf-8" />
         <base href=".">
-        <link rel="stylesheet" href="./src/style/style.css?v=1685620420245" />
+        <link rel="stylesheet" href="./src/style/style.css?v=1685802666581" />
         <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
-        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1685620420245" media="screen and (max-width : 900px)" />
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1685802666581" media="screen and (max-width : 900px)" />
         <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
-        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1685620420245" />
+        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1685802666581" />
         <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
         <!-- For iOS Safari phone browser detection -->
         <meta name="format-detection" content="telephone=no">
@@ -51,24 +51,56 @@
             rel="stylesheet"
         />-->
 
-        <script src="./src/script/Landing.js?v=1685620420245"></script>
+        <script src="./src/script/Landing.js?v=1685802666581"></script>
         
         <style>
             .special-1 {
                 display: none;
             }
 
+            .special-3 {
+                cursor: pointer;
+                width: 50%;
+                box-sizing: border-box;
+                /* margin auto on side, 60 top and bottom */
+                margin: 60px auto;
+            }
+
+            .special-3 img {
+                border-radius: 6px;
+                box-shadow: 0 0 4px #1b1e21a3;
+                width: 100%;
+                box-sizing: border-box;
+                transition: all 0.3s ease;
+                opacity: 1;
+            }
+
+            .special-3:hover img {
+                box-shadow: 0 0 6px #1b1e21;
+                opacity: 0.8;
+            }
+
+            #presse {
+                margin-top: 160px;
+            }
+
             @media screen and (max-width : 900px) {
                 .special-1 {
                     display: block;
                 }
-                .special-2 {
+                .special-2, .special-4 {
                     display: flex;
                     flex-direction: column;
                     flex-wrap: nowrap;
                 }
                 .special-2 a {
                     margin: 10px 0;
+                }
+                .special-3 {
+                    width: 100%;
+                }
+                #presse {
+                    margin-top: 60px;
                 }
             }
         </style>
@@ -94,9 +126,9 @@
                     </a>
                 </div>
                 <div id="header-buttons">
-                    <!--<p class="mob-only indicator">Menu</p>
-                    <ul class="menu">-->
-                    <ul>
+                    <p class="mob-only indicator">Menu</p>
+                    <ul class="menu">
+                        <li><a href="./presse.html">Presse</a></li>
                         <li><a href="./contacts.html">Contact</a></li>
                     </ul>
                 </div>
@@ -328,6 +360,26 @@
 
                 </section>
             </div>
+
+
+            <section class="txt-center" id="presse">
+                <h1 class="h1">On parle de nous !</h1>
+                <p>
+                    Explorez les médias qui ont couvert notre initiative de réemploi chantier,
+                    <br >mettant en avant notre engagement en faveur de l'économie circulaire.
+                </p>
+                <a target="_blank" href="https://www.tf1info.fr/conso/video-reportage-tf1-bricolage-cette-appli-cycle-zero-peut-vous-permettre-de-faire-de-grosses-economies-2258775.html">
+                    <div class="special-3">
+                        <img src="./src/img/illustrations/tf1_cyclezero.jpg" alt="">
+                    </div>
+                </a>
+
+                <div class="special-4">
+                    <a href="./presse.html" class="_btt _orange">Découvrir les actualités</a>
+                </div>
+            
+            </section>
+
                     
         <footer>
             <div class="box left-box">
@@ -350,6 +402,7 @@
             <div class="box right-box">
                 <ul class="footer-links">
                     <li><a href="./contacts.html">Contact</a></li>
+                    <li><a href="./presse.html">Presse</a></li>
                     <li><a href="./cgu.html">CGU</a></li>
                 </ul>
                 <ul class="social-links">
@@ -374,7 +427,6 @@
 
         <div id="ready"></div>
         </div>
-
 
     </body>
 </html>

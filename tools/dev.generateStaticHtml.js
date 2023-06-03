@@ -22,6 +22,9 @@ class FileManager {
     }
 
     async Read(filepath = null) {
+
+        console.log(filepath, this.From())
+
         try {
             const fileDatas = await fs.promises.readFile(
                 filepath ? filepath : this.From()

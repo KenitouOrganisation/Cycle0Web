@@ -72,19 +72,24 @@ section{
     right: -25px;
 }
 
+#header-buttons ul.menu li {
+    width: 100%;
+}
+
 #header-buttons ul.menu {
     pointer-events: none;
     opacity: 0;
-    transition: opacity 300ms ease;
+    transition: opacity 100ms ease;
     position: absolute;
     top: 52px;
-    right: 0;
+    right: 0px;
     background: #fbfbfb;
     box-sizing: border-box;
     border-radius: 2px;
-    border: 3px solid #303030;
+    border: 1px solid #717171;
     padding: 0;
-    box-shadow: 0 0 8px #545454;
+    /* box-shadow: 0 0 8px #545454;*/
+    min-width: 250px;
 }
 
 #header-buttons:hover ul.menu{
@@ -92,11 +97,13 @@ section{
     opacity: 1;
 }
 
-#header-buttons ul li{
+#header-buttons ul a{
     padding: 14px 11px;
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+    display: block;
+    margin: 0!important;
 }
 
 #header-buttons ul.menu li:not(:last-child){

@@ -10,11 +10,11 @@
                 
         <meta charset="utf-8" />
         <base href=".">
-        <link rel="stylesheet" href="./src/style/style.css?v=1685804043047" />
+        <link rel="stylesheet" href="./src/style/style.css?v=1685803836284" />
         <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
-        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1685804043047" media="screen and (max-width : 900px)" />
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1685803836284" media="screen and (max-width : 900px)" />
         <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
-        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1685804043047" />
+        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1685803836284" />
         <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
         <!-- For iOS Safari phone browser detection -->
         <meta name="format-detection" content="telephone=no">
@@ -23,13 +23,13 @@
         -->
             <!-- HTML Meta Tags -->
 
-        <title>Conditions Générales d'Utilisation - Cycle Zéro</title>
+        <title>Presse - Cycle Zéro</title>
         <meta name="description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
 
         <!-- Facebook Meta Tags -->
         <meta property="og:url" content="https://cyclezero.fr/">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Conditions Générales d'Utilisation - Cycle Zéro">
+        <meta property="og:title" content="Presse - Cycle Zéro">
         <meta property="og:description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
         <meta property="og:image" content="https://cyclezero.fr/src/img/og_img.jpg">
 
@@ -37,7 +37,7 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="cyclezero.fr">
         <meta property="twitter:url" content="https://cyclezero.fr/">
-        <meta name="twitter:title" content="Conditions Générales d'Utilisation - Cycle Zéro">
+        <meta name="twitter:title" content="Presse - Cycle Zéro">
         <meta name="twitter:description" content="Cycle Zéro, l’application qui permet de donner ou de récupérer gratuitement des matériaux de chantier. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
         <meta name="twitter:image" content="https://cyclezero.fr/src/img/og_img.jpg">
 
@@ -51,19 +51,117 @@
             rel="stylesheet"
         />-->
 
-    </head>
-    <body class="js-on">
         <style>
-            .frame_container {
-                display: block;
-                width: 100vw;
-                height: 100vh;
-                margin-top: var(--header-height);
-                border: none;
-                box-sizing: border-box;
-                max-width: 100%;
+            .container {
+                display: flex;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+                align-items: stretch;
             }
+
+            .article-box {
+                background-color: white;
+                /* border: 1px solid #b7b7b7; */
+                border-radius: 5px;
+                width: 30%;
+                margin: 20px 10px;
+                box-shadow: 0 0 4px #4848482e;
+                transition: all 0.2s ease;
+            }
+
+            .article-box:hover {
+                box-shadow: 0 0 7px #48484866;
+                background: #f7f7f7;
+            }
+
+            .article-box .datetime {
+                color: #ababab;
+                font-size: 14px;
+                margin: 0;
+            }
+
+            .article-box h2 {
+                margin-top: 10px;
+                font-size: 18px;
+                color: var(--primary-color);
+            }
+
+            .article-box p {
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+
+            .article-box img {
+                width: 100%;
+                border-radius: 5px;
+            }
+
+            .article-box a {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: space-between;
+                text-decoration: none;
+                color: black;
+            }
+
+            .article-box .seemore span {
+                margin-left: 5px;
+            }
+
+            .article-box .seemore {
+                font-size: 17px;
+                color: #1e59dd;
+            }
+
+            .article-box .authors {
+                color: var(--primary-color);
+                font-size: 11px;
+                opacity: 0.7;
+            }
+
+            
+            .article-box > a {
+                padding: 30px 42px;
+                height: 100%;
+                box-sizing: border-box;
+            }
+
+            .second {
+                margin-bottom: 20px;
+            }
+
+            .article-box ._dot {
+                color: var(--secondary-color);
+            }
+
+            @media screen and (max-width : 900px){
+                .container {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .article-box {
+                    width: 90%;
+                    margin: 12px 10px;
+                }
+
+                .article-box > a {
+                    padding: 9px 42px;
+                }
+
+                .first {
+                    margin-top: 10px!important;
+                }
+
+            }
+
         </style>
+        <script src="./src/script/Presse.js"></script>
+    </head>
+    <body>
                 
         <header>
             <nav>
@@ -85,12 +183,31 @@
                 </div>
             </nav>
         </header>
-        <iframe
-            src="./src/page/cgu_plain.htm?v=1685804043047"
-            class="frame_container"
-        ></iframe>
 
-                
+        <div class="wrap-content">
+
+            <section class="first txt-center">
+                <h1 class="h1">Les articles et reportages</h1>
+                <p>
+                    Pour toute demande de communication, veuillez nous contacter par e-mail à
+                    <br>
+                    <a href="mailto:contact@cyclezero.fr">contact@cyclezero.fr</a>
+                    en précisant <b>[Presse] dans l'objet du mail.</b>
+                    <br><br>
+                    Nous serons ravis de collaborer avec vous 😌!
+                </p>
+            </section>
+
+            <section id="coup-de-coeur" class="second">
+                <h2 class="h2">Nos coups de cœur ❤️</h1>
+                <div class="content"></div>
+            </section>
+            <section class="" id="autres-articles">
+                <h2 class="h2">Nos autres articles</h1>
+                <div class="content"></div>
+            </section>
+
+                    
         <footer>
             <div class="box left-box">
                 <img
@@ -137,5 +254,6 @@
 
         <div id="ready"></div>
 
+        </div>
     </body>
 </html>

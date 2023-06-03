@@ -18,6 +18,11 @@ async function GenerateStaticHTML(){
     ).WatchCompile();
 
     new FileManager(
+        "presse.html",
+        "Presse - Cycle Zéro"
+    ).WatchCompile();
+
+    new FileManager(
         "cgu.html",
         "Conditions Générales d'Utilisation - Cycle Zéro"
     ).WatchCompile();
