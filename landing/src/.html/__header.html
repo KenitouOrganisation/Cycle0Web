@@ -12,6 +12,8 @@
                 </div>
                 <div id="header-buttons">
                     <p class="mob-only indicator">Menu</p>
+                </div>
+                <div id="header-menu">
                     <ul class="menu">
                         <li><a href="./presse.html">Presse</a></li>
                         <li><a href="./contacts.html">Contact</a></li>
@@ -19,3 +21,19 @@
                 </div>
             </nav>
         </header>
+        <script>
+            (function(){
+                const header = Engine.Q('#header-buttons');
+                const menu = Engine.Q('#header-menu');
+                const hoverClass = 'hover';
+
+                function onClick(e){
+                    menu.classList.contains(hoverClass)
+                        ? menu.classList.remove(hoverClass)
+                        : menu.classList.add(hoverClass);
+                }
+
+                header.addEventListener('click', onClick);
+                menu.addEventListener('click', onClick);
+            })();
+        </script>
