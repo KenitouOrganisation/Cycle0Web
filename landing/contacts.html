@@ -25,11 +25,11 @@
         
         <meta charset="utf-8" />
         <base href=".">
-        <link rel="stylesheet" href="./src/style/style.css?v=1685817948692" />
+        <link rel="stylesheet" href="./src/style/style.css?v=1687700850292" />
         <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
-        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1685817948692" media="screen and (max-width : 900px)" />
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1687700850292" media="screen and (max-width : 900px)" />
         <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
-        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1685817948692" />
+        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1687700850292" />
         <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
         <!-- For iOS Safari phone browser detection -->
         <meta name="format-detection" content="telephone=no">
@@ -68,7 +68,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.css">
         <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.js"></script>
         <script defer src="./src/script/gCookieConsent.js"></script>
-        <script src="./src/script/Contact.js?v=1685817948692"></script>
+        <script src="./src/script/Contact.js?v=1687700850292"></script>
     </head>
 
     <!--
@@ -120,7 +120,7 @@ label.form-label {
 }
 
 
-form input:not(input[type="submit"]), form textarea {
+form input:not(input[type="submit"]), form textarea, form select {
     padding: 17px 20px;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.23);
@@ -155,6 +155,11 @@ form .textarea-counter{
     zoom: 0.8;
     color: rgb(0 0 0);
     transition: all 300ms ease;
+}
+
+form select, form select option {
+    font-size: 18px;
+    width: 100%;
 }
 
 .special-end-btn{

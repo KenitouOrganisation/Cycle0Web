@@ -1,6 +1,7 @@
 const totalCarac = 300;
-const totalObjectCarac = 100;
+const totalObjectCarac = 80;
 const totalMailCarac = 320;
+const requestDate = new Date();
 
 const ContactForms = {};
 const CF = ContactForms;
@@ -18,15 +19,27 @@ CF.Init = () => {
     return;*/
 
     CF.InitElmt();
+    CF.InitAplpyArgs();
     CF.Debounce = new Engine.DebounceCall(1000);
 
     CF._elmt = Engine.Q("#contact_forms");
     CF._elmt.addEventListener("submit", CF.OnSubmit);
 
+    // TODO : should not be used anymore, but we still allow it for now
     if(/colab_pro/.test(document.location.search))
-        CF.inputObject.value = "Collaborer avec Cycle Zéro";
+        CF.selectObject.value = "collab"
 
     CF.FormsShow();
+};
+CF.InitAplpyArgs = () => {
+
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    const subject = params.get('subject');
+
+    // CF.selectObjectInitValue = subject ? subject : "none";
+    CF.selectObject.value = subject ? subject : "none";
+
 };
 /*
 CF.TemporaryForms = () => {
@@ -70,13 +83,33 @@ CF.InitElmt = () => {
             maxLength={totalMailCarac.toString()}
         />
     );
+    CF.selectObjectValues = [
+        { value: "none", title: "Sélectionner un sujet ..." },
+        { value: "general", title: "Questions générales" },
+        { value: "info_product_services", title: "Informations sur les produits/services" },
+        { value: "support_tech", title: "Support technique" },
+        { value: "bug_error", title: "Signalement de bugs ou d'erreurs" },
+        { value: "suggestion", title: "Suggestions d'amélioration" },
+        { value: "collab", title: "Collaborer avec Cycle Zéro" },
+        { value: "press", title: "Demandes de presse ou médias" },
+        { value: "other", title: "Autres" },
+    ];
+    CF.selectObject = (
+        <select
+            name="subject"
+            class="entryInput"
+            required
+        >
+            {CF.selectObjectValues.map((opt, idx) => <option value={opt.value}>{opt.title}</option>)}
+        </select>
+    );
+
     CF.inputObject = (
         <input
             class="entryInput"
             type="text"
             name="object"
             placeholder=""
-            required
             autocomplete="off"
             maxLength={totalObjectCarac.toString()}
         />
@@ -129,6 +162,10 @@ CF.InitElmt = () => {
     CF.inputObject.addEventListener("keyup", () => {
         CF.formSubmitAtLeastOnce === true && CF.CheckForm.Object();
     });
+
+    CF.selectObject.addEventListener("change", () => {
+        CF.formSubmitAtLeastOnce === true && CF.CheckForm.Subject();
+    });
 };
 
 CF.FormsInputsLabelRender = (ipt, label, parentProps={})=>{
@@ -149,9 +186,12 @@ CF.FormsRender = () => (
     <div class="not-form-elmt">
         <h2 class="h2 center-form">Formulaire de contact</h2>
         {CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email")}
-        {CF.FormsInputsLabelRender(CF.inputObject, "Objet")}
+        {CF.FormsInputsLabelRender(CF.selectObject, "Sujet")}
+        {CF.FormsInputsLabelRender(CF.inputObject, "Précisez le sujet")}
         {CF.FormsInputsLabelRender(CF.textarea, "Votre message", { style : "margin-bottom: 0;" })}
         {CF.textareaCounterBox}
+        <div class="h-captcha center-form" data-sitekey="2626626e-f325-458f-bc72-2d6457624cc4"></div>
+        <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
         {CF.submitBtt}
     </div>
 );
@@ -165,6 +205,7 @@ CF.CheckForm = {
         // parse HTML tags
         data.message = data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         data.object = data.object.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        data.subject = data.subject.replace(/</g, "&lt;").replace(/>/g, "&gt;");    // not necessary, but for security
         data.email = data.email.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         return data;
     },
@@ -236,18 +277,47 @@ CF.CheckForm = {
         }
         
         // check object minimum length of 10
-        if (data.object.length < 10) {
-            CF.inputObject.setCustomValidity(
-                `L'objet doit contenir au moins 10 caractères`
-            );
-            CF.inputObject.reportValidity();
-            correct = false;
-        }
+        // if (data.object.length < 10) {
+        //     CF.inputObject.setCustomValidity(
+        //         `L'objet doit contenir au moins 10 caractères`
+        //     );
+        //     CF.inputObject.reportValidity();
+        //     correct = false;
+        // }
 
         if(correct)
             CF.inputObject.setCustomValidity("");
 
         return correct;
+    },
+    Subject : (data=null) => {
+
+        // we check if subject is not equal to "none", and if it's not, we check if it's not empty
+        data = data
+            ? data
+            : {subject : CF.selectObject.value};
+
+        let correct = true;
+        
+
+        if(data.subject === "none" || data.subject === "")
+            correct = false;
+
+        // check if suject exist on the list, to rpevent user to change the value manually on the inspector and send a wrong value
+        if( CF.selectObjectValues.filter(opt => opt.value === data.subject).length < 1 ){
+            // console.warn("The subject value is not on the list, it's probably a user manipulation")
+            correct = false;
+        }
+
+        if(!correct){
+            CF.selectObject.setCustomValidity("Veuillez choisir un sujet");
+            CF.selectObject.reportValidity();
+        }else{
+            CF.selectObject.setCustomValidity("");
+        }
+
+        return correct;
+
     },
     Message : (data=null) => {
 
@@ -281,12 +351,32 @@ CF.CheckForm = {
         return correct;
     },
 
+    Captcha : () => {
+        try{
+            const token = grecaptcha.getResponse();
+            if(token){
+                console.log("CAPTCHA verification passed");
+                return true;
+            }
+
+            console.log("CAPTCHA verification failed");
+            return false;
+        }
+        catch(err){
+            console.error(err);
+        }
+        
+        return false;
+    },
+
     All : (data) => {
         const checkEmail = CF.CheckForm.Email(data);
         const checkObject = CF.CheckForm.Object(data);
+        const checkSubject = CF.CheckForm.Subject(data);
         const checkMessage = CF.CheckForm.Message(data);
+        const checkCaptcha = CF.CheckForm.Captcha();
 
-        return checkEmail && checkObject && checkMessage;
+        return checkEmail && checkObject && checkSubject && checkMessage && checkCaptcha;
     }
 
 };
@@ -316,6 +406,27 @@ CF.OnSubmitDebounceCall = async (e) => {
         return;
     }
 
+    const subjectOption = CF.selectObjectValues.find(opt => opt.value === dataObj['subject']);
+    const subjectTitle = subjectOption ? subjectOption.title : dataObj['subject'];
+    dataObj['message'] +=  `
+
+
+--------------------
+Email : ${dataObj['email']}
+Sujet ID : ${dataObj['subject']}
+Sujet : [${subjectTitle}] ${dataObj['object']}
+Date d'envoi : ${new Date().toLocaleString()}
+Requête : ${window.location.href}
+Date de la requête : ${requestDate.toLocaleString()}
+-------------------
+
+`;  
+
+    
+    // addinng html line break to the message
+    dataObj['message'] = dataObj['message'].replace(/\n/g, "<br />");
+    dataObj['object'] = `[${dataObj['subject']}] ${dataObj['object']}`;
+    delete dataObj['subject'];
     console.log(dataObj)
 
     // send data to server
