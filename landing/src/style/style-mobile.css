@@ -355,3 +355,13 @@ form#search-chantiers > * {
     padding-right: 10px;
 }
 
+#logo ul.social-links {
+    left: 110px;
+    padding-left: 14px;
+}
+
+#logo ul.social-links li a {
+    width: 38px;
+    height: 38px;
+    margin: 0 2px;
+}

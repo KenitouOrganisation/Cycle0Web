@@ -31,6 +31,11 @@ async function GenerateStaticHTML(){
         "privacy.html",
         "Conditions Générales d'Utilisation - Cycle Zéro"
     ).WatchCompile();
+
+    new FileManager(
+        "faq.html",
+        "FAQ - Cycle Zéro"
+    ).WatchCompile();
     
 }
 

@@ -1,6 +1,6 @@
 Engine.OnReady(()=>{
 
     ContactForms.Init();
-    // console.clear();
+    console.clear();
 
 });

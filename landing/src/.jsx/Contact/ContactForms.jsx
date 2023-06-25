@@ -185,12 +185,26 @@ CF.FormsInputsLabelRender = (ipt, label, parentProps={})=>{
 CF.FormsRender = () => (
     <div class="not-form-elmt">
         <h2 class="h2 center-form">Formulaire de contact</h2>
+        <p class="center-form">
+            Pour faciliter votre expérience, n'oubliez pas de consulter <a href="./contacts.html.from_contact">notre FAQ</a>.
+            <br />
+            Elle regorge d'informations utiles qui pourraient répondre à vos interrogations.
+            <br /><br />
+            Nous vous invitons à y jeter un coup d'œil avant de nous contacter.
+            Nous serons ravis de vous aider si vous ne trouvez pas la réponse que vous recherchez.
+            <br />
+            <br />
+            Merci pour votre compréhension !
+        </p>
+        <br />
+        
         {CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email")}
         {CF.FormsInputsLabelRender(CF.selectObject, "Sujet")}
         {CF.FormsInputsLabelRender(CF.inputObject, "Précisez le sujet")}
         {CF.FormsInputsLabelRender(CF.textarea, "Votre message", { style : "margin-bottom: 0;" })}
         {CF.textareaCounterBox}
         <div class="h-captcha center-form" data-sitekey="2626626e-f325-458f-bc72-2d6457624cc4"></div>
+        <div id="captcha-error-text"></div>
         <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
         {CF.submitBtt}
     </div>
@@ -352,18 +366,31 @@ CF.CheckForm = {
     },
 
     Captcha : () => {
+
+        const captchaErrorText = Engine.Q('#captcha-error-text');
+        captchaErrorText.innerHTML = "";
+
         try{
             const token = grecaptcha.getResponse();
             if(token){
                 console.log("CAPTCHA verification passed");
+                
+                // remove captchaErrorText children if exist and replace it by a new p text
+                while (captchaErrorText.firstChild) {
+                    captchaErrorText.removeChild(captchaErrorText.firstChild);
+                }
+
                 return true;
             }
 
             console.log("CAPTCHA verification failed");
+            
+            captchaErrorText.appendChild(<p class="center-form" style="color: red; font-size: 17px; margin-top: 0;" >Veuillez valider le captcha</p>);
             return false;
         }
         catch(err){
             console.error(err);
+            captchaErrorText.appendChild(<p style="color: 'red;" >Une erreur s'est produite lors de la validation du captcha.</p>);
         }
         
         return false;

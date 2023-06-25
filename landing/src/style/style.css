@@ -796,3 +796,42 @@ CHANTIERS.HTML
         opacity: 1;
     }
 }
+
+
+#logo ul.social-links li a {
+    background: var(--primary-color);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    display: block;
+    margin: 0 8px;
+}
+
+#logo ul.social-links li a {
+    /* margin: 0; */
+    /* display: block; */
+}
+
+#logo ul.social-links li img {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#logo ul.social-links {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    transform: translateY(-50%);
+}
+
+#logo ul.social-links li a:hover {
+    background: var(--secondary-color);
+}

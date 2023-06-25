@@ -566,11 +566,17 @@ CF.FormsRender = () => Engine.Elmt("div", {
   class: "not-form-elmt"
 }, Engine.Elmt("h2", {
   class: "h2 center-form"
-}, "Formulaire de contact"), CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email"), CF.FormsInputsLabelRender(CF.selectObject, "Sujet"), CF.FormsInputsLabelRender(CF.inputObject, "Précisez le sujet"), CF.FormsInputsLabelRender(CF.textarea, "Votre message", {
+}, "Formulaire de contact"), Engine.Elmt("p", {
+  class: "center-form"
+}, "Pour faciliter votre exp\xE9rience, n'oubliez pas de consulter ", Engine.Elmt("a", {
+  href: "./contacts.html.from_contact"
+}, "notre FAQ"), ".", Engine.Elmt("br", null), "Elle regorge d'informations utiles qui pourraient r\xE9pondre \xE0 vos interrogations.", Engine.Elmt("br", null), Engine.Elmt("br", null), "Nous vous invitons \xE0 y jeter un coup d'\u0153il avant de nous contacter. Nous serons ravis de vous aider si vous ne trouvez pas la r\xE9ponse que vous recherchez.", Engine.Elmt("br", null), Engine.Elmt("br", null), "Merci pour votre compr\xE9hension !"), Engine.Elmt("br", null), CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email"), CF.FormsInputsLabelRender(CF.selectObject, "Sujet"), CF.FormsInputsLabelRender(CF.inputObject, "Précisez le sujet"), CF.FormsInputsLabelRender(CF.textarea, "Votre message", {
   style: "margin-bottom: 0;"
 }), CF.textareaCounterBox, Engine.Elmt("div", {
   class: "h-captcha center-form",
   "data-sitekey": "2626626e-f325-458f-bc72-2d6457624cc4"
+}), Engine.Elmt("div", {
+  id: "captcha-error-text"
 }), Engine.Elmt("script", {
   src: "https://js.hcaptcha.com/1/api.js",
   async: true,
@@ -682,18 +688,33 @@ CF.CheckForm = {
     return correct;
   },
   Captcha: () => {
+    const captchaErrorText = Engine.Q('#captcha-error-text');
+    captchaErrorText.innerHTML = "";
+
     try {
       const token = grecaptcha.getResponse();
 
       if (token) {
         console.log("CAPTCHA verification passed");
+
+        while (captchaErrorText.firstChild) {
+          captchaErrorText.removeChild(captchaErrorText.firstChild);
+        }
+
         return true;
       }
 
       console.log("CAPTCHA verification failed");
+      captchaErrorText.appendChild(Engine.Elmt("p", {
+        class: "center-form",
+        style: "color: red; font-size: 17px; margin-top: 0;"
+      }, "Veuillez valider le captcha"));
       return false;
     } catch (err) {
       console.error(err);
+      captchaErrorText.appendChild(Engine.Elmt("p", {
+        style: "color: 'red;"
+      }, "Une erreur s'est produite lors de la validation du captcha."));
     }
 
     return false;
@@ -786,4 +807,5 @@ Date de la requête : ${requestDate.toLocaleString()}
 };
 Engine.OnReady(() => {
   ContactForms.Init();
+  console.clear();
 });
