@@ -487,6 +487,27 @@ const presseListData_autres = [{
   description: "Cycle Zéro : L’appli pour trouver des matériaux gratuits sur les chantiers",
   image: "",
   link: "https://www.echantillonsclub.com/194646-cycle-zero.html"
+}, {
+  title: "Cd-mentiel Magazine",
+  datetime: "2023-06-11",
+  type: "ARTICLE",
+  description: "Cycle Zéro : l’appli qui révolutionne le secteur du bâtiment",
+  image: "",
+  link: "https://www.cd-mentielmagazine.fr/cycle-zero-lappli-qui-revolutionne-le-secteur-du-batiment/"
+}, {
+  title: "20 minutes",
+  datetime: "2023-06-14",
+  type: "ARTICLE",
+  description: "« On n’imagine pas le gâchis »… Sur les chantiers, des initiatives se lancent pour donner une seconde vie aux déchets",
+  image: "",
+  link: "https://www.20minutes.fr/planete/4040460-20230614-imagine-gachis-chantiers-initiatives-lancent-donner-seconde-vie-dechets"
+}, {
+  title: "AirZen Radio",
+  datetime: "2023-06-16",
+  type: "PODCAST+ARTICLE",
+  description: "Cycle Zéro, une application du réemploi des matériaux de chantier",
+  image: "",
+  link: "https://www.airzen.fr/cycle-zero-une-application-du-reemploi-des-materiaux-de-chantier/"
 }];
 class PresseListArticle {
   constructor(data, container) {
