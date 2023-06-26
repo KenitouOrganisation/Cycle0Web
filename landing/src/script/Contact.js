@@ -569,7 +569,7 @@ CF.FormsRender = () => Engine.Elmt("div", {
 }, "Formulaire de contact"), Engine.Elmt("p", {
   class: "center-form"
 }, "Pour faciliter votre exp\xE9rience, n'oubliez pas de consulter ", Engine.Elmt("a", {
-  href: "./contacts.html.from_contact"
+  href: "./contacts.html?from_contact"
 }, "notre FAQ"), ".", Engine.Elmt("br", null), "Elle regorge d'informations utiles qui pourraient r\xE9pondre \xE0 vos interrogations.", Engine.Elmt("br", null), Engine.Elmt("br", null), "Nous vous invitons \xE0 y jeter un coup d'\u0153il avant de nous contacter. Nous serons ravis de vous aider si vous ne trouvez pas la r\xE9ponse que vous recherchez.", Engine.Elmt("br", null), Engine.Elmt("br", null), "Merci pour votre compr\xE9hension !"), Engine.Elmt("br", null), CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email"), CF.FormsInputsLabelRender(CF.selectObject, "Sujet"), CF.FormsInputsLabelRender(CF.inputObject, "Précisez le sujet"), CF.FormsInputsLabelRender(CF.textarea, "Votre message", {
   style: "margin-bottom: 0;"
 }), CF.textareaCounterBox, Engine.Elmt("div", {
