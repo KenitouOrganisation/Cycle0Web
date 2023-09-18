@@ -50,6 +50,7 @@ mvn clean install && cd ./target
 
 2. Then copy .jar from ./target folder to /home/apps/cycle0-core (from local folder to remote folder) :
 scp core-0.0.1-SNAPSHOT.jar root@178.170.37.30:/home/apps/cycle0-core
+scp core-0.0.1-SNAPSHOT.jar root@185.246.84.106:/home/apps/cycle0-core
 
 Connecting to the remote
 ssh root@178.170.37.30
