@@ -381,126 +381,211 @@ Engine.SwipeHandle = class {
   Destroy() {}
 
 };
-const _clear = console.clear;
-
-class FetchData {
-  constructor() {
-    this.licenses = [];
-    this.licensesGithub = [];
-    this.licensesGithubDetails = [];
-    this.loaded = false;
+const presseListData_coupDeCoeur = [{
+  title: "TF1 - Reportage",
+  datetime: "2023-05-30",
+  type: "VIDÉO",
+  description: "Bricolage : cette appli peut vous permettre de faire de grosses économies",
+  image: "./src/img/illustrations/tf1_cyclezero.jpg",
+  link: "https://www.tf1info.fr/conso/video-reportage-tf1-bricolage-cette-appli-cycle-zero-peut-vous-permettre-de-faire-de-grosses-economies-2258775.html"
+}, {
+  title: "France 2 - Reportage",
+  datetime: "2023-05-29",
+  type: "VIDÉO",
+  description: "Une idée pour la France : Des matériaux gratuits dans les chantiers",
+  image: "./src/img/illustrations/fr2_cyclezero.jpg",
+  link: "https://www.france.tv/france-2/journal-13h00/4911703-edition-du-lundi-29-mai-2023.html"
+}, {
+  title: "France 3 - Reportage",
+  datetime: "2023-05-22",
+  type: "VIDÉO",
+  description: "Une nouvelle application pour récupérer gratuitement des matériaux sur les chantiers",
+  image: "./src/img/illustrations/fr3_cyclezero.jpg",
+  link: "https://france3-regions.francetvinfo.fr/paris-ile-de-france/paris/video-une-nouvelle-application-pour-recuperer-gratuitement-des-materiaux-sur-les-chantiers-2778070.html"
+}];
+const presseListData_autres = [{
+  title: "WE DEMAIN",
+  datetime: "2023-03-27",
+  type: "ARTICLE",
+  description: "Cycle Zéro : une appli pour récupérer gratuitement des matériaux de chantiers",
+  image: "",
+  link: "https://www.wedemain.fr/inventer/cycle-zero-une-appli-pour-recuperer-gratuitement-des-materiaux-de-chantiers/"
+}, {
+  title: "Marcelle",
+  datetime: "2023-02-28",
+  type: "ARTICLE",
+  description: "Une appli pour récupérer (gratuitement) les déchets des chantiers",
+  image: "",
+  link: "https://marcelle.media/une-appli-pour-recuperer-gratuitement-les-dechets-des-chantiers-cycle-zero/"
+}, {
+  title: "Green is the New Black",
+  datetime: "2023-02-21",
+  type: "ARTICLE",
+  description: "Cycle Zero Co-Founder Selim Zouaoui on Turning Construction Waste Into Resource",
+  image: "",
+  link: "https://greenisthenewblack.com/cycle-zero-co-founder-selim-zouaoui-on-turning-construction-waste-into-resource/"
+}, {
+  title: "EKOPO",
+  datetime: "2023-04-14",
+  type: "ARTICLE",
+  description: "Cycle Zéro : une appli pour récupérer des matériaux de chantiers",
+  image: "",
+  link: "https://www.ekopo.fr/Thematique/entreprises-1285/Breves/Cycle-Zero-un-appli-pour-recuperer-des-materiaux-de-chantiers-379010.htm"
+}, {
+  title: "Le nouvel Economiste",
+  datetime: "2023-02-06",
+  type: "ARTICLE",
+  description: "Cycle Zéro, une application pour le réemploi des déchets parisiens du BTP",
+  image: "",
+  link: "https://www.lenouveleconomiste.fr/cyclezero-une-application-pour-le-reemploi-des-dechets-parisiens-du-btp-97890/"
+}, {
+  title: "France Bleu",
+  datetime: "2023-02-09",
+  type: "PODCAST",
+  description: "Cycle Zero, l'appli malin pour recycler les matériaux de chantiers franciliens",
+  image: "",
+  link: "https://www.francebleu.fr/emissions/c-est-quoi-c-chantier/cycle-zero-l-appli-malin-pour-recycler-les-materiaux-de-chantiers-franciliens-1681300"
+}, {
+  title: "Transition(s)",
+  datetime: "2023-04-21",
+  type: "PODCAST",
+  description: "Karima Lebsir : cette architecte fait la chasse au gaspillage sur les chantiers",
+  image: "",
+  link: "https://podcasts.apple.com/fr/podcast/transition-s/id1481435719?i=1000610085296"
+}, {
+  title: "Le Figaro",
+  datetime: "2023-04-20",
+  type: "VIDÉO",
+  description: "Cycle Zéro : l'appli pour recycler les matériaux de chantiers",
+  image: "",
+  link: "https://video.lefigaro.fr/figaro/video/cycle-zero-lappli-pour-recycler-les-materiaux-de-chantiers/"
+}, {
+  title: "Le Moniteur",
+  datetime: "2023-04-04",
+  type: "ARTICLE",
+  description: "Réemploi sur les chantiers : Cycle Zéro s'adresse aux particuliers bricoleurs",
+  image: "",
+  link: "https://www.lemoniteur.fr/article/reemploi-sur-les-chantiers-cycle-zero-s-adresse-aux-particuliers-bricoleurs.2263671"
+}, {
+  title: "18h39 - Castorama",
+  datetime: "2022-10-02",
+  type: "ARTICLE",
+  description: "L'application Cycle Zéro permet de récupérer gratuitement des matériaux et des déchets de chantier",
+  image: "",
+  link: "https://www.18h39.fr/articles/cycle-zero-application-recuperer-gratuitement-materiaux-chantier.html"
+}, {
+  title: "NordLittoral",
+  datetime: "2023-05-22",
+  type: "ARTICLE",
+  description: "Cette application permet de récupérer gratuitement des matériaux sur les chantiers",
+  image: "",
+  link: "https://www.nordlittoral.fr/174637/article/2023-05-22/cette-application-permet-de-recuperer-gratuitement-des-materiaux-sur-les"
+}, {
+  title: "EchantillonsClub",
+  datetime: "2023-06-01",
+  type: "ARTICLE",
+  description: "Cycle Zéro : L’appli pour trouver des matériaux gratuits sur les chantiers",
+  image: "",
+  link: "https://www.echantillonsclub.com/194646-cycle-zero.html"
+}, {
+  title: "Cd-mentiel Magazine",
+  datetime: "2023-06-11",
+  type: "ARTICLE",
+  description: "Cycle Zéro : l’appli qui révolutionne le secteur du bâtiment",
+  image: "",
+  link: "https://www.cd-mentielmagazine.fr/cycle-zero-lappli-qui-revolutionne-le-secteur-du-batiment/"
+}, {
+  title: "20 minutes",
+  datetime: "2023-06-14",
+  type: "ARTICLE",
+  description: "« On n’imagine pas le gâchis »… Sur les chantiers, des initiatives se lancent pour donner une seconde vie aux déchets",
+  image: "",
+  link: "https://www.20minutes.fr/planete/4040460-20230614-imagine-gachis-chantiers-initiatives-lancent-donner-seconde-vie-dechets"
+}, {
+  title: "AirZen Radio",
+  datetime: "2023-06-16",
+  type: "PODCAST+ARTICLE",
+  description: "Cycle Zéro, une application du réemploi des matériaux de chantier",
+  image: "",
+  link: "https://www.airzen.fr/cycle-zero-une-application-du-reemploi-des-materiaux-de-chantier/"
+}];
+class PresseListArticle {
+  constructor(data, container) {
+    this.data = data;
+    this.container = container;
   }
 
-  async Init() {
-    this.licenses = await this.getLicenses();
+  sortByDate(desc = false) {
+    this.data.sort((a, b) => {
+      const datetimeA = new Date(a.datetime);
+      const datetimeB = new Date(b.datetime);
+      if (desc) return datetimeB - datetimeA;
+      return datetimeA - datetimeB;
+    });
+  }
 
-    _clear();
+  convertToFrenchDate(dateString) {
+    try {
+      const options = {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      };
+      const date = new Date(dateString);
 
-    this.licensesGithub = await this.getGithubLicensesList();
+      if (isNaN(date.getTime())) {
+        throw new Error("Date invalide");
+      }
 
-    _clear();
-
-    for (let i = 0; i < this.licensesGithub.length; i++) {
-      this.licensesGithubDetails.push(await this.getGithubLicensesDetails(this.licensesGithub[i].key));
-
-      _clear();
+      const frenchDate = date.toLocaleDateString("fr-FR", options);
+      return frenchDate;
+    } catch (error) {
+      console.error("Erreur lors de la conversion de la date :", error);
+      return dateString;
     }
-
-    this.loaded = true;
-    console.log(this.loaded);
   }
 
-  getLicenses() {
-    return fetch('./src/page/licenses.data.json').then(response => response.json()).then(data => data);
-  }
-
-  getGithubLicensesList() {
-    return fetch('https://api.github.com/licenses').then(response => response.json()).then(data => data);
-  }
-
-  getGithubLicensesDetails(license) {
-    return fetch(`https://api.github.com/licenses/${license}`).then(response => response.json()).then(data => data);
-  }
-
-  onReady() {
-    return new Promise((resolve, reject) => {
-      if (this.loaded && globalThis.fromMobile === 3) {
-        resolve();
-      } else {
-        setTimeout(() => {
-          this.onReady().then(() => {
-            resolve();
-          });
-        }, 100);
-      }
-    });
-  }
-
-  onReadyMob() {
-    return new Promise((resolve, reject) => {
-      if (globalThis.fromMobile === 3) {
-        resolve();
-      } else {
-        setTimeout(() => {
-          this.onReadyMob().then(() => {
-            resolve();
-          });
-        }, 100);
-      }
-    });
-  }
-
-}
-class RenderLicenses {
-  static renderLicenses(licenseName) {
-    const targetLicenseDetails = fetcher.licensesGithubDetails.filter(license => license.key.toLowerCase() == licenseName.toLowerCase());
-    const details = targetLicenseDetails[0];
+  renderItem(item) {
     return Engine.Elmt("div", {
-      class: "license-article-item"
-    }, Engine.Elmt("p", null, details?.description ? details.description : 'No description available'), Engine.Elmt("p", null, details?.body ? details.body : 'No mentions available'), Engine.Elmt("p", null, details?.html_url ? details.html_url : ''));
+      class: "article-box"
+    }, Engine.Elmt("a", {
+      target: "_blank",
+      href: item.link
+    }, Engine.Elmt("h2", null, item.title), Engine.Elmt("p", {
+      class: "datetime"
+    }, this.convertToFrenchDate(item.datetime)), Engine.Elmt("p", null, item.type, Engine.Elmt("span", {
+      class: "_dot"
+    }, ". "), item.description), item.image && Engine.Elmt("img", {
+      src: item.image,
+      alt: item.title
+    }), Engine.Elmt("p", {
+      class: "authors"
+    }, item.authors), Engine.Elmt("p", {
+      class: "seemore"
+    }, "Voir plus", Engine.Elmt("span", null, "\u2192"))));
   }
 
-  static renderPackageList(pkgs) {
-    const pkgContainer = Engine.Elmt("ul", null);
-    pkgs.forEach(pkgName => {
-      pkgContainer.appendChild(Engine.Elmt("li", {
-        class: "license-pkg-item"
-      }, Engine.Elmt("p", {
-        class: "license-pkg-name"
-      }, pkgName)));
+  renderContent() {
+    const contentContainer = Engine.Elmt("div", {
+      class: "container"
     });
-    return pkgContainer;
+    this.data.forEach(item => {
+      contentContainer.appendChild(this.renderItem(item));
+    });
+    return contentContainer;
   }
 
-  static renderAll(fetcher) {
-    let container = Engine.Elmt("div", null);
-    document.body.appendChild(container);
-
-    for (const licenseName in fetcher.licenses) {
-      const pkgs = fetcher.licenses[licenseName];
-      const licenseContainer = Engine.Elmt("div", {
-        class: "license-container"
-      }, Engine.Elmt("div", {
-        class: "license-name"
-      }, licenseName), Engine.Elmt("div", {
-        class: "license-pkg-list"
-      }, this.renderPackageList(pkgs)), Engine.Elmt("div", {
-        class: "license-article"
-      }, this.renderLicenses(licenseName)));
-      container.appendChild(licenseContainer);
-    }
+  render() {
+    this.container.replaceChildren(this.renderContent());
   }
 
 }
-const fetcher = new FetchData();
-fetcher.onReadyMob().then(() => {
-  fetcher.Init();
-});
 Engine.OnReady(async () => {
-  Engine.Console.Log('Ready Licenses');
-  const pgr_bar = Engine.Q('#pgr_bar');
-  await fetcher.onReady();
-  Engine.Console.Log('Ready Fetch');
-  RenderLicenses.renderAll(fetcher);
-  pgr_bar.style.display = 'none';
+  if (Engine.CheckCompatibility() === false || !Engine.JSEnable) return;
+  Engine.Console.Log('Ready Presse');
+  const listCoupDeCoeur = new PresseListArticle(presseListData_coupDeCoeur, Engine.Q('#coup-de-coeur .content'));
+  listCoupDeCoeur.render();
+  const listAutres = new PresseListArticle(presseListData_autres, Engine.Q('#autres-articles .content'));
+  listAutres.sortByDate(true);
+  listAutres.render();
 });

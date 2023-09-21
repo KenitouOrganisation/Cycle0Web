@@ -1,8 +1,8 @@
 const Engine = {};
 Engine.JSEnable = true;
 Engine.VERSION = {
-  NUMBER: '1.0.2',
-  DATE: '2023-02-04'
+  NUMBER: '1.0.3',
+  DATE: '2023-06-25'
 };
 
 Engine.isMobileScreen = () => window.matchMedia("(max-width: 900px)").matches;
@@ -83,11 +83,16 @@ Engine.Elmt = function (name, attr, ...children) {
     if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else elmt.setAttribute(name, attr[name]);
   }
 
-  children.forEach(child => {
-    if (child instanceof Node) elmt.appendChild(child);
-    if (typeof child == 'string') elmt.innerHTML += child;
-  });
+  Engine.ElmtLoopChildren(elmt, children);
   return elmt;
+};
+
+Engine.ElmtLoopChildren = function (parent, children) {
+  children.forEach(child => {
+    if (child instanceof Array) return Engine.ElmtLoopChildren(parent, child);
+    if (child instanceof Node) parent.appendChild(child);
+    if (typeof child == 'string') parent.innerHTML += child;
+  });
 };
 
 Engine.Q = (selector, parent = null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
@@ -421,8 +426,9 @@ const ContactCheckMail = async iptMail => {
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 const totalCarac = 300;
-const totalObjectCarac = 100;
+const totalObjectCarac = 80;
 const totalMailCarac = 320;
+const requestDate = new Date();
 const ContactForms = {};
 const CF = ContactForms;
 CF.currentCarac = 0;
@@ -432,13 +438,21 @@ CF.formSubmitAtLeastOnce = false;
 CF.Init = () => {
   CF._elmt = Engine.Q("#contact_forms");
   CF.InitElmt();
+  CF.InitAplpyArgs();
   CF.Debounce = new Engine.DebounceCall(1000);
   CF._elmt = Engine.Q("#contact_forms");
 
   CF._elmt.addEventListener("submit", CF.OnSubmit);
 
-  if (/join_equip/.test(document.location.search)) CF.inputObject.value = "Rejoindre l'équipe";
+  if (/colab_pro/.test(document.location.search)) CF.selectObject.value = "collab";
   CF.FormsShow();
+};
+
+CF.InitAplpyArgs = () => {
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  const subject = params.get('subject');
+  CF.selectObject.value = subject ? subject : "none";
 };
 
 CF.InitElmt = () => {
@@ -455,12 +469,46 @@ CF.InitElmt = () => {
     required: true,
     maxLength: totalMailCarac.toString()
   });
+  CF.selectObjectValues = [{
+    value: "none",
+    title: "Sélectionner un sujet ..."
+  }, {
+    value: "general",
+    title: "Questions générales"
+  }, {
+    value: "info_product_services",
+    title: "Informations sur les produits/services"
+  }, {
+    value: "support_tech",
+    title: "Support technique"
+  }, {
+    value: "bug_error",
+    title: "Signalement de bugs ou d'erreurs"
+  }, {
+    value: "suggestion",
+    title: "Suggestions d'amélioration"
+  }, {
+    value: "collab",
+    title: "Collaborer avec Cycle Zéro"
+  }, {
+    value: "press",
+    title: "Demandes de presse ou médias"
+  }, {
+    value: "other",
+    title: "Autres"
+  }];
+  CF.selectObject = Engine.Elmt("select", {
+    name: "subject",
+    class: "entryInput",
+    required: true
+  }, CF.selectObjectValues.map((opt, idx) => Engine.Elmt("option", {
+    value: opt.value
+  }, opt.title)));
   CF.inputObject = Engine.Elmt("input", {
     class: "entryInput",
     type: "text",
     name: "object",
     placeholder: "",
-    required: true,
     autocomplete: "off",
     maxLength: totalObjectCarac.toString()
   });
@@ -500,6 +548,9 @@ CF.InitElmt = () => {
   CF.inputObject.addEventListener("keyup", () => {
     CF.formSubmitAtLeastOnce === true && CF.CheckForm.Object();
   });
+  CF.selectObject.addEventListener("change", () => {
+    CF.formSubmitAtLeastOnce === true && CF.CheckForm.Subject();
+  });
 };
 
 CF.FormsInputsLabelRender = (ipt, label, parentProps = {}) => {
@@ -515,9 +566,22 @@ CF.FormsRender = () => Engine.Elmt("div", {
   class: "not-form-elmt"
 }, Engine.Elmt("h2", {
   class: "h2 center-form"
-}, "Formulaire de contact"), CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email"), CF.FormsInputsLabelRender(CF.inputObject, "Objet"), CF.FormsInputsLabelRender(CF.textarea, "Votre message", {
+}, "Formulaire de contact"), Engine.Elmt("p", {
+  class: "center-form"
+}, "Pour faciliter votre exp\xE9rience, n'oubliez pas de consulter ", Engine.Elmt("a", {
+  href: "./contacts.html?from_contact"
+}, "notre FAQ"), ".", Engine.Elmt("br", null), "Elle regorge d'informations utiles qui pourraient r\xE9pondre \xE0 vos interrogations.", Engine.Elmt("br", null), Engine.Elmt("br", null), "Nous vous invitons \xE0 y jeter un coup d'\u0153il avant de nous contacter. Nous serons ravis de vous aider si vous ne trouvez pas la r\xE9ponse que vous recherchez.", Engine.Elmt("br", null), Engine.Elmt("br", null), "Merci pour votre compr\xE9hension !"), Engine.Elmt("br", null), CF.FormsInputsLabelRender(CF.inputEmail, "Votre adresse email"), CF.FormsInputsLabelRender(CF.selectObject, "Sujet"), CF.FormsInputsLabelRender(CF.inputObject, "Précisez le sujet"), CF.FormsInputsLabelRender(CF.textarea, "Votre message", {
   style: "margin-bottom: 0;"
-}), CF.textareaCounterBox, CF.submitBtt);
+}), CF.textareaCounterBox, Engine.Elmt("div", {
+  class: "h-captcha center-form",
+  "data-sitekey": "2626626e-f325-458f-bc72-2d6457624cc4"
+}), Engine.Elmt("div", {
+  id: "captcha-error-text"
+}), Engine.Elmt("script", {
+  src: "https://js.hcaptcha.com/1/api.js",
+  async: true,
+  defer: true
+}), CF.submitBtt);
 
 CF.FormsShow = () => {
   CF._elmt?.replaceChildren(CF.FormsRender());
@@ -527,6 +591,7 @@ CF.CheckForm = {
   ParseCodeData: data => {
     data.message = data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     data.object = data.object.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    data.subject = data.subject.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     data.email = data.email.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     return data;
   },
@@ -578,13 +643,27 @@ CF.CheckForm = {
       correct = false;
     }
 
-    if (data.object.length < 10) {
-      CF.inputObject.setCustomValidity(`L'objet doit contenir au moins 10 caractères`);
-      CF.inputObject.reportValidity();
+    if (correct) CF.inputObject.setCustomValidity("");
+    return correct;
+  },
+  Subject: (data = null) => {
+    data = data ? data : {
+      subject: CF.selectObject.value
+    };
+    let correct = true;
+    if (data.subject === "none" || data.subject === "") correct = false;
+
+    if (CF.selectObjectValues.filter(opt => opt.value === data.subject).length < 1) {
       correct = false;
     }
 
-    if (correct) CF.inputObject.setCustomValidity("");
+    if (!correct) {
+      CF.selectObject.setCustomValidity("Veuillez choisir un sujet");
+      CF.selectObject.reportValidity();
+    } else {
+      CF.selectObject.setCustomValidity("");
+    }
+
     return correct;
   },
   Message: (data = null) => {
@@ -608,11 +687,45 @@ CF.CheckForm = {
     if (correct) CF.textarea.setCustomValidity("");
     return correct;
   },
+  Captcha: () => {
+    const captchaErrorText = Engine.Q('#captcha-error-text');
+    captchaErrorText.innerHTML = "";
+
+    try {
+      const token = grecaptcha.getResponse();
+
+      if (token) {
+        console.log("CAPTCHA verification passed");
+
+        while (captchaErrorText.firstChild) {
+          captchaErrorText.removeChild(captchaErrorText.firstChild);
+        }
+
+        return true;
+      }
+
+      console.log("CAPTCHA verification failed");
+      captchaErrorText.appendChild(Engine.Elmt("p", {
+        class: "center-form",
+        style: "color: red; font-size: 17px; margin-top: 0;"
+      }, "Veuillez valider le captcha"));
+      return false;
+    } catch (err) {
+      console.error(err);
+      captchaErrorText.appendChild(Engine.Elmt("p", {
+        style: "color: 'red;"
+      }, "Une erreur s'est produite lors de la validation du captcha."));
+    }
+
+    return false;
+  },
   All: data => {
     const checkEmail = CF.CheckForm.Email(data);
     const checkObject = CF.CheckForm.Object(data);
+    const checkSubject = CF.CheckForm.Subject(data);
     const checkMessage = CF.CheckForm.Message(data);
-    return checkEmail && checkObject && checkMessage;
+    const checkCaptcha = CF.CheckForm.Captcha();
+    return checkEmail && checkObject && checkSubject && checkMessage && checkCaptcha;
   }
 };
 
@@ -636,6 +749,24 @@ CF.OnSubmitDebounceCall = async e => {
     return;
   }
 
+  const subjectOption = CF.selectObjectValues.find(opt => opt.value === dataObj['subject']);
+  const subjectTitle = subjectOption ? subjectOption.title : dataObj['subject'];
+  dataObj['message'] += `
+
+
+--------------------
+Email : ${dataObj['email']}
+Sujet ID : ${dataObj['subject']}
+Sujet : [${subjectTitle}] ${dataObj['object']}
+Date d'envoi : ${new Date().toLocaleString()}
+Requête : ${window.location.href}
+Date de la requête : ${requestDate.toLocaleString()}
+-------------------
+
+`;
+  dataObj['message'] = dataObj['message'].replace(/\n/g, "<br />");
+  dataObj['object'] = `[${dataObj['subject']}] ${dataObj['object']}`;
+  delete dataObj['subject'];
   console.log(dataObj);
   const resp = await Engine.Ajax.FetchJSON(CF.reqUrl, {
     method: "POST",

@@ -7,14 +7,29 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
     <head>
-                
+        
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            type="text/plain"
+            data-cookiecategory="analytics"
+            src="https://www.googletagmanager.com/gtag/js?id=G-XCNT4D3NPY"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-XCNT4D3NPY');
+        </script>
+        
         <meta charset="utf-8" />
         <base href=".">
-        <link rel="stylesheet" href="./src/style/style.css?v=1679004977852" />
+        <link rel="stylesheet" href="./src/style/style.css?v=1687716035055" />
         <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
-        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1679004977852" media="screen and (max-width : 900px)" />
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1687716035055" media="screen and (max-width : 900px)" />
         <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
-        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1679004977852" />
+        <link rel="icon" type="image/png" href="./src/img/icon.png?v=1687716035055" />
         <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
         <!-- For iOS Safari phone browser detection -->
         <meta name="format-detection" content="telephone=no">
@@ -50,8 +65,62 @@
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap"
             rel="stylesheet"
         />-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.css">
+        <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.js"></script>
+        <script defer src="./src/script/gCookieConsent.js"></script>
+        <script src="./src/script/Landing.js?v=1687716035055"></script>
+        
+        <style>
+            .special-1 {
+                display: none;
+            }
 
-        <script src="./src/script/Landing.js?v=1682016498785"></script>
+            .special-3 {
+                cursor: pointer;
+                width: 50%;
+                box-sizing: border-box;
+                /* margin auto on side, 60 top and bottom */
+                margin: 60px auto;
+            }
+
+            .special-3 img {
+                border-radius: 6px;
+                box-shadow: 0 0 4px #1b1e21a3;
+                width: 100%;
+                box-sizing: border-box;
+                transition: all 0.3s ease;
+                opacity: 1;
+            }
+
+            .special-3:hover img {
+                box-shadow: 0 0 6px #1b1e21;
+                opacity: 0.8;
+            }
+
+            #presse {
+                margin-top: 160px;
+            }
+
+            @media screen and (max-width : 900px) {
+                .special-1 {
+                    display: block;
+                }
+                .special-2, .special-4 {
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                }
+                .special-2 a {
+                    margin: 10px 0;
+                }
+                .special-3 {
+                    width: 100%;
+                }
+                #presse {
+                    margin-top: 60px;
+                }
+            }
+        </style>
     </head>
 
     <!--
@@ -72,16 +141,52 @@
                             alt="Cycle Zéro - Accueil"
                         />
                     </a>
+                    <ul class="social-links">
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/Cycle-Z%C3%A9ro-107479335338932/">
+                                <img src="./src/img/icons/social-fbook.png" alt="Page Facebook">
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.linkedin.com/company/cycle-zero/">
+                                <img src="./src/img/icons/social-lkdin.png" alt="Page LinkedIn">
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.instagram.com/cyclezero.app/">
+                                <img src="./src/img/icons/social-insta.png" alt="Compte Instagram">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div id="header-buttons">
-                    <!--<p class="mob-only indicator">Menu</p>
-                    <ul class="menu">-->
-                    <ul>
+                    <p class="mob-only indicator">Menu</p>
+                </div>
+                <div id="header-menu">
+                    <ul class="menu">
+                        <li><a href="./presse.html">Presse</a></li>
                         <li><a href="./contacts.html">Contact</a></li>
+                        <li><a href="/faq.html">FAQ</a></li>
                     </ul>
                 </div>
             </nav>
         </header>
+        <script>
+            (function(){
+                const header = Engine.Q('#header-buttons');
+                const menu = Engine.Q('#header-menu');
+                const hoverClass = 'hover';
+
+                function onClick(e){
+                    menu.classList.contains(hoverClass)
+                        ? menu.classList.remove(hoverClass)
+                        : menu.classList.add(hoverClass);
+                }
+
+                header.addEventListener('click', onClick);
+                menu.addEventListener('click', onClick);
+            })();
+        </script>
 
         <div class="wrap-content">
    
@@ -159,21 +264,21 @@
                     <div class="left-box">
                         <div class="inline-box">
                             <div>
-                                <p class="h1-label mono">10</p>
+                                <p class="h1-label mono">15</p>
                                 <p class="h2-label">Chantiers</p>
                             </div>
                             <div class="data">
                                 <div>
-                                    <p class="h3-label">35</p>
-                                    <p class="h4-label">M3 de déchets</p>
+                                    <p class="h3-label">100</p>
+                                    <p class="h4-label">Tonnes de déchets</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">64%</p>
+                                    <p class="h3-label">75%</p>
                                     <p class="h4-label">Taux de réemploi</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">15 365</p>
-                                    <p class="h4bis-label">Kg de Co2 économisés</p>
+                                    <p class="h3-label">35 365</p>
+                                    <p class="h4bis-label">Kg de CO2 économisés</p>
                                 </div>
                             </div>
                         </div>
@@ -206,15 +311,15 @@
                             </div>
                             <div class="data">
                                 <div>
-                                    <p class="h3-label">39 805</p>
+                                    <p class="h3-label">90 000</p>
                                     <p class="h4-label">Kilos d'ordures</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">822</p>
+                                    <p class="h3-label">1 892</p>
                                     <p class="h4-label">Jours de chauffage</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">116 401 515</p>
+                                    <p class="h3-label">267 104 235</p>
                                     <p class="h4bis-label">Litres d'eau potable</p>
                                 </div>
                             </div>
@@ -222,7 +327,7 @@
                     </div>
 
                     <!--<a href="#" class="_btt _orange mob-only" style="margin-top: 50px;">Voir les chantiers</a>-->
-                    <p style="margin: 20px 0;">
+                    <p style="margin: 20px 0;" class="special-1">
                         <a href="https://datagir.ademe.fr/apps/impact-co2/" target="_blank" class="external-link mob-only">Calculé avec Datagir</a>
                     </p>
 
@@ -243,7 +348,7 @@
                         <div id="les-chiffres-map-txt">
                             <p class="">
                                 <span>Notre communauté compte déjà </span>
-                                <span class="h3-label" style="zoom: 0.8;">3<span style="font-size: 18px;"> </span>781</span>
+                                <span class="h3-label" style="zoom: 0.8;">50<span style="font-size: 18px;"> </span>002</span>
                                 <span> inscrits partout en France métropolitaine.</span>
                             </p>
                             <p class="">
@@ -288,14 +393,16 @@
                         <h1 class="h1">Le mouvement de Cycle Zéro vous appartient</h1>
                         <p class="">
                             Cycle zéro est un mouvement qui vise à se diffuser partout en France. 
-                            <span class="_txt_orange">Notre structure est ouverte</span> à tous ceux qui souhaiterait propager notre modèle d’économie circulaire. 
+                            <span class="_txt_orange">Notre structure est ouverte</span> à tous ceux qui souhaiteraient propager notre modèle d’économie circulaire. 
                             <br>
                             <span class="_txt_orange">Contactez-nous pour collaborer dans vos régions !</span>
                         </p>
                     </div>
-        
-                    <a href="./contacts.html?join_equip" class="_btt _orange"">Rejoindre l'équipe</a>
                     
+                    <div class="special-2">
+                        <a href="./contacts.html?colab_pro" class="_btt _primary"">Professionnel</a>
+                    </div>
+                   
                     <div class="picto-container">
                         <div class="anim-picto picto1"></div>
                         <div class="anim-picto picto2"></div>
@@ -305,6 +412,26 @@
 
                 </section>
             </div>
+
+
+            <section class="txt-center" id="presse">
+                <h1 class="h1">On parle de nous !</h1>
+                <p>
+                    Explorez les médias qui ont couvert notre initiative de réemploi chantier,
+                    <br >mettant en avant notre engagement en faveur de l'économie circulaire.
+                </p>
+                <a target="_blank" href="https://www.tf1info.fr/conso/video-reportage-tf1-bricolage-cette-appli-cycle-zero-peut-vous-permettre-de-faire-de-grosses-economies-2258775.html">
+                    <div class="special-3">
+                        <img src="./src/img/illustrations/tf1_cyclezero.jpg" alt="">
+                    </div>
+                </a>
+
+                <div class="special-4">
+                    <a href="./presse.html" class="_btt _orange">Découvrir les actualités</a>
+                </div>
+            
+            </section>
+
                     
         <footer>
             <div class="box left-box">
@@ -326,7 +453,9 @@
             </div>
             <div class="box right-box">
                 <ul class="footer-links">
+                    <li><a href="./faq.html">FAQ</a></li>
                     <li><a href="./contacts.html">Contact</a></li>
+                    <li><a href="./presse.html">Presse</a></li>
                     <li><a href="./cgu.html">CGU</a></li>
                 </ul>
                 <ul class="social-links">
@@ -351,7 +480,6 @@
 
         <div id="ready"></div>
         </div>
-
 
     </body>
 </html>

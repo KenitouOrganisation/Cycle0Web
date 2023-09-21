@@ -1,0 +1,113 @@
+<<{__copyrights.html}>>
+<!DOCTYPE html>
+<html lang="fr-FR">
+    <head>
+        <<{__head.html}>>
+        <script src="./src/script/FAQ.js?v=$filetimestamp$"></script>
+    </head>
+
+    <!--
+        Code adapted to show without Javascript, so we put all first in html 
+        (where we have a heavy HTML code instead of using JS to have less repeat code)
+    -->
+
+    <body class="not_sub">
+
+<style>
+
+.first {
+    margin-bottom: 80px;
+}
+
+.article-box {
+    border: 1px solid #dddddd;
+    padding: 10px 45px;
+    margin: 13px 0px;
+    border-radius: 3px;
+    background: #fff;
+    transition: background 0.2s ease;
+}
+
+.article-box:hover {
+    background: #fbfbfb;
+}
+
+.article-box .answer {
+    display: none;
+    text-align: justify;
+}
+
+.article-box .arrow {
+    background-image: url('data:image/svg+xml,\00003csvg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">\00003cpath fill="%2370757a" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z">\00003c/path>\00003c/svg>');
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+
+.article-box h2 {
+    margin: 0px;
+}
+
+.article-box .header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin: 8px 0px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.article-box.on .answer {
+    display: block;
+}
+
+.article-box.on .arrow {
+    transform: rotate(180deg);
+}
+
+@media screen and (max-width : 900px){
+    .article-box {
+        padding: 10px 20px;
+    }
+}
+
+</style>
+
+        <<{__header.html}>>
+
+        <div class="wrap-content">
+
+            <section class="first txt-center">
+                <h1 class="h1">Foire aux questions (F.A.Q)</h1>
+                <p>
+                    Retrouvez ci-dessous les questions fréquemments posées.
+                    <br >
+                    Si vous ne trouvez pas votre réponse, vous pouvez <a href="./contacts.html?from_faq">nous contacter ici</a> en indiquant le sujet de votre demande.
+                </p>
+            </section>
+
+            <section id="faq-main">
+                <form action="" method="POST" id="contact_forms">
+                    <div class="not-form delayed-appear">
+                        <h1 class="h1">FAQ indisponible</h1>
+                        <p>
+                            Le FAQ requis l'utilisation de JavaScript. Il se peut aussi que votre navigateur web ait désactivé JavaScript ou qu'il soit obsolète. 
+                            <br><br>
+                            Si vous souhaitez nous contacter, vous pourrez nous envoyer un e-mail à l'adresse suivante : <a href="mailto:contact@cyclezero.fr">contact@cyclezero.fr</a>
+                            <br><br><br>
+                            La team Cycle Zéro ♻️
+                        </p>
+                    </div>
+                </form>
+            </section>
+
+            <<{__footer.html}>>
+
+        </div>
+
+    </body>
+</html>

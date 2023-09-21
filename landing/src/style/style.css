@@ -92,10 +92,6 @@ img{
 
 }
 
-._btt:hover{
-    background: var(--primary-color)!important;
-}
-
 ._btt._orange {
     color: #fff;
     background: var(--secondary-color);
@@ -104,6 +100,19 @@ img{
 ._btt._grey {
     color: #fff;
     background: #C4C4C4;
+}
+
+._btt:hover{
+    background: var(--primary-color);
+}
+
+._btt._primary{
+    color: #fff;
+    background: var(--primary-color);
+}
+
+._btt._primary:hover{
+    background: var(--secondary-color)!important;
 }
 
 .o-hidden{
@@ -178,23 +187,23 @@ header nav{
     vertical-align: middle;
 }
 
-#header-buttons {
+#header-menu, #header-buttons {
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
 }
 
-#header-buttons ul{
+#header-menu ul{
     margin: 0;
     list-style: none;
 }
 
-#header-buttons ul li{
+#header-menu ul li{
     display: inline-block;
 }
 
-#header-buttons ul li a{
+#header-menu ul li a{
     text-decoration: none;
     font-weight: 700;
     font-size: 24px;
@@ -205,8 +214,8 @@ header nav{
     transition: all 200ms ease;
 }
 
-#header-buttons ul li a:hover,
-#header-buttons ul li a.on
+#header-menu ul li a:hover,
+#header-menu ul li a.on
 {
     color: var(--secondary-color);
 }
@@ -769,4 +778,60 @@ CHANTIERS.HTML
 
 .switcher-btt.on{
     background: var(--primary-color);
+}
+
+.delayed-appear {
+    opacity: 0;
+    animation-name: delayed-appear;
+    animation-duration: 0.5s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes delayed-appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+#logo ul.social-links li a {
+    background: var(--primary-color);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    display: block;
+    margin: 0 8px;
+}
+
+#logo ul.social-links li a {
+    /* margin: 0; */
+    /* display: block; */
+}
+
+#logo ul.social-links li img {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#logo ul.social-links {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    transform: translateY(-50%);
+}
+
+#logo ul.social-links li a:hover {
+    background: var(--secondary-color);
 }

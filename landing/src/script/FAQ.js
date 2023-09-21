@@ -381,126 +381,77 @@ Engine.SwipeHandle = class {
   Destroy() {}
 
 };
-const _clear = console.clear;
+const FAQListData = [{
+  question: "Comment réserver des matériaux ?",
+  answer: `Pour réserver des matériaux gratuits dans l’application, il vous suffit de vous rendre dans le menu « recherche », « à proximité » ou encore par catégorie. À partir de là, vous pourrez pré réserver les matériaux de votre choix en cliquant sur reverser.
 
-class FetchData {
-  constructor() {
-    this.licenses = [];
-    this.licensesGithub = [];
-    this.licensesGithubDetails = [];
-    this.loaded = false;
+Pour connaître les nouveaux arrivages, il est pour l’instant nécessaire de consulter régulièrement l’application. A terme, un système de notification et d’alerte sera actionnable afin que vous soyez alerté de l’arrivée de nouveautés à proximité de chez vous.
+`
+}, {
+  question: "Peut-on déposer ou vendre des matériaux en étant un particulier ?",
+  answer: `Nous recevons énormément de demandes dans ce sens, mais malheureusement, il n’est pas possible en tant que particulier de déposer des matériaux sur l’application. Les matériaux disponibles sur l’application sont uniquement issus de chantiers professionnels.
+`
+}, {
+  question: "Comment récupérer des matériaux ?",
+  answer: `Une fois votre réservation validée sur l’application, vous recevrez par mail les informations relatives au chantier (lieu, contact, etc.). Il ne vous reste plus qu’à vous rendre sur site pour le/les récupérer.
+`
+}, {
+  question: "Comment télécharger l’application ?",
+  answer: `Vous pouvez cliquer sur les liens situés en bas à gauche de cette page. Sinon, vous pouvez également vous rendre sur la Play store et l'App store pour télécharger l’application.
+`
+}, {
+  question: "A quoi sert la géolocalisation ?",
+  answer: `Le système de géolocalisation vous permet de visualiser sur l’application les matériaux situés pochent de chez vous. Le rayon varie selon l’endroit selon votre emplacement et la densité de population.
+
+Si vous êtes situés dans une grande ville, votre rayon sera de 50 km. En revanche, si vous habitez dans un village votre rayon, sera élargi à 100km.
+
+Ainsi, nous favorisons <b>les déplacements courts</b>, afin de limiter l’impact carbone des déplacements, tout en permettant d’offrir à tous un éventail suffisant pour trouver matériaux à son pied.
+`
+}, {
+  question: "Pourquoi n’ai-je aucun matériau proche de chez moi ?",
+  answer: `C’est une question de temps ! Nôtre démarche est née en Île-de-France il y a seulement 8 mois et nous redoublons nos efforts pour nous développer le plus rapidement possible dans tout l’hexagone. Nous travaillons actuellement notre arrivée dans la région Nord, Bretagne et en PACA.
+`
+}, {
+  question: "Nous n’avons pas répondu à votre question ?",
+  answer: `Posez-nous vos questions depuis <a href="./contacts.html?from_faq">notre formulaire ici</a>.
+Nous vous répondrons le plus rapidement possible.
+`
+}];
+class FAQListArticle {
+  constructor(data, container) {
+    this.data = data;
+    this.container = container;
   }
 
-  async Init() {
-    this.licenses = await this.getLicenses();
-
-    _clear();
-
-    this.licensesGithub = await this.getGithubLicensesList();
-
-    _clear();
-
-    for (let i = 0; i < this.licensesGithub.length; i++) {
-      this.licensesGithubDetails.push(await this.getGithubLicensesDetails(this.licensesGithub[i].key));
-
-      _clear();
-    }
-
-    this.loaded = true;
-    console.log(this.loaded);
-  }
-
-  getLicenses() {
-    return fetch('./src/page/licenses.data.json').then(response => response.json()).then(data => data);
-  }
-
-  getGithubLicensesList() {
-    return fetch('https://api.github.com/licenses').then(response => response.json()).then(data => data);
-  }
-
-  getGithubLicensesDetails(license) {
-    return fetch(`https://api.github.com/licenses/${license}`).then(response => response.json()).then(data => data);
-  }
-
-  onReady() {
-    return new Promise((resolve, reject) => {
-      if (this.loaded && globalThis.fromMobile === 3) {
-        resolve();
-      } else {
-        setTimeout(() => {
-          this.onReady().then(() => {
-            resolve();
-          });
-        }, 100);
-      }
+  renderItem(item) {
+    item.answer = item.answer.replace(/\n/g, "<br>");
+    const box = Engine.Elmt("div", {
+      class: "article-box"
+    }, Engine.Elmt("div", {
+      class: "header"
+    }, Engine.Elmt("h2", null, item.question), Engine.Elmt("div", {
+      class: "arrow"
+    })), Engine.Elmt("p", {
+      class: "answer"
+    }, item.answer));
+    box.addEventListener("click", () => {
+      box.classList.toggle("on");
     });
+    return box;
   }
 
-  onReadyMob() {
-    return new Promise((resolve, reject) => {
-      if (globalThis.fromMobile === 3) {
-        resolve();
-      } else {
-        setTimeout(() => {
-          this.onReadyMob().then(() => {
-            resolve();
-          });
-        }, 100);
-      }
-    });
+  renderList() {
+    const ctn = Engine.Elmt("div", {
+      class: "article-list"
+    }, this.data.map(this.renderItem));
+    this.container.appendChild(ctn);
   }
 
 }
-class RenderLicenses {
-  static renderLicenses(licenseName) {
-    const targetLicenseDetails = fetcher.licensesGithubDetails.filter(license => license.key.toLowerCase() == licenseName.toLowerCase());
-    const details = targetLicenseDetails[0];
-    return Engine.Elmt("div", {
-      class: "license-article-item"
-    }, Engine.Elmt("p", null, details?.description ? details.description : 'No description available'), Engine.Elmt("p", null, details?.body ? details.body : 'No mentions available'), Engine.Elmt("p", null, details?.html_url ? details.html_url : ''));
-  }
-
-  static renderPackageList(pkgs) {
-    const pkgContainer = Engine.Elmt("ul", null);
-    pkgs.forEach(pkgName => {
-      pkgContainer.appendChild(Engine.Elmt("li", {
-        class: "license-pkg-item"
-      }, Engine.Elmt("p", {
-        class: "license-pkg-name"
-      }, pkgName)));
-    });
-    return pkgContainer;
-  }
-
-  static renderAll(fetcher) {
-    let container = Engine.Elmt("div", null);
-    document.body.appendChild(container);
-
-    for (const licenseName in fetcher.licenses) {
-      const pkgs = fetcher.licenses[licenseName];
-      const licenseContainer = Engine.Elmt("div", {
-        class: "license-container"
-      }, Engine.Elmt("div", {
-        class: "license-name"
-      }, licenseName), Engine.Elmt("div", {
-        class: "license-pkg-list"
-      }, this.renderPackageList(pkgs)), Engine.Elmt("div", {
-        class: "license-article"
-      }, this.renderLicenses(licenseName)));
-      container.appendChild(licenseContainer);
-    }
-  }
-
-}
-const fetcher = new FetchData();
-fetcher.onReadyMob().then(() => {
-  fetcher.Init();
-});
-Engine.OnReady(async () => {
-  Engine.Console.Log('Ready Licenses');
-  const pgr_bar = Engine.Q('#pgr_bar');
-  await fetcher.onReady();
-  Engine.Console.Log('Ready Fetch');
-  RenderLicenses.renderAll(fetcher);
-  pgr_bar.style.display = 'none';
+Engine.OnReady(() => {
+  document.querySelector("#faq-main").innerHTML = "<div class='content'></div>";
+  const articles = new FAQListArticle(FAQListData, document.querySelector("#faq-main .content"));
+  globalThis.articles = articles;
+  articles.renderList();
+  console.clear();
 });

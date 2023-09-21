@@ -1,14 +1,61 @@
-<!--
-
-    Copyright 2022-2023 / Cycle Zéro
-    Toutes copies même partielles de n'importe qu'elle partie du code du site Cycle Zéro sont strictement interdites.
-
--->
+<<{__copyrights.html}>>
 <!DOCTYPE html>
 <html lang="fr-FR">
     <head>
         <<{__head.html}>>
         <script src="./src/script/Landing.js?v=$filetimestamp$"></script>
+        
+        <style>
+            .special-1 {
+                display: none;
+            }
+
+            .special-3 {
+                cursor: pointer;
+                width: 50%;
+                box-sizing: border-box;
+                /* margin auto on side, 60 top and bottom */
+                margin: 60px auto;
+            }
+
+            .special-3 img {
+                border-radius: 6px;
+                box-shadow: 0 0 4px #1b1e21a3;
+                width: 100%;
+                box-sizing: border-box;
+                transition: all 0.3s ease;
+                opacity: 1;
+            }
+
+            .special-3:hover img {
+                box-shadow: 0 0 6px #1b1e21;
+                opacity: 0.8;
+            }
+
+            #presse {
+                margin-top: 160px;
+            }
+
+            @media screen and (max-width : 900px) {
+                .special-1 {
+                    display: block;
+                }
+                .special-2, .special-4 {
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                }
+                .special-2 a {
+                    margin: 10px 0;
+                }
+                .special-3 {
+                    width: 100%;
+                }
+                #presse {
+                    margin-top: 60px;
+                }
+            }
+        </style>
     </head>
 
     <!--
@@ -96,21 +143,21 @@
                     <div class="left-box">
                         <div class="inline-box">
                             <div>
-                                <p class="h1-label mono">10</p>
+                                <p class="h1-label mono">15</p>
                                 <p class="h2-label">Chantiers</p>
                             </div>
                             <div class="data">
                                 <div>
-                                    <p class="h3-label">35</p>
-                                    <p class="h4-label">M3 de déchets</p>
+                                    <p class="h3-label">100</p>
+                                    <p class="h4-label">Tonnes de déchets</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">64%</p>
+                                    <p class="h3-label">75%</p>
                                     <p class="h4-label">Taux de réemploi</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">15 365</p>
-                                    <p class="h4bis-label">Kg de Co2 économisés</p>
+                                    <p class="h3-label">35 365</p>
+                                    <p class="h4bis-label">Kg de CO2 économisés</p>
                                 </div>
                             </div>
                         </div>
@@ -143,15 +190,15 @@
                             </div>
                             <div class="data">
                                 <div>
-                                    <p class="h3-label">39 805</p>
+                                    <p class="h3-label">90 000</p>
                                     <p class="h4-label">Kilos d'ordures</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">822</p>
+                                    <p class="h3-label">1 892</p>
                                     <p class="h4-label">Jours de chauffage</p>
                                 </div>
                                 <div>
-                                    <p class="h3-label">116 401 515</p>
+                                    <p class="h3-label">267 104 235</p>
                                     <p class="h4bis-label">Litres d'eau potable</p>
                                 </div>
                             </div>
@@ -159,7 +206,7 @@
                     </div>
 
                     <!--<a href="#" class="_btt _orange mob-only" style="margin-top: 50px;">Voir les chantiers</a>-->
-                    <p style="margin: 20px 0;">
+                    <p style="margin: 20px 0;" class="special-1">
                         <a href="https://datagir.ademe.fr/apps/impact-co2/" target="_blank" class="external-link mob-only">Calculé avec Datagir</a>
                     </p>
 
@@ -180,7 +227,7 @@
                         <div id="les-chiffres-map-txt">
                             <p class="">
                                 <span>Notre communauté compte déjà </span>
-                                <span class="h3-label" style="zoom: 0.8;">3<span style="font-size: 18px;"> </span>781</span>
+                                <span class="h3-label" style="zoom: 0.8;">50<span style="font-size: 18px;"> </span>002</span>
                                 <span> inscrits partout en France métropolitaine.</span>
                             </p>
                             <p class="">
@@ -225,14 +272,16 @@
                         <h1 class="h1">Le mouvement de Cycle Zéro vous appartient</h1>
                         <p class="">
                             Cycle zéro est un mouvement qui vise à se diffuser partout en France. 
-                            <span class="_txt_orange">Notre structure est ouverte</span> à tous ceux qui souhaiterait propager notre modèle d’économie circulaire. 
+                            <span class="_txt_orange">Notre structure est ouverte</span> à tous ceux qui souhaiteraient propager notre modèle d’économie circulaire. 
                             <br>
                             <span class="_txt_orange">Contactez-nous pour collaborer dans vos régions !</span>
                         </p>
                     </div>
-        
-                    <a href="./contacts.html?join_equip" class="_btt _orange"">Rejoindre l'équipe</a>
                     
+                    <div class="special-2">
+                        <a href="./contacts.html?colab_pro" class="_btt _primary"">Professionnel</a>
+                    </div>
+                   
                     <div class="picto-container">
                         <div class="anim-picto picto1"></div>
                         <div class="anim-picto picto2"></div>
@@ -242,9 +291,28 @@
 
                 </section>
             </div>
+
+
+            <section class="txt-center" id="presse">
+                <h1 class="h1">On parle de nous !</h1>
+                <p>
+                    Explorez les médias qui ont couvert notre initiative de réemploi chantier,
+                    <br >mettant en avant notre engagement en faveur de l'économie circulaire.
+                </p>
+                <a target="_blank" href="https://www.tf1info.fr/conso/video-reportage-tf1-bricolage-cette-appli-cycle-zero-peut-vous-permettre-de-faire-de-grosses-economies-2258775.html">
+                    <div class="special-3">
+                        <img src="./src/img/illustrations/tf1_cyclezero.jpg" alt="">
+                    </div>
+                </a>
+
+                <div class="special-4">
+                    <a href="./presse.html" class="_btt _orange">Découvrir les actualités</a>
+                </div>
+            
+            </section>
+
             <<{__footer.html}>>
         </div>
-
 
     </body>
 </html>

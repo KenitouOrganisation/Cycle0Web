@@ -1,6 +1,6 @@
 const Engine = {};
 Engine.JSEnable = true;
-Engine.VERSION = { NUMBER : '1.0.2', DATE : '2023-02-04' };
+Engine.VERSION = { NUMBER : '1.0.3', DATE : '2023-06-25' };
 Engine.isMobileScreen = ()=>window.matchMedia("(max-width: 900px)").matches;
 
 Engine.CheckCompatibility = function () {
@@ -99,12 +99,18 @@ Engine.Elmt = function (name, attr, ...children) {
         else elmt.setAttribute(name, attr[name]);
     }
 
-    children.forEach((child) => {
-        if (child instanceof Node) elmt.appendChild(child);
-        if (typeof child == 'string') elmt.innerHTML += child;
-    });
+    Engine.ElmtLoopChildren(elmt, children);
     return elmt;
 };
+Engine.ElmtLoopChildren = function (parent, children) {
+    children.forEach((child) => {
+        if(child instanceof Array)
+            return Engine.ElmtLoopChildren(parent, child);
+
+        if (child instanceof Node) parent.appendChild(child);
+        if (typeof child == 'string') parent.innerHTML += child;
+    });
+}
 
 Engine.Q = (selector, parent=null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
 Engine.QAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
