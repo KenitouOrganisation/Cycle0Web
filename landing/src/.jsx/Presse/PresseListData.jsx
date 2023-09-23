@@ -164,5 +164,32 @@ const presseListData_autres = [
         image: "",
         link: "https://www.airzen.fr/cycle-zero-une-application-du-reemploi-des-materiaux-de-chantier/",
     },
+    {
+        title: "Sogood Stories",
+        datetime: "2023-08-07",
+        type: "PODCAST",
+        description:
+            "Spécial été: atteindre les grands décideurs par télépathie avec Karima Lebsir",
+        image: "",
+        link: "https://www.sogoodstories.com/episode/special-ete-atteindre-les-grands-decideurs-par-telepathie-avec-karima-lebsir/",
+    },
+    {
+        title: "Batiactu",
+        datetime: "2023-09-01",
+        type: "ARTICLE",
+        description:
+            "Cycle Zéro, l'appli pour récupérer gratuitement les matériaux de chantier",
+        image: "",
+        link: "https://www.batiactu.com/edito/cycle-zero-appli-recuperer-gratuitement-materiaux-chantier-66825.php",
+    },
+    {
+        title: "Les Numériques",
+        datetime: "2023-08-19",
+        type: "ARTICLE",
+        description:
+            "Cycle Zéro : le Vinted du BTP pour réduire les déchets et faire des économies",
+        image: "",
+        link: "https://www.lesnumeriques.com/societe-numerique/cycle-zero-le-vinted-du-btp-pour-reduire-les-dechets-et-faire-des-economies-n212441.html",
+    },
         
 ];
