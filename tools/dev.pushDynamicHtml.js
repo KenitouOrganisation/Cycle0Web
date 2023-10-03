@@ -36,6 +36,11 @@ async function GenerateStaticHTML(){
         "faq.html",
         "FAQ - Cycle Zéro"
     ).WatchCompile();
+
+    new FileManager(
+        "chantiers.html",
+        "Chantiers - Cycle Zéro"
+    ).WatchCompile();
     
 }
 

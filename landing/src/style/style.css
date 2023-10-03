@@ -597,8 +597,13 @@ footer{
 footer ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row-reverse;
     padding-inline-start: 0;
+}
+
+footer ul li {
+    margin: 6px 0;
 }
 
 footer ul.footer-links {
