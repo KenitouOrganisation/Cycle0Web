@@ -191,5 +191,14 @@ const presseListData_autres = [
         image: "",
         link: "https://www.lesnumeriques.com/societe-numerique/cycle-zero-le-vinted-du-btp-pour-reduire-les-dechets-et-faire-des-economies-n212441.html",
     },
-        
+    {
+        title: "Région Île-de-France",
+        datetime: "2023-10-04",
+        type: "ARTICLE",
+        description:
+            "La révolution numérique anti-gaspi dans le BTP",
+        image: "",
+        link: "https://www.calameo.com/read/002202362265556728486?page=9",
+    },
+
 ];

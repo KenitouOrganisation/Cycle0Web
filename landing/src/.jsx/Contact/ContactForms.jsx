@@ -186,7 +186,7 @@ CF.FormsRender = () => (
     <div class="not-form-elmt">
         <h2 class="h2 center-form">Formulaire de contact</h2>
         <p class="center-form">
-            Pour faciliter votre expérience, n'oubliez pas de consulter <a href="./contacts.html?from_contact">notre FAQ</a>.
+            Pour faciliter votre expérience, n'oubliez pas de consulter <a href="./faq.html">notre FAQ</a>.
             <br />
             Elle regorge d'informations utiles qui pourraient répondre à vos interrogations.
             <br /><br />

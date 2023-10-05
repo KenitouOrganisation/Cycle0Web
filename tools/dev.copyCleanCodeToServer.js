@@ -1,73 +1,68 @@
-// Recursive search directory method : https://stackoverflow.com/a/45130990/9408443
-
+// Import required modules
 const { resolve, dirname } = require("path");
 const fs = require("fs");
-const { readdir } = fs.promises;
+const { readdir, stat } = fs.promises;
 
+// Define source and destination folders
 let sourceFolder = "landing";
 let destFolder = "landing_clean";
 
-async function* getFiles(dir) {
-    const dirents = await readdir(dir, { withFileTypes: true });
-    for (const dirent of dirents) {
-        const res = resolve(dir, dirent.name);
+const trackProcess = {
+    errorFolder: 0,
+    errorFile: 0,
+    success: 0
+};
 
-        if (dirent.isDirectory() && dirent.name[0] != ".") {
-            yield* getFiles(res);
-        } else {
-            yield res;
-        }
-    }
-}
-
-function CopyFile(segmented_name) {
+// Define a function to copy files
+async function copyFile(sourcePath, destPath) {
     try {
-        const filePath = segmented_name.join("/");
-        
-        // we replace ./landing by ./lading_clean
-        const insertPosition = segmented_name.indexOf(sourceFolder);
-        segmented_name.splice(insertPosition, 1, destFolder);
-
-        const destPath = segmented_name.join("/");
-
-        const destdirpath = dirname(destPath);
-
-        // if folder path doesn't exist, we create it before copying the file
-        if (!fs.existsSync(destdirpath)) {
-            fs.mkdirSync(destdirpath, { recursive: true });
+        // Check if the source is a directory
+        const sourceStats = await stat(sourcePath);
+        if (sourceStats.isDirectory()) {
+            console.error(`Skipping directory: ${sourcePath}`);
+            return;
         }
 
-        fs.copyFileSync(filePath, destPath);
+        // Ensure the destination directory exists
+        const destDirPath = dirname(destPath);
+        await fs.promises.mkdir(destDirPath, { recursive: true });
+
+        // Copy the file
+        await fs.promises.copyFile(sourcePath, destPath);
+        console.log(`Copied: ${sourcePath} to ${destPath}`);
+
+        trackProcess.success ++;
     } catch (err) {
-        console.error(err);
+        console.error(`Error copying file: ${err.message}`);
+        trackProcess.errorFile ++;
     }
 }
 
-function StartCheck() {
+// Define a function to recursively copy files
+async function copyFilesRecursively(sourceDir, destDir) {
+    try {
+        // Read the source directory
+        const dirents = await readdir(sourceDir, { withFileTypes: true });
 
-    // if this is the main script called inside the cmd, we try to get the source and dest folder from the cmd arguments
-    if(typeof require !== 'undefined' && require.main === module){
-        if(process?.argv && process?.argv[2] && process?.argv[3]) {
-            sourceFolder = process.argv[2];
-            destFolder = process.argv[3];
+        // Process each entry
+        for (const dirent of dirents) {
+            if(!dirent.name.startsWith('.')){
+                const sourcePath = resolve(sourceDir, dirent.name);
+                const destPath = resolve(destDir, dirent.name);
+
+                // If it's a directory, recursively copy it
+                if (dirent.isDirectory()) {
+                    await copyFilesRecursively(sourcePath, destPath);
+                } else {
+                    // If it's a file, copy it
+                    await copyFile(sourcePath, destPath);
+                }
+            }
         }
+    } catch (err) {
+        console.error(`Error reading directory: ${err.message}`);
+        trackProcess.errorFolder ++;
     }
-
-
-    /*
-        Make sure this script is launch from the root of this project `node ./tools/....js`
-        Make sure also the variable sourceFolder match with this project folder name !
-        Also make sure landing folder is present at the same level of ./tools/ folder
-    */
-
-    if (!fs.existsSync("./" + sourceFolder))
-        throw new Error(
-            "The project folder called " +
-                sourceFolder +
-                " doesn't exist. Rename it or change sourceFolder variable of this script"
-        );
-
-    return true;
 }
 
 function Wait(ms){
@@ -78,41 +73,31 @@ function Wait(ms){
     });
 }
 
+// Main function
 (async () => {
-    StartCheck();
-
-    await fs.rm("./" + destFolder + "/", { recursive: true }, (err) => {
-        if(err)
-            console.error(err);
-    });
-
-    await Wait(1000);
-
-
-    let countTreated = [];
-
-    for await (const f of getFiles(`./${sourceFolder}/`)) {
-        let toBeIgnored = false;
-        const segmented_name = f.split("\\");
-        segmented_name.forEach((name) => {
-            // we ignored all files that are inside a folder starting with . or th file starting with .
-            // but the folder starting with . are already ignored inside getFiles function, to avoid unecessary deep search
-            if (name[0] == ".") {
-                toBeIgnored = true;
-                return;
-            }
-        });
-        countTreated.push(toBeIgnored);
-        //console.log(toBeIgnored, f);
-        if (!toBeIgnored) CopyFile(segmented_name);
+    // Check if this script is the main module and parse command-line arguments
+    if (require.main === module && process.argv.length >= 4) {
+        sourceFolder = process.argv[2];
+        destFolder = process.argv[3];
     }
 
-    // count element method : https://www.jsowl.com/count-duplicate-values-in-an-array-in-javascript/
-    const elementCounts = {};
+    // Check if source folder exists
+    if (!fs.existsSync(sourceFolder)) {
+        console.error(`Source folder '${sourceFolder}' does not exist 😵‍💫.`);
+        return;
+    }else {
+        // cleanup the existing directories
+        await fs.rm(destFolder, {recursive: true}, 
+            (err)=>{
+                if(err)
+                    console.error(err)
+            }    
+        );
+        await Wait(1000);
+    }
 
-    countTreated.forEach((element) => {
-        elementCounts[element] = (elementCounts[element] || 0) + 1;
-    });
+    // Recursively copy files from sourceFolder to destFolder
+    await copyFilesRecursively(sourceFolder, destFolder);
 
-    console.log(elementCounts);
+    console.log("Copy completed with: ", trackProcess);
 })();

@@ -14,6 +14,7 @@ node ./tools/dev.obfuscateJS.js ./%destFolder%/src/script/gCookieConsent.js
 node ./tools/dev.obfuscateJS.js ./%destFolder%/src/script/Landing.js
 node ./tools/dev.obfuscateJS.js ./%destFolder%/src/script/Licenses.js
 node ./tools/dev.obfuscateJS.js ./%destFolder%/src/script/Presse.js
+node ./tools/dev.obfuscateJS.js ./%destFolder%/src/script/Chantiers.js
 
 node ./tools/dev.minifyCss.js ./%destFolder%/src/style/style.css
 node ./tools/dev.minifyCss.js ./%destFolder%/src/style/style-mobile.css

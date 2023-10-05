@@ -629,7 +629,7 @@ footer .social-links a {
     width: 80px;
     aspect-ratio: 1/1;
     display: inline-flex;
-    border-radius: 20px;
+    border-radius: 50px;
     justify-content: center;
     align-items: center;
 }
@@ -700,11 +700,11 @@ CHANTIERS.HTML
 
 
 .search-content-box .table .illustration img {
-    width: 60px;
+    width: 75px;
 }
 
 .search-content-box .logo {
-    max-width: 214Px;
+    width: 150px;
     max-height: 97px;
 }
 
@@ -712,15 +712,15 @@ CHANTIERS.HTML
     transition: all 200ms ease;
     padding-top: 16px;
     border-radius: 4px;
-    box-shadow: 0px 8px 24px rgba(39, 1, 38, 0.12);
+    box-shadow: 0px 2px 7px rgba(39, 1, 38, 0.12);
     margin: 20px 0;
 }
 
 .search-content-box:hover{
-    box-shadow: 0px 8px 24px rgba(39, 1, 38, 0.22);
+    box-shadow: 0px 1px 8px rgba(39, 1, 38, 0.22);
 }
 
-.search-content-container {
+.search-content-container .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -731,13 +731,13 @@ CHANTIERS.HTML
 }
 
 .search-content-box .table .illustration {
-    display: inline;
+    display: inline-flex;
 }
 
 .search-content-box .cell {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: center;
     margin: 20px 0;
 }
 
@@ -746,7 +746,7 @@ CHANTIERS.HTML
 }
 
 .search-content-box .data {
-    margin-left: 21px;
+    margin-left: 2px;
 }
 
 .search-content-box .content {

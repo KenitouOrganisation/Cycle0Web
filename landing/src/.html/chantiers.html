@@ -3,6 +3,7 @@
 <html lang="fr-FR">
     <head>
         <<{__head.html}>>
+        <script src="./src/script/Chantiers.js?v=$filetimestamp$"></script>
     </head>
 
     <!--
@@ -18,25 +19,35 @@
 
             <section style="margin-bottom: 0;">
                 <div>
-                    <h2 class="h2">Recherchez parmis nos 3403 chantiers partout en France : </h2>
-                    <form action="" method="GET" id="search-chantiers">
+                    <h2 class="h2">Recherchez parmis nos chantiers partout en France : </h2>
+                    <p>
+                        <a
+                            style="display: inline-block; margin: 10px 0;"
+                            href="./contacts.html?colab_pro"
+                            class="_btt _primary"
+                        >Professionnel ? Collaborer avec nous</a>
+                    </p>
+                    <!-- <form action="" method="GET" id="search-chantiers">
                         <div id="main-searchbar">
                             <input type="text" placeholder="Rechercher">
                         </div>
                         <a class="_btt _orange">Nombre de chantiers</a>
                         <a class="_btt _grey">Récents</a>
                         <a class="_btt _grey">Taux de réemploi</a>
-                    </form>
+                    </form> -->
                 </div>
             </section>
 
             <section style="margin-top: 0;">
 
                 <div class="search-content-container">
-                    <div class="search-content-box">
+                    <!-- <div class="search-content-box">
                         <div class="header">
                             <img src="./src/img/logo.png" alt="Cycle Zéro" class="logo">
-                            <h2 class="h2 _txt_orange">23 chantiers</h2>
+                            <div>
+                                <h2 class="h2 _txt_orange">23 chantiers</h2>
+                                <p class="_txt_orange" style="font-size: 18px;" >Depuis 1996</p>
+                            </div>
                         </div>
                         <div class="content">
                             <div class="table left-box">
@@ -50,16 +61,6 @@
                                     <div class="data">
                                         <h2 class="h2">673</h2>
                                         <p class="p2">M3 de déchets</p>
-                                    </div>
-                                </div>
-    
-                                <div class="cell">
-                                    <div class="illustration">
-                                        <img src="./src/img/icons/Picto_02.png" alt="">
-                                    </div>
-                                    <div class="data">
-                                        <h2 class="h2">78%</h2>
-                                        <p class="p2">Taux de réemploi</p>
                                     </div>
                                 </div>
     
@@ -90,16 +91,6 @@
     
                                 <div class="cell">
                                     <div class="illustration">
-                                        <img src="./src/img/icons/Picto_02.png" alt="">
-                                    </div>
-                                    <div class="data">
-                                        <h2 class="h2">283</h2>
-                                        <p class="p2">Jours de chauffage</p>
-                                    </div>
-                                </div>
-    
-                                <div class="cell">
-                                    <div class="illustration">
                                         <img src="./src/img/icons/Picto_08.png" alt="">
                                     </div>
                                     <div class="data">
@@ -110,7 +101,7 @@
         
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </section>
@@ -119,12 +110,11 @@
 
         </div>
 
-        <script>
+        <!-- <script>
             // TODO : to be removed (only for dev visualization)
             const elmt = document.querySelector(".search-content-box");
             for(let i = 0; i < 4; i++)
                 elmt.parentNode.appendChild(elmt.cloneNode(true));
-        </script>
-
+        </script> -->
     </body>
 </html>
