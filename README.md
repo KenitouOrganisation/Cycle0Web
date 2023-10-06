@@ -156,5 +156,5 @@ node ./tools/dev.minifyCss.js ./$destFolder/src/style/style-mobile.css;
 
 ```
 docker build --tag cyclezero-backend .
-docker run -p 8080:8080 cyclezero-backend cyclezero-backend-live
+docker run --name cyclezero-backend-ctn -p 8080:8080 cyclezero-backend
 ```
