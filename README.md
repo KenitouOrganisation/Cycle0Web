@@ -151,3 +151,10 @@ node ./tools/dev.minifyCss.js ./$destFolder/src/style/style-mobile.css;
 # copy this comment too, to end the script
 
 ```
+
+## Docker
+
+```
+docker build --tag cyclezero-backend .
+docker run -p 8080:8080 cyclezero-backend cyclezero-backend-live
+```

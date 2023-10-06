@@ -427,9 +427,14 @@ class ChantiersListArticle {
   formatNumber(val) {
     return parseFloat(val).toLocaleString();
   }
+  renderValueUnit(unitStr) {
+    return Engine.Elmt("span", {
+      style: "font-size: 13px;"
+    }, unitStr);
+  }
   renderCell(data) {
     const isMillion = parseFloat(data.value) > 999999;
-    const value = isMillion ? this.formatNumber(parseInt(parseFloat(data.value) / 1000000)) + ' <span style="font-size: 13px;">millions</span>' : this.formatNumber(data.value);
+    const value = isMillion ? this.formatNumber(parseInt(parseFloat(data.value) / 1000000)) + ' ' + this.renderValueUnit('millions').outerHTML : this.formatNumber(data.value);
     return Engine.Elmt("div", {
       class: "cell"
     }, Engine.Elmt("div", {
@@ -468,11 +473,13 @@ class ChantiersListArticle {
     }, "R\xE9sultats :"), this.renderCell({
       picto: './src/img/icons/Picto_Chantiers_01.png',
       value: item.data?.WEIGHT,
-      unit: 'Tonnes de déchets'
+      extendValue: this.renderValueUnit(' t'),
+      unit: 'de matériaux traités'
     }), this.renderCell({
       picto: './src/img/icons/Picto_Chantiers_03.png',
       value: item.data?.CO2,
-      unit: 'Kg de CO2 économisés'
+      extendValue: this.renderValueUnit(' kg'),
+      unit: 'de CO2 économisés'
     })), Engine.Elmt("div", {
       class: "table right-box"
     }, Engine.Elmt("div", {
@@ -480,11 +487,12 @@ class ChantiersListArticle {
     }, "L'\xE9quivalent de :"), this.renderCell({
       picto: './src/img/icons/Picto_Chantiers_04.png',
       value: item.data?.GARBAGE,
-      unit: "Kilos d'ordures"
+      extendValue: this.renderValueUnit(' kg'),
+      unit: "d'ordures"
     }), this.renderCell({
       picto: './src/img/icons/Picto_Chantiers_02.png',
       value: item.data?.WATER,
-      unit: "Litres d'eau potable"
+      unit: "litres d'eau potable"
     }))));
   }
   renderContent() {

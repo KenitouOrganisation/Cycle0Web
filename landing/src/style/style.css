@@ -622,6 +622,7 @@ footer .footer-links a:hover {
 
 footer .footer-links a, footer .social-links a {
     margin: 0 20px;
+    font-size: 22px;
 }
 
 footer .social-links a {

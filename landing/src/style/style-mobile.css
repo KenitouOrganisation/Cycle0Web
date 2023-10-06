@@ -349,10 +349,11 @@ form#search-chantiers > * {
 .search-content-box .cell {
     flex-direction: column;
     white-space: nowrap;
+    align-items: flex-start;
 }
 
 .search-content-box .table.left-box {
-    padding-right: 10px;
+    padding-right: 26px;
 }
 
 #logo ul.social-links {

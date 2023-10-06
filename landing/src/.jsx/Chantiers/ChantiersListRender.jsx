@@ -28,6 +28,14 @@ class ChantiersListArticle {
         return parseFloat(val).toLocaleString();
     }
 
+    renderValueUnit(unitStr) {
+        return (
+            <span style="font-size: 13px;">
+                {unitStr}
+            </span>
+        )
+    }
+
     /**
      * 
      * @param {Object|JSON} data
@@ -46,7 +54,7 @@ class ChantiersListArticle {
         const value = isMillion
             ? this.formatNumber(
                     parseInt(parseFloat(data.value)/1000000)
-                ) + ' <span style="font-size: 13px;">millions</span>'
+                ) + ' ' + this.renderValueUnit('millions').outerHTML
             : this.formatNumber( data.value );
 
         return (
@@ -89,13 +97,15 @@ class ChantiersListArticle {
                         {this.renderCell({
                             picto: './src/img/icons/Picto_Chantiers_01.png',
                             value: item.data?.WEIGHT,
-                            unit: 'Tonnes de déchets'
+                            extendValue: this.renderValueUnit(' t'),
+                            unit: 'de matériaux traités'
                         })}
 
                         {this.renderCell({
                             picto: './src/img/icons/Picto_Chantiers_03.png',
                             value: item.data?.CO2,
-                            unit: 'Kg de CO2 économisés'
+                            extendValue: this.renderValueUnit(' kg'),
+                            unit: 'de CO2 économisés'
                         })}
                     </div>
                     <div class="table right-box">
@@ -106,13 +116,14 @@ class ChantiersListArticle {
                         {this.renderCell({
                             picto: './src/img/icons/Picto_Chantiers_04.png',
                             value: item.data?.GARBAGE,
-                            unit: "Kilos d'ordures"
+                            extendValue: this.renderValueUnit(' kg'),
+                            unit: "d'ordures"
                         })}
 
                         {this.renderCell({
                             picto: './src/img/icons/Picto_Chantiers_02.png',
                             value: item.data?.WATER,
-                            unit: "Litres d'eau potable"
+                            unit: "litres d'eau potable"
                         })}
 
                     </div>
