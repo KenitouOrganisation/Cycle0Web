@@ -38,3 +38,7 @@ Init.CreateHashtagsBandeau = ()=>{
 Init.CustomAlert = ()=>{
     CustomAlertOnReady ? CustomAlertOnReady() : null;
 }
+
+Init.CarteFranceSVG = ()=>{
+    new CarteFrance();
+}

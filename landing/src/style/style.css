@@ -4,6 +4,7 @@
     --main-font: "Montserrat", Arial, sans-serif;
     --primary-color: #003D3B;
     --secondary-color: #FF4E00;
+    --tertiary-color: #0088E5;
     --color-1: #fff;
 }
 
@@ -44,7 +45,7 @@ body {
     margin: 0;
 }
 
-body *{
+body *:not(svg *){
     font-family: 'Montserrat';
     font-size: 24px;
 }
@@ -447,7 +448,7 @@ footer{
     width: 50%;
 }
 
-#les-chiffres-map-carte img {
+#les-chiffres-map-carte img, #les-chiffres-map-carte svg {
     width: 100%;
 }
 
@@ -457,6 +458,18 @@ footer{
     right: 0;
     width: 40%;
     max-width: 500px;
+}
+
+#les-chiffres-map-carte svg text {
+    pointer-events: none;
+}
+
+#les-chiffres-map-carte svg path {
+    transition: all 300ms ease;
+}
+
+#les-chiffres-map-carte svg path:hover {
+    fill: var(--tertiary-color)!important;
 }
 
 #les-chiffres-map p {
