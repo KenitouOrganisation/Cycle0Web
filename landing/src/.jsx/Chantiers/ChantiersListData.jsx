@@ -45,8 +45,8 @@ const chantiersListData_main = [
         link: "",
         data: {
             WORKSITE_QUANTITY: 1,
-            WEIGHT: '8500',
-            CO2: '6738',
+            WEIGHT: '4.8',
+            CO2: '8500',
             GARBAGE: '6738',
             WATER: '22217568'
         }
