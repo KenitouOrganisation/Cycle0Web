@@ -22,7 +22,8 @@ class FAQListArticle
             </div>
         );
 
-        box.addEventListener("click", ()=>{
+        box.addEventListener("click", (e)=>{
+            if(e.target.classList.contains("answer")) return;
             box.classList.toggle("on");
         });
 

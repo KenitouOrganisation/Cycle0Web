@@ -4,26 +4,20 @@ Engine.VERSION = {
   NUMBER: '1.0.3',
   DATE: '2023-06-25'
 };
-
 Engine.isMobileScreen = () => window.matchMedia("(max-width: 900px)").matches;
-
 Engine.CheckCompatibility = function () {
   const value = !Object.defineProperty || !document.addEventListener;
   if (value === true) console.error(new Error("The browser is not supported (too old or missing Javascript)"));
   return !value;
 };
-
 Engine.Console = class _Console {
   static __dev__ = true;
-
   static Log(...args) {
     if (_Console.__dev__ === true) console.log(...args);
   }
-
   static Error(...args) {
     if (_Console.__dev__ === true) console.error(...args);
   }
-
 };
 Engine.Alert = class _Alert {
   static Show({
@@ -33,15 +27,11 @@ Engine.Alert = class _Alert {
   }) {
     alert(title + "\n\n" + message);
   }
-
   static Error(obj) {
     _Alert.Show(obj);
-
     return false;
   }
-
 };
-
 (function () {
   "use strict";
 
@@ -49,7 +39,6 @@ Engine.Alert = class _Alert {
     title: "Navigateur incompatible",
     message: "Votre navigateur n'est pas supporté par notre site. Veuillez le mettre à jour ou changer de navigateur."
   });
-
   function Define(obj, attrName, attrValue) {
     Object.defineProperty(obj, attrName, {
       configurable: false,
@@ -58,35 +47,28 @@ Engine.Alert = class _Alert {
       value: attrValue
     });
   }
-
   Define(Engine, "Define", Define);
   Define(Engine, "Def", function (attrName, attrValue) {
     return Define(Engine, attrName, attrValue);
   });
 })();
-
 Engine.CSS = {};
 Engine.DOM = {};
 Engine.MATH = {};
 Engine.MATH.WithUnit = {};
-
 Engine.AddJsAttr = function (elmt, jsAttrObj) {
   for (let name in jsAttrObj) {
     elmt[name] = jsAttrObj[name];
   }
 };
-
 Engine.Elmt = function (name, attr, ...children) {
   const elmt = document.createElement(name);
-
   for (let name in attr) {
     if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else elmt.setAttribute(name, attr[name]);
   }
-
   Engine.ElmtLoopChildren(elmt, children);
   return elmt;
 };
-
 Engine.ElmtLoopChildren = function (parent, children) {
   children.forEach(child => {
     if (child instanceof Array) return Engine.ElmtLoopChildren(parent, child);
@@ -94,35 +76,25 @@ Engine.ElmtLoopChildren = function (parent, children) {
     if (typeof child == 'string') parent.innerHTML += child;
   });
 };
-
 Engine.Q = (selector, parent = null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
-
 Engine.QAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
-
 Engine.CSS._root = null;
-
 Engine.CSS.InitRoot = function () {
   if (!Engine.CSS._root) Engine.CSS._root = Engine.Q(":root");
 };
-
 Engine.CSS.SetVar = function (name, value) {
   Engine.CSS.InitRoot();
-
   Engine.CSS._root.style.setProperty(name, value);
 };
-
 Engine.CSS.GetVar = function (name) {
   Engine.CSS.InitRoot();
   return Engine.CSS._root.style.getPropertyValue(name);
 };
-
 Engine.DOM._readyElement = "#ready";
-
 Engine.DOM.OnReady = Engine.OnReady = callback => {
   document.addEventListener("DOMContentLoaded", e => {
     const interval = setInterval(() => {
       const readyElmt = Engine.Q(Engine.DOM._readyElement);
-
       if (readyElmt) {
         clearInterval(interval);
         callback();
@@ -130,11 +102,9 @@ Engine.DOM.OnReady = Engine.OnReady = callback => {
     }, 100);
   });
 };
-
 Engine.DOM.ClassSwitch = (elmt, class1, class2, force1 = null) => {
   if (force1 === null) return elmt.classList.contains(class1) ? (elmt.classList.add(class2), elmt.classList.remove(class1)) : (elmt.classList.add(class1), elmt.classList.remove(class2));
   let temp1, temp2;
-
   if (force1 === true) {
     temp1 = class1;
     temp2 = class2;
@@ -142,28 +112,22 @@ Engine.DOM.ClassSwitch = (elmt, class1, class2, force1 = null) => {
     temp1 = class2;
     temp2 = class1;
   }
-
   elmt.classList.add(temp1);
   elmt.classList.remove(temp2);
 };
-
 Engine.DOM.insertBefore = (newNode, referenceNode) => {
   referenceNode.parentNode.insertBefore(newNode, referenceNode);
 };
-
 Engine.DOM.insertAfter = (newNode, referenceNode) => {
   Engine.DOM.insertBefore(newNode, referenceNode.nextSibling);
 };
-
 Engine.DOM.removeElmt = elmt => {
   elmt.parentNode.removeChild(elmt);
 };
-
 Engine.DOM.getRect = elmt => {
   const clientRect = elmt.getBoundingClientRect();
   return clientRect ? clientRect : {};
 };
-
 Engine.DOM.IsVisible = (elmt, strict = false) => {
   const clientRect = Engine.DOM.getRect(elmt);
   const isAbove = clientRect.top < 0;
@@ -172,11 +136,9 @@ Engine.DOM.IsVisible = (elmt, strict = false) => {
   const isRight = clientRect.x > window.innerWidth;
   return !isAbove && !isUnder && !isLeft && !isRight;
 };
-
 Engine.MATH.WithUnit.SplitValue = valStr => {
   return valStr.split(/([0-9.]+)/);
 };
-
 Engine.MATH.WithUnit.Multiply = (number, valStr) => {
   const val = Engine.MATH.WithUnit.SplitValue(valStr);
   if (!val[1]) val[1] = 1;
@@ -184,7 +146,6 @@ Engine.MATH.WithUnit.Multiply = (number, valStr) => {
   const result = number * val[1];
   return result + val[2];
 };
-
 Engine.MATH.Bounded = ({
   value,
   min,
@@ -194,7 +155,6 @@ Engine.MATH.Bounded = ({
   if (max && value > max) return max;
   return value;
 };
-
 Engine.Ajax = class _Ajax {
   static async Fetch(url, options = {}) {
     try {
@@ -204,7 +164,6 @@ Engine.Ajax = class _Ajax {
       return null;
     }
   }
-
   static async FetchText(url, options = {}) {
     const req = await _Ajax.Fetch(url, options);
     if (req == null) return {};
@@ -213,12 +172,10 @@ Engine.Ajax = class _Ajax {
       text: await req.text()
     };
   }
-
   static async FetchJSON(url, options = {}) {
     const rep = await _Ajax.FetchText(url, options);
     const req = rep.req;
     const repText = rep.text;
-
     try {
       return {
         req: req,
@@ -239,9 +196,7 @@ Engine.Ajax = class _Ajax {
       };
     }
   }
-
 };
-
 Engine.WaitFor = function (ms = 0) {
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -249,7 +204,6 @@ Engine.WaitFor = function (ms = 0) {
     }, ms);
   });
 };
-
 Engine.Observer = {};
 Engine.Observer.Intersection = class {
   constructor(elmts, handleIntersect) {
@@ -262,12 +216,10 @@ Engine.Observer.Intersection = class {
       threshold: this.buildThresholdList()
     };
     this.obs = new IntersectionObserver((entries, observer) => this.handleIntersect(entries, observer), options);
-
     for (let elmt of this.elmts) {
       this.obs.observe(elmt);
     }
   }
-
   handleIntersect(entries, observer) {
     entries.forEach(entry => {
       this.callback({
@@ -278,28 +230,22 @@ Engine.Observer.Intersection = class {
       this.prevRatio = entry.intersectionRatio;
     });
   }
-
   buildThresholdList() {
     let thresholds = [];
     let numSteps = 20;
-
     for (let i = 1.0; i <= numSteps; i++) {
       let ratio = i / numSteps;
       thresholds.push(ratio);
     }
-
     thresholds.push(0);
     return thresholds;
   }
-
   Destroy() {
     for (let elmt of this.elmts) {
       this.obs.unobserve(elmt);
     }
-
     Engine.Console.Log("Destroy observer");
   }
-
 };
 Engine.DebounceCall = class {
   constructor(invokeTime = 500) {
@@ -307,7 +253,6 @@ Engine.DebounceCall = class {
     this.invokeTime = invokeTime;
     this.lastTimeClicked = 0;
   }
-
   Invoke(callback) {
     if (Date.now() - this.lastTimeClicked > this.invokeTime) {
       console.log('------> Invoke accepted');
@@ -315,10 +260,8 @@ Engine.DebounceCall = class {
     } else {
       console.log('------> Invoke rejected');
     }
-
     this.lastTimeClicked = Date.now();
   }
-
   InvokeAsync(callback) {
     return new Promise((req, rej) => {
       this.Invoke(async () => {
@@ -326,7 +269,6 @@ Engine.DebounceCall = class {
       });
     });
   }
-
 };
 Engine.SwipeHandle = class {
   constructor(elmt, onSwipeEnd, onSwipeMove) {
@@ -346,20 +288,17 @@ Engine.SwipeHandle = class {
     elmt.addEventListener('touchend', e => this.SwipeEnd(e));
     elmt.addEventListener('touchmove', e => this.SwipeMove(e));
   }
-
   SwipeStart(e) {
     if (this.isDestroyed) return e.stopImmediatePropagation();
     this.touchstart.x = e.changedTouches[0].screenX;
     this.touchstart.y = e.changedTouches[0].screenY;
   }
-
   SwipeEnd(e) {
     if (this.isDestroyed) return e.stopImmediatePropagation();
     this.touchend.x = e.changedTouches[0].screenX;
     this.touchend.y = e.changedTouches[0].screenX;
     this.onSwipeEnd(this.CheckHorizontalDirection());
   }
-
   SwipeMove(e) {
     if (this.isDestroyed) return e.stopImmediatePropagation();
     this.onSwipeMove({
@@ -367,19 +306,15 @@ Engine.SwipeHandle = class {
       y: e.changedTouches[0].screenY - this.touchstart.y
     });
   }
-
   CheckHorizontalDirection() {
     if (this.touchend.x < this.touchstart.x) return -1;
     if (this.touchend.x > this.touchstart.x) return 1;
   }
-
   CheckVerticalDirection() {
     if (this.touchend.y < this.touchstart.y) alert('swiped down!');
     if (this.touchend.y > this.touchstart.y) alert('swiped up!');
   }
-
   Destroy() {}
-
 };
 const FAQListData = [{
   question: "Comment réserver des matériaux ?",
@@ -422,7 +357,6 @@ class FAQListArticle {
     this.data = data;
     this.container = container;
   }
-
   renderItem(item) {
     item.answer = item.answer.replace(/\n/g, "<br>");
     const box = Engine.Elmt("div", {
@@ -434,19 +368,18 @@ class FAQListArticle {
     })), Engine.Elmt("p", {
       class: "answer"
     }, item.answer));
-    box.addEventListener("click", () => {
+    box.addEventListener("click", e => {
+      if (e.target.classList.contains("answer")) return;
       box.classList.toggle("on");
     });
     return box;
   }
-
   renderList() {
     const ctn = Engine.Elmt("div", {
       class: "article-list"
     }, this.data.map(this.renderItem));
     this.container.appendChild(ctn);
   }
-
 }
 Engine.OnReady(() => {
   document.querySelector("#faq-main").innerHTML = "<div class='content'></div>";
