@@ -5,7 +5,7 @@ const chantiersListData_main = [
         logo: "./src/img/illustrations/chantiers/rivp.png",
         link: "",
         data: {
-            WORKSITE_QUANTITY: 3,
+            WORKSITE_QUANTITY: 4,
             WEIGHT: '23.3',
             CO2: '48266',
             GARBAGE: '74748',
@@ -25,19 +25,19 @@ const chantiersListData_main = [
             WATER: '24700708'
         }
     },
-    {
-        title: "DEMCY",
-        datetime: "",
-        logo: "./src/img/illustrations/chantiers/demcy.jpg",
-        link: "",
-        data: {
-            WORKSITE_QUANTITY: 1,
-            WEIGHT: '10',
-            CO2: '20184',
-            GARBAGE: '16000',
-            WATER: '52757576'
-        }
-    },
+    // {
+    //     title: "DEMCY",
+    //     datetime: "",
+    //     logo: "./src/img/illustrations/chantiers/demcy.jpg",
+    //     link: "",
+    //     data: {
+    //         WORKSITE_QUANTITY: 1,
+    //         WEIGHT: '10',
+    //         CO2: '20184',
+    //         GARBAGE: '16000',
+    //         WATER: '52757576'
+    //     }
+    // },
     {
         title: "NOBRA MENUISERIE",
         datetime: "",
