@@ -1,6 +1,6 @@
 const Engine = {};
 Engine.JSEnable = true;
-Engine.VERSION = { NUMBER : '1.0.3', DATE : '2023-06-25' };
+Engine.VERSION = { NUMBER : '1.0.4', DATE : '2024-02-17' };
 Engine.isMobileScreen = ()=>window.matchMedia("(max-width: 900px)").matches;
 
 Engine.CheckCompatibility = function () {
@@ -96,6 +96,7 @@ Engine.Elmt = function (name, attr, ...children) {
     const elmt = document.createElement(name);
     for (let name in attr) {
         if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);
+        else if (name == "style" && typeof attr[name] == "object" ) elmt.setAttribute(name, Engine.toInlineStyle(attr[name]));
         else elmt.setAttribute(name, attr[name]);
     }
 
@@ -111,6 +112,14 @@ Engine.ElmtLoopChildren = function (parent, children) {
         if (typeof child == 'string') parent.innerHTML += child;
     });
 }
+Engine.toInlineStyle = function (styleObj) {
+    let style = "";
+    for (let name in styleObj) {
+        const formattedName = name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+        style += formattedName + ":" + styleObj[name] + ";";
+    }
+    return style;
+};
 
 Engine.Q = (selector, parent=null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
 Engine.QAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);

@@ -31,8 +31,12 @@ Init.GalleryContainerShowOnScroll = ()=>{
 
 };*/
 
+Init.CreateHeaderBandeau = ()=>{
+    new HeaderBandeau().render();
+}
+
 Init.CreateHashtagsBandeau = ()=>{
-    new Bandeau().Render();
+    new Bandeau().render();
 }
 
 Init.CustomAlert = ()=>{

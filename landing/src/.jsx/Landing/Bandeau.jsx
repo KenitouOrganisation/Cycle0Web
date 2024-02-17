@@ -19,7 +19,7 @@ class Bandeau{
         ];
     }
 
-    Render(){
+    render(){
 
         const container = (
             <div class="anim"></div>

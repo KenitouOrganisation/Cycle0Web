@@ -523,6 +523,7 @@ footer{
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .bandeau-box {
@@ -530,14 +531,14 @@ footer{
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    margin: 70px 0;
+    /* margin: 70px 0; */
     transform: translateX(0);
     transition: transform 2.1s linear;
 }
 
 .bandeau-box .anim{
     transform: translateX(0%);
-    animation: scrollTxt 25s linear infinite;
+    animation: scrollTxt 40s linear infinite;
 }
 
 /*.bandeau-box:hover .anim{

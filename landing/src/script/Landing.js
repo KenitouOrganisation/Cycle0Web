@@ -1,8 +1,8 @@
 const Engine = {};
 Engine.JSEnable = true;
 Engine.VERSION = {
-  NUMBER: '1.0.3',
-  DATE: '2023-06-25'
+  NUMBER: '1.0.4',
+  DATE: '2024-02-17'
 };
 Engine.isMobileScreen = () => window.matchMedia("(max-width: 900px)").matches;
 Engine.CheckCompatibility = function () {
@@ -64,7 +64,7 @@ Engine.AddJsAttr = function (elmt, jsAttrObj) {
 Engine.Elmt = function (name, attr, ...children) {
   const elmt = document.createElement(name);
   for (let name in attr) {
-    if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else elmt.setAttribute(name, attr[name]);
+    if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else if (name == "style" && typeof attr[name] == "object") elmt.setAttribute(name, Engine.toInlineStyle(attr[name]));else elmt.setAttribute(name, attr[name]);
   }
   Engine.ElmtLoopChildren(elmt, children);
   return elmt;
@@ -75,6 +75,14 @@ Engine.ElmtLoopChildren = function (parent, children) {
     if (child instanceof Node) parent.appendChild(child);
     if (typeof child == 'string') parent.innerHTML += child;
   });
+};
+Engine.toInlineStyle = function (styleObj) {
+  let style = "";
+  for (let name in styleObj) {
+    const formattedName = name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+    style += formattedName + ":" + styleObj[name] + ";";
+  }
+  return style;
 };
 Engine.Q = (selector, parent = null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
 Engine.QAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
@@ -321,7 +329,7 @@ class Bandeau {
     this.elmt = Engine.Q('#bandeau-hashtags');
     this.keywords = ["synergie", "urbanisme bas carbone", "frugalité", "sobriété", "Économie circulaire", "Écologie", "Valorisation", "Sobriété Réemploi", "Construction", "BTP", "Antigaspi", "Innovation ESS", "Chantier", "Zéro déchet"];
   }
-  Render() {
+  render() {
     const container = Engine.Elmt("div", {
       class: "anim"
     });
@@ -467,6 +475,50 @@ class GalleryBox_Switcher {
     this.currentSlide = slideNumber;
   }
 }
+class HeaderBandeau {
+  constructor() {
+    this.bandeauHeight = 30;
+    this.header = Engine.Q('header');
+    this.nav = Engine.Q('nav', this.header);
+    this.containerStyle = {
+      height: this.bandeauHeight + 'px',
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      marginTop: 0,
+      width: '100%',
+      zIndex: 10001,
+      backgroundColor: '#fff',
+      fontSize: '1.2em'
+    };
+  }
+  modifyHeader() {
+    this.header.style.top = this.bandeauHeight + 'px';
+  }
+  render() {
+    const container = Engine.Elmt("div", {
+      class: "bandeau-box",
+      style: this.containerStyle
+    });
+    const content = Engine.Elmt("div", {
+      class: "anim",
+      style: {
+        animationDelay: '3.5s'
+      }
+    }, Engine.Elmt("div", {
+      class: "bandeau-elmt",
+      style: {
+        fontSize: '0.7em',
+        paddingRight: '200px',
+        color: 'var(--primary-color)'
+      }
+    }, "Chers amis Cycleurs, si par malheur vous seriez amen\xE9 \xE0 ne pas trouver votre bonheur sur notre application, sachez que nous nous en excusons. Nous sommes fr\xE9quemment victimes de notre succ\xE8s et pas encore disponibles dans toutes les r\xE9gions (pour l'instant \xEEle-de-France, Haut de France et PACA), mais faisons tout notre possible afin de vous permettre de trouver (gratuitement) chaussure \xE0 votre pied."));
+    this.modifyHeader();
+    container.appendChild(content);
+    container.appendChild(content.cloneNode(true));
+    Engine.DOM.insertBefore(container, this.header);
+  }
+}
 const Init = {};
 Init.GalleryContainerShowOnScroll = () => {
   let mobile = Engine.isMobileScreen();
@@ -480,8 +532,11 @@ Init.GalleryContainerShowOnScroll = () => {
     }
   });
 };
+Init.CreateHeaderBandeau = () => {
+  new HeaderBandeau().render();
+};
 Init.CreateHashtagsBandeau = () => {
-  new Bandeau().Render();
+  new Bandeau().render();
 };
 Init.CustomAlert = () => {
   CustomAlertOnReady ? CustomAlertOnReady() : null;
