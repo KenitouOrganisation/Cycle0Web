@@ -1,6 +1,6 @@
 const Engine = {};
 Engine.JSEnable = true;
-Engine.VERSION = { NUMBER : '1.0.4', DATE : '2024-02-17' };
+Engine.VERSION = { NUMBER : '1.0.5', DATE : '2024-02-18' };
 Engine.isMobileScreen = ()=>window.matchMedia("(max-width: 900px)").matches;
 
 Engine.CheckCompatibility = function () {
@@ -134,7 +134,7 @@ Engine.CSS.SetVar = function (name, value) {
 };
 Engine.CSS.GetVar = function (name) {
     Engine.CSS.InitRoot();
-    return Engine.CSS._root.style.getPropertyValue(name);
+    return window.getComputedStyle(Engine.CSS._root).getPropertyValue(name);
 };
 
 Engine.DOM._readyElement = "#ready";
@@ -201,6 +201,22 @@ Engine.DOM.IsVisible = (elmt, strict = false) => {
 
 Engine.MATH.WithUnit.SplitValue = (valStr) => {
     return valStr.split(/([0-9.]+)/); // return ["", "number", "unit"]
+};
+
+Engine.MATH.WithUnit.Add = (valStr1, valStr2) => {
+    const val1 = Engine.MATH.WithUnit.SplitValue(valStr1);
+    const val2 = Engine.MATH.WithUnit.SplitValue(valStr2);
+
+    // preventing undefined or null value, that cause NaN
+    if (!val1[1]) val1[1] = 1;
+    if (!val2[1]) val2[1] = 1;
+
+    if (!val1[2]) val1[2] = "";
+    if (!val2[2]) val2[2] = "";
+
+    const result = parseFloat(val1[1]) + parseFloat(val2[1]);
+    const unit = val1[2] || val2[2];
+    return result + unit;
 };
 
 Engine.MATH.WithUnit.Multiply = (number, valStr) => {

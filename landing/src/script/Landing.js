@@ -1,8 +1,8 @@
 const Engine = {};
 Engine.JSEnable = true;
 Engine.VERSION = {
-  NUMBER: '1.0.4',
-  DATE: '2024-02-17'
+  NUMBER: '1.0.5',
+  DATE: '2024-02-18'
 };
 Engine.isMobileScreen = () => window.matchMedia("(max-width: 900px)").matches;
 Engine.CheckCompatibility = function () {
@@ -96,7 +96,7 @@ Engine.CSS.SetVar = function (name, value) {
 };
 Engine.CSS.GetVar = function (name) {
   Engine.CSS.InitRoot();
-  return Engine.CSS._root.style.getPropertyValue(name);
+  return window.getComputedStyle(Engine.CSS._root).getPropertyValue(name);
 };
 Engine.DOM._readyElement = "#ready";
 Engine.DOM.OnReady = Engine.OnReady = callback => {
@@ -146,6 +146,17 @@ Engine.DOM.IsVisible = (elmt, strict = false) => {
 };
 Engine.MATH.WithUnit.SplitValue = valStr => {
   return valStr.split(/([0-9.]+)/);
+};
+Engine.MATH.WithUnit.Add = (valStr1, valStr2) => {
+  const val1 = Engine.MATH.WithUnit.SplitValue(valStr1);
+  const val2 = Engine.MATH.WithUnit.SplitValue(valStr2);
+  if (!val1[1]) val1[1] = 1;
+  if (!val2[1]) val2[1] = 1;
+  if (!val1[2]) val1[2] = "";
+  if (!val2[2]) val2[2] = "";
+  const result = parseFloat(val1[1]) + parseFloat(val2[1]);
+  const unit = val1[2] || val2[2];
+  return result + unit;
 };
 Engine.MATH.WithUnit.Multiply = (number, valStr) => {
   const val = Engine.MATH.WithUnit.SplitValue(valStr);
@@ -477,9 +488,11 @@ class GalleryBox_Switcher {
 }
 class HeaderBandeau {
   constructor() {
+    this.enable = true;
     this.bandeauHeight = 30;
     this.header = Engine.Q('header');
     this.nav = Engine.Q('nav', this.header);
+    this.headerMenu = Engine.Q('#header-menu', this.nav);
     this.containerStyle = {
       height: this.bandeauHeight + 'px',
       position: 'fixed',
@@ -489,13 +502,22 @@ class HeaderBandeau {
       width: '100%',
       zIndex: 10001,
       backgroundColor: '#fff',
-      fontSize: '1.2em'
+      fontSize: '1.2em',
+      padding: '1px 0'
     };
+    window.addEventListener('resize', () => {
+      this.modifyHeader();
+    });
   }
   modifyHeader() {
+    if (!this.enable) return;
     this.header.style.top = this.bandeauHeight + 'px';
+    const currentHeaderHeight = Engine.CSS.GetVar('--header-height');
+    const newHeaderHeight = Engine.MATH.WithUnit.Add(this.bandeauHeight.toString(), currentHeaderHeight);
+    if (Engine.isMobileScreen()) this.headerMenu.style.top = newHeaderHeight;else this.headerMenu.style.top = '';
   }
   render() {
+    if (!this.enable) return;
     const container = Engine.Elmt("div", {
       class: "bandeau-box",
       style: this.containerStyle

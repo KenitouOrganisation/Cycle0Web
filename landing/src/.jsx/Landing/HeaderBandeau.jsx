@@ -1,8 +1,10 @@
 class HeaderBandeau{
     constructor(){
+        this.enable = true;
         this.bandeauHeight = 30;
         this.header = Engine.Q('header');
         this.nav = Engine.Q('nav', this.header);
+        this.headerMenu = Engine.Q('#header-menu', this.nav);
 
         this.containerStyle = {
             height: this.bandeauHeight + 'px',
@@ -14,15 +16,32 @@ class HeaderBandeau{
             zIndex: 10001,
             backgroundColor: '#fff',
             fontSize: '1.2em',
+            padding: '1px 0',
         }
+
+        window.addEventListener('resize', ()=>{
+            this.modifyHeader();
+        });
         
     }
 
     modifyHeader(){
-        this.header.style.top = this.bandeauHeight + 'px'; 
+        if(!this.enable) return;
+
+        this.header.style.top = (this.bandeauHeight) + 'px';
+
+        // changing a property inside ::root element
+        const currentHeaderHeight = Engine.CSS.GetVar('--header-height');
+        const newHeaderHeight = Engine.MATH.WithUnit.Add(this.bandeauHeight.toString(), currentHeaderHeight);
+
+        if(Engine.isMobileScreen())
+            this.headerMenu.style.top = newHeaderHeight;
+        else
+            this.headerMenu.style.top = '';
     }
 
     render(){
+        if(!this.enable) return;
 
         const container = (
             <div class="bandeau-box" style={this.containerStyle}></div>

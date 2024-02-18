@@ -11,6 +11,10 @@ section{
     margin: 70px var(--page-side-margin);
 }
 
+header{
+    min-width: unset;
+}
+
 .h1-label{
     font-size: 30px;
 }
