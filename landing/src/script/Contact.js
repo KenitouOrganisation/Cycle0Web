@@ -1,8 +1,8 @@
 const Engine = {};
 Engine.JSEnable = true;
 Engine.VERSION = {
-  NUMBER: '1.0.3',
-  DATE: '2023-06-25'
+  NUMBER: '1.0.5',
+  DATE: '2024-02-18'
 };
 Engine.isMobileScreen = () => window.matchMedia("(max-width: 900px)").matches;
 Engine.CheckCompatibility = function () {
@@ -64,7 +64,7 @@ Engine.AddJsAttr = function (elmt, jsAttrObj) {
 Engine.Elmt = function (name, attr, ...children) {
   const elmt = document.createElement(name);
   for (let name in attr) {
-    if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else elmt.setAttribute(name, attr[name]);
+    if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else if (name == "style" && typeof attr[name] == "object") elmt.setAttribute(name, Engine.toInlineStyle(attr[name]));else elmt.setAttribute(name, attr[name]);
   }
   Engine.ElmtLoopChildren(elmt, children);
   return elmt;
@@ -75,6 +75,14 @@ Engine.ElmtLoopChildren = function (parent, children) {
     if (child instanceof Node) parent.appendChild(child);
     if (typeof child == 'string') parent.innerHTML += child;
   });
+};
+Engine.toInlineStyle = function (styleObj) {
+  let style = "";
+  for (let name in styleObj) {
+    const formattedName = name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+    style += formattedName + ":" + styleObj[name] + ";";
+  }
+  return style;
 };
 Engine.Q = (selector, parent = null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
 Engine.QAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
@@ -88,7 +96,7 @@ Engine.CSS.SetVar = function (name, value) {
 };
 Engine.CSS.GetVar = function (name) {
   Engine.CSS.InitRoot();
-  return Engine.CSS._root.style.getPropertyValue(name);
+  return window.getComputedStyle(Engine.CSS._root).getPropertyValue(name);
 };
 Engine.DOM._readyElement = "#ready";
 Engine.DOM.OnReady = Engine.OnReady = callback => {
@@ -138,6 +146,17 @@ Engine.DOM.IsVisible = (elmt, strict = false) => {
 };
 Engine.MATH.WithUnit.SplitValue = valStr => {
   return valStr.split(/([0-9.]+)/);
+};
+Engine.MATH.WithUnit.Add = (valStr1, valStr2) => {
+  const val1 = Engine.MATH.WithUnit.SplitValue(valStr1);
+  const val2 = Engine.MATH.WithUnit.SplitValue(valStr2);
+  if (!val1[1]) val1[1] = 1;
+  if (!val2[1]) val2[1] = 1;
+  if (!val1[2]) val1[2] = "";
+  if (!val2[2]) val2[2] = "";
+  const result = parseFloat(val1[1]) + parseFloat(val2[1]);
+  const unit = val1[2] || val2[2];
+  return result + unit;
 };
 Engine.MATH.WithUnit.Multiply = (number, valStr) => {
   const val = Engine.MATH.WithUnit.SplitValue(valStr);

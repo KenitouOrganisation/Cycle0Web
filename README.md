@@ -54,6 +54,7 @@ scp core-0.0.1-SNAPSHOT.jar root@185.246.84.106:/home/apps/cycle0-core
 
 Connecting to the remote
 ssh root@178.170.37.30
+ssh root@185.246.84.106
 
 3. Rename it on remote folder:
 cd /home/apps/cycle0-core && mv cyclezero.jar cyclezero-previous.jar && mv core-0.0.1-SNAPSHOT.jar cyclezero.jar

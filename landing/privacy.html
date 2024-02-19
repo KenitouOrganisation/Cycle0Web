@@ -1,10 +1,191 @@
+<!--
+
+    Copyright 2022-2024 / Cycle Zéro
+    Toutes copies même partielles de n'importe qu'elle partie du code du site Cycle Zéro sont strictement interdites.
+
+-->
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Conditions Générales d'Utilisation - Cycle Zéro</title>
-        <meta charset="utf-8">
-        <meta http-equiv="refresh" content="0; url=./cgu.html">
-    </head>
-    <body>
-    </body>
+<html lang="fr-FR">
+	<head>
+		
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            type="text/plain"
+            data-cookiecategory="analytics"
+            src="https://www.googletagmanager.com/gtag/js?id=G-XCNT4D3NPY"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XCNT4D3NPY');
+        </script>
+        
+        <meta charset="utf-8" />
+        <base href=".">
+        <link rel="stylesheet" href="./src/style/style.css?v=1708374872421" />
+        <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1708374872421" media="screen and (max-width : 900px)" />
+        <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
+        <link rel="icon" type="image/png" href="/src/img/icon.png?v=1708374872421" />
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
+        <!-- For iOS Safari phone browser detection -->
+        <meta name="format-detection" content="telephone=no">
+        <!--
+            Meta SEO
+        -->
+            <!-- HTML Meta Tags -->
+
+        <title>Politique de confidentialité - Cycle Zéro</title>
+        <meta name="description" content="Cycle Zéro, l’application qui permet de récupérer gratuitement des matériaux sur les chantiers de proximité. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
+
+        <!-- Facebook Meta Tags -->
+        <meta property="og:url" content="https://cyclezero.fr/">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Politique de confidentialité - Cycle Zéro">
+        <meta property="og:description" content="Cycle Zéro, l’application qui permet de récupérer gratuitement des matériaux sur les chantiers de proximité. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
+        <meta property="og:image" content="https://cyclezero.fr/src/img/og_img.jpg">
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="cyclezero.fr">
+        <meta property="twitter:url" content="https://cyclezero.fr/">
+        <meta name="twitter:title" content="Politique de confidentialité - Cycle Zéro">
+        <meta name="twitter:description" content="Cycle Zéro, l’application qui permet de récupérer gratuitement des matériaux sur les chantiers de proximité. Une solution pour réduire vos dépenses et votre impact environnemental. Préinscrivez-vous dès maintenant !">
+        <meta name="twitter:image" content="https://cyclezero.fr/src/img/og_img.jpg">
+
+        <!--
+            Google Fonts
+        -->
+        <!--<link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap"
+            rel="stylesheet"
+        />-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.css">
+        <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.js"></script>
+        <script defer src="./src/script/gCookieConsent.js"></script>
+		<link rel="stylesheet" href="./src/style/iframe-docs.css" />
+	</head>
+	<body class="js-on">
+		        
+        <header>
+            <nav>
+                <div id="logo" class="frame">
+                    <a href="" class="image">
+                        <span class="helper"></span>
+                        <img
+                            src="./src/img/logo.png"
+                            alt="Cycle Zéro - Accueil"
+                        />
+                    </a>
+                    <ul class="social-links">
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/Cycle-Z%C3%A9ro-107479335338932/">
+                                <img src="./src/img/icons/social-fbook.png" alt="Page Facebook">
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.linkedin.com/company/cycle-zero/">
+                                <img src="./src/img/icons/social-lkdin.png" alt="Page LinkedIn">
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.instagram.com/cyclezero.app/">
+                                <img src="./src/img/icons/social-insta.png" alt="Compte Instagram">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="header-buttons">
+                    <p class="mob-only indicator">Menu</p>
+                </div>
+                <div id="header-menu">
+                    <ul class="menu">
+                        <li><a href="./chantiers.html">Chantiers</a></li>
+                        <li><a href="./presse.html">Presse</a></li>
+                        <li><a href="./contacts.html">Contact</a></li>
+                        <li><a href="/faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <script>
+            (function(){
+                const header = Engine.Q('#header-buttons');
+                const menu = Engine.Q('#header-menu');
+                const hoverClass = 'hover';
+
+                function onClick(e){
+                    menu.classList.contains(hoverClass)
+                        ? menu.classList.remove(hoverClass)
+                        : menu.classList.add(hoverClass);
+                }
+
+                header.addEventListener('click', onClick);
+                menu.addEventListener('click', onClick);
+            })();
+        </script>
+
+		<div class="wrap-content">
+			<iframe
+				src="./src/page/privacy_plain.htm?v=1708374872421"
+				class="frame_container"
+			></iframe>
+
+			        
+        <footer>
+            <div class="box left-box">
+                <img
+                    class="logo"
+                    width="160"
+                    src="./src/img/logo.png"
+                    alt="Cycle Zéro"
+                />
+                <div class="intro-store-links">
+                    <a class="social_link" target="_blank" href="https://apps.apple.com/fr/app/cycle-z%C3%A9ro/id1619382404?itsct=apps_box_badge&amp;itscg=30200">
+                        <img src="./src/img/stores/app-store-black.svg" alt="Télécharger dans l'App Store">  
+                    </a>
+                    <a class="social_link" target="_blank" href="https://play.google.com/store/apps/details?id=com.cycle0.cycle0app">
+                        <img alt="Disponible sur Google Play" src="./src/img/stores/google-play-badge.png">
+                    </a>
+                    <p style="font-size: 12px; margin: 0; text-align: center;">©2022-2024 Cycle Zéro - Tous droits réservés</p>
+                </div>
+            </div>
+            <div class="box right-box">
+                <ul class="footer-links">
+                    <li><a href="./cgu.html">Conditions générales</a></li>
+                    <li><a href="./privacy.html">Confidentialité</a></li>
+                    <li><a href="./legals.html">Mentions légales</a></li>
+
+                    <li><a href="./chantiers.html">Chantiers</a></li>
+                    <li><a href="./presse.html">Presse</a></li>
+                    <li><a href="./contacts.html">Contact</a></li>
+                    <li><a href="./faq.html">FAQ</a></li>
+                </ul>
+                <ul class="social-links">
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Cycle-Z%C3%A9ro-107479335338932/">
+                            <img src="./src/img/icons/social-fbook.png" alt="Page Facebook">
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/company/cycle-zero/">
+                            <img src="./src/img/icons/social-lkdin.png" alt="Page LinkedIn">
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://www.instagram.com/cyclezero.app/">
+                            <img src="./src/img/icons/social-insta.png" alt="Compte Instagram">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+        <div id="ready"></div>
+		</div>
+	</body>
 </html>

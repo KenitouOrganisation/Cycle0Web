@@ -18,28 +18,33 @@ async function GenerateStaticHTML(){
     ).WatchCompile();
 
     new FileManager(
-        "presse.html",
-        "Presse - Cycle Zéro"
-    ).WatchCompile();
-
-    new FileManager(
         "cgu.html",
         "Conditions Générales d'Utilisation - Cycle Zéro"
     ).WatchCompile();
 
     new FileManager(
         "privacy.html",
-        "Conditions Générales d'Utilisation - Cycle Zéro"
+        "Politique de confidentialité - Cycle Zéro"
     ).WatchCompile();
 
     new FileManager(
-        "faq.html",
-        "FAQ - Cycle Zéro"
+        "legals.html",
+        "Mentions légales - Cycle Zéro"
     ).WatchCompile();
 
     new FileManager(
         "chantiers.html",
         "Chantiers - Cycle Zéro"
+    ).WatchCompile();
+    
+    new FileManager(
+        "presse.html",
+        "Presse - Cycle Zéro"
+    ).WatchCompile();
+
+    new FileManager(
+        "faq.html",
+        "FAQ - Cycle Zéro"
     ).WatchCompile();
     
 }

@@ -1,10 +1,11 @@
 class HeaderBandeau{
     constructor(){
-        this.enable = true;
+        this.enable = false;
         this.bandeauHeight = 30;
         this.header = Engine.Q('header');
         this.nav = Engine.Q('nav', this.header);
         this.headerMenu = Engine.Q('#header-menu', this.nav);
+        this.wrapContent = Engine.Q('.wrap-content');
 
         this.containerStyle = {
             height: this.bandeauHeight + 'px',
@@ -22,6 +23,14 @@ class HeaderBandeau{
         window.addEventListener('resize', ()=>{
             this.modifyHeader();
         });
+
+        // the message will be displayed after the 19th of February 2024 at 3:00
+        const currentDate = new Date();
+        const targetDate = new Date('2024-02-19 03:00:00');
+        const maxDate = new Date('2024-03-04 03:00:00');
+        if(currentDate => targetDate && currentDate <= maxDate){
+            this.enable = true;
+        }
         
     }
 
@@ -34,10 +43,15 @@ class HeaderBandeau{
         const currentHeaderHeight = Engine.CSS.GetVar('--header-height');
         const newHeaderHeight = Engine.MATH.WithUnit.Add(this.bandeauHeight.toString(), currentHeaderHeight);
 
-        if(Engine.isMobileScreen())
+        if(Engine.isMobileScreen()){
             this.headerMenu.style.top = newHeaderHeight;
-        else
+            this.wrapContent.style.marginTop = Engine.MATH.WithUnit.Add(newHeaderHeight, '15');
+        }
+        else{
             this.headerMenu.style.top = '';
+            this.wrapContent.style.marginTop = '';
+        }
+            
     }
 
     render(){
@@ -56,7 +70,7 @@ class HeaderBandeau{
                     paddingRight: '200px',
                     color: 'var(--primary-color)'
                 }}>
-                    Chers amis Cycleurs, si par malheur vous seriez amené à ne pas trouver votre bonheur sur notre application, sachez que nous nous en excusons. Nous sommes fréquemment victimes de notre succès et pas encore disponibles dans toutes les régions (pour l'instant île-de-France, Haut de France et PACA), mais faisons tout notre possible afin de vous permettre de trouver (gratuitement) chaussure à votre pied.
+                    Chers amis Cycleurs, si par malheur vous étiez amenés à ne pas trouver votre bonheur sur notre application, sachez que nous nous en excusons. Nous sommes fréquemment victimes de notre succès et pas encore disponibles dans toutes les régions (pour l'instant Île-de-France, Haut-de-France et PACA), mais faisons tout notre possible afin de vous permettre de trouver (gratuitement) chaussure à votre pied.
                 </div>
             </div>
         );

@@ -1,28 +1,20 @@
 <<{__copyrights.html}>>
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <head>
-        <<{__head.html}>>
-    </head>
-    <body class="js-on">
-        <style>
-            .frame_container {
-                display: block;
-                width: 100vw;
-                height: 100vh;
-                margin-top: var(--header-height);
-                border: none;
-                box-sizing: border-box;
-                max-width: 100%;
-            }
-        </style>
-        <<{__header.html}>>
-        <iframe
-            src="./src/page/cgu_plain.htm?v=$filetimestamp$"
-            class="frame_container"
-        ></iframe>
+	<head>
+		<<{__head.html}>>
+		<link rel="stylesheet" href="./src/style/iframe-docs.css" />
+	</head>
+	<body class="js-on">
+		<<{__header.html}>>
 
-        <<{__footer.html}>>
+		<div class="wrap-content">
+			<iframe
+				src="./src/page/cgu_plain.htm?v=$filetimestamp$"
+				class="frame_container"
+			></iframe>
 
-    </body>
+			<<{__footer.html}>>
+		</div>
+	</body>
 </html>

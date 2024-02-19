@@ -488,11 +488,12 @@ class GalleryBox_Switcher {
 }
 class HeaderBandeau {
   constructor() {
-    this.enable = true;
+    this.enable = false;
     this.bandeauHeight = 30;
     this.header = Engine.Q('header');
     this.nav = Engine.Q('nav', this.header);
     this.headerMenu = Engine.Q('#header-menu', this.nav);
+    this.wrapContent = Engine.Q('.wrap-content');
     this.containerStyle = {
       height: this.bandeauHeight + 'px',
       position: 'fixed',
@@ -508,13 +509,25 @@ class HeaderBandeau {
     window.addEventListener('resize', () => {
       this.modifyHeader();
     });
+    const currentDate = new Date();
+    const targetDate = new Date('2024-02-19 03:00:00');
+    const maxDate = new Date('2024-03-04 03:00:00');
+    if (currentDate => targetDate && currentDate <= maxDate) {
+      this.enable = true;
+    }
   }
   modifyHeader() {
     if (!this.enable) return;
     this.header.style.top = this.bandeauHeight + 'px';
     const currentHeaderHeight = Engine.CSS.GetVar('--header-height');
     const newHeaderHeight = Engine.MATH.WithUnit.Add(this.bandeauHeight.toString(), currentHeaderHeight);
-    if (Engine.isMobileScreen()) this.headerMenu.style.top = newHeaderHeight;else this.headerMenu.style.top = '';
+    if (Engine.isMobileScreen()) {
+      this.headerMenu.style.top = newHeaderHeight;
+      this.wrapContent.style.marginTop = Engine.MATH.WithUnit.Add(newHeaderHeight, '15');
+    } else {
+      this.headerMenu.style.top = '';
+      this.wrapContent.style.marginTop = '';
+    }
   }
   render() {
     if (!this.enable) return;
@@ -534,7 +547,7 @@ class HeaderBandeau {
         paddingRight: '200px',
         color: 'var(--primary-color)'
       }
-    }, "Chers amis Cycleurs, si par malheur vous seriez amen\xE9 \xE0 ne pas trouver votre bonheur sur notre application, sachez que nous nous en excusons. Nous sommes fr\xE9quemment victimes de notre succ\xE8s et pas encore disponibles dans toutes les r\xE9gions (pour l'instant \xEEle-de-France, Haut de France et PACA), mais faisons tout notre possible afin de vous permettre de trouver (gratuitement) chaussure \xE0 votre pied."));
+    }, "Chers amis Cycleurs, si par malheur vous \xE9tiez amen\xE9s \xE0 ne pas trouver votre bonheur sur notre application, sachez que nous nous en excusons. Nous sommes fr\xE9quemment victimes de notre succ\xE8s et pas encore disponibles dans toutes les r\xE9gions (pour l'instant \xCEle-de-France, Haut-de-France et PACA), mais faisons tout notre possible afin de vous permettre de trouver (gratuitement) chaussure \xE0 votre pied."));
     this.modifyHeader();
     container.appendChild(content);
     container.appendChild(content.cloneNode(true));
