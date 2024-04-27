@@ -119,7 +119,7 @@ cc.run({
                     {
                         title: "Plus d'informations",
                         description:
-                            'Pour plus d\'informations, vous pouvez lire notre <a class="cc-link" href="./cgu.html">politique de confidentialité</a>.',
+                            'Pour plus d\'informations, vous pouvez lire notre <a class="cc-link" href="./privacy.html">politique de confidentialité</a>.',
                     },
                 ],
             },
