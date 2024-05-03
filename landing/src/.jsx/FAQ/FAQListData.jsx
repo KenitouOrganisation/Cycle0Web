@@ -1,7 +1,7 @@
 const FAQListData = [
 	{
 		question: "Comment réserver des matériaux ?",
-		answer: `Pour réserver des matériaux gratuits dans l’application, il vous suffit de vous rendre dans le menu « recherche », « à proximité » ou encore par catégorie. À partir de là, vous pourrez pré réserver les matériaux de votre choix en cliquant sur reverser.
+		answer: `Pour réserver des matériaux gratuits dans l’application, il vous suffit de vous rendre dans le menu « recherche », « à proximité » ou encore par catégorie. À partir de là, vous pourrez pré réserver les matériaux de votre choix en cliquant sur réserver.
 
 Pour connaître les nouveaux arrivages, il est pour l’instant nécessaire de consulter régulièrement l’application. A terme, un système de notification et d’alerte sera actionnable afin que vous soyez alerté de l’arrivée de nouveautés à proximité de chez vous.
 `,
