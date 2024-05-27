@@ -228,20 +228,20 @@ header{
     font-size: 20px;
 }
 
-#landing-foot .picto-container{
+.highlight-section .picto-container{
     display: none;
     visibility: hidden;
 }
 
-#landing-foot .txt-container{
+.highlight-section .txt-container{
     width: 100%;
 }
 
-#landing-foot .txt-container{
+.highlight-section .txt-container, .highlight-section .h1{
     line-height: 25px;
 }
 
-#landing-foot p{
+.highlight-section p{
     margin-bottom: 40px;
 }
 

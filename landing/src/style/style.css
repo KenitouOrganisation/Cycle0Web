@@ -555,32 +555,71 @@ footer{
     }
 }
 
-#landing-foot {
+.highlight-section {
     background: rgba(0, 58, 58, 0.2);
     border: 1px solid transparent;
 }
 
-#landing-foot section {
+.highlight-section section {
     margin: 80px var(--page-side-margin);
 }
 
-#landing-foot p {
+.highlight-section p {
     margin-top: 60px;
     margin-bottom: 80px;
 }
 
-#landing-foot .txt-container{
+.highlight-section .h1{
+    line-height: 50px;
+}
+
+.highlight-section .txt-container{
     width: 62%;
     margin: auto;
     line-height: 35px;
     max-width: 800px;
 }
 
-#landing-foot .anim-picto{
+.highlight-section .anim-picto{
     position: absolute;
     background-repeat: no-repeat;
     background-size: contain;
     aspect-ratio: 1 / 1;
+}
+
+#landing-alerte .illustration {
+    top: 0;
+    left: -140px;
+}
+
+#landing-alerte .illustration img{
+    height: 450px;
+}
+
+
+#landing-alerte .picto1{
+    background-image: url("../img/icons/Picto_01.png");
+    width: 116px;
+    right: 110px;
+    bottom: -110px;
+}
+#landing-alerte .picto2{
+    background-image: url("../img/icons/Picto_02.png");
+    width: 88px;
+    right: -20px;
+    bottom: 0px;
+}
+#landing-alerte .picto4{
+    background-image: url("../img/icons/Picto_04.png");
+    width: 81px;
+    top: -40px;
+    right: 65px;
+}
+#landing-alerte .picto8{
+    background-image: url("../img/icons/Picto_08.png");
+    width: 105px;
+    right: -120px;
+    top: 80px;
 }
 
 #landing-foot .picto1{
