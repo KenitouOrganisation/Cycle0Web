@@ -1,8 +1,8 @@
 const Engine = {};
 Engine.JSEnable = true;
 Engine.VERSION = {
-  NUMBER: '1.0.3',
-  DATE: '2023-06-25'
+  NUMBER: '1.0.5',
+  DATE: '2024-02-18'
 };
 Engine.isMobileScreen = () => window.matchMedia("(max-width: 900px)").matches;
 Engine.CheckCompatibility = function () {
@@ -64,7 +64,7 @@ Engine.AddJsAttr = function (elmt, jsAttrObj) {
 Engine.Elmt = function (name, attr, ...children) {
   const elmt = document.createElement(name);
   for (let name in attr) {
-    if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else elmt.setAttribute(name, attr[name]);
+    if (name == "data-js-attr") Engine.AddJsAttr(elmt, attr[name]);else if (name == "style" && typeof attr[name] == "object") elmt.setAttribute(name, Engine.toInlineStyle(attr[name]));else elmt.setAttribute(name, attr[name]);
   }
   Engine.ElmtLoopChildren(elmt, children);
   return elmt;
@@ -75,6 +75,14 @@ Engine.ElmtLoopChildren = function (parent, children) {
     if (child instanceof Node) parent.appendChild(child);
     if (typeof child == 'string') parent.innerHTML += child;
   });
+};
+Engine.toInlineStyle = function (styleObj) {
+  let style = "";
+  for (let name in styleObj) {
+    const formattedName = name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+    style += formattedName + ":" + styleObj[name] + ";";
+  }
+  return style;
 };
 Engine.Q = (selector, parent = null) => parent ? parent.querySelector(selector) : document.querySelector(selector);
 Engine.QAll = (selector, parent) => parent ? parent.querySelectorAll(selector) : document.querySelectorAll(selector);
@@ -88,7 +96,7 @@ Engine.CSS.SetVar = function (name, value) {
 };
 Engine.CSS.GetVar = function (name) {
   Engine.CSS.InitRoot();
-  return Engine.CSS._root.style.getPropertyValue(name);
+  return window.getComputedStyle(Engine.CSS._root).getPropertyValue(name);
 };
 Engine.DOM._readyElement = "#ready";
 Engine.DOM.OnReady = Engine.OnReady = callback => {
@@ -138,6 +146,17 @@ Engine.DOM.IsVisible = (elmt, strict = false) => {
 };
 Engine.MATH.WithUnit.SplitValue = valStr => {
   return valStr.split(/([0-9.]+)/);
+};
+Engine.MATH.WithUnit.Add = (valStr1, valStr2) => {
+  const val1 = Engine.MATH.WithUnit.SplitValue(valStr1);
+  const val2 = Engine.MATH.WithUnit.SplitValue(valStr2);
+  if (!val1[1]) val1[1] = 1;
+  if (!val2[1]) val2[1] = 1;
+  if (!val1[2]) val1[2] = "";
+  if (!val2[2]) val2[2] = "";
+  const result = parseFloat(val1[1]) + parseFloat(val2[1]);
+  const unit = val1[2] || val2[2];
+  return result + unit;
 };
 Engine.MATH.WithUnit.Multiply = (number, valStr) => {
   const val = Engine.MATH.WithUnit.SplitValue(valStr);
@@ -337,6 +356,13 @@ const presseListData_coupDeCoeur = [{
   description: "Une nouvelle application pour récupérer gratuitement des matériaux sur les chantiers",
   image: "./src/img/illustrations/fr3_cyclezero.jpg",
   link: "https://france3-regions.francetvinfo.fr/paris-ile-de-france/paris/video-une-nouvelle-application-pour-recuperer-gratuitement-des-materiaux-sur-les-chantiers-2778070.html"
+}, {
+  title: "France 5 - Reportage",
+  datetime: "2024-05-28",
+  type: "VIDÉO",
+  description: "La seconde main... première de la classe ?",
+  image: "./src/img/illustrations/fr5_cyclezero.jpg",
+  link: "https://www.linkedin.com/posts/cycle-zero_cycle-z%C3%A9ro-documentaire-france-5-activity-7201555149503242240-QdYC?utm_source=share"
 }];
 const presseListData_autres = [{
   title: "WE DEMAIN",
@@ -471,6 +497,48 @@ const presseListData_autres = [{
   description: "La révolution numérique anti-gaspi dans le BTP",
   image: "",
   link: "https://www.calameo.com/read/002202362265556728486?page=9"
+}, {
+  title: "France Bleu",
+  datetime: "2024-06-08",
+  type: "PODCAST",
+  description: "Des matériaux ou matériels de chantier gratuits pour les particuliers",
+  image: "",
+  link: "https://www.francebleu.fr/emissions/la-chronique-de-valere-correard/des-materiaux-ou-materiels-de-chantier-gratuits-pour-les-particuliers-9256742"
+}, {
+  title: "Que Choisir",
+  datetime: "2024-05-27",
+  type: "ARTICLE",
+  description: "Le réemploi de matériaux, une mine d’or encore sous-exploitée",
+  image: "",
+  link: "https://www.quechoisir.org/enquete-economie-circulaire-dans-le-batiment-le-reemploi-de-materiaux-une-mine-d-or-encore-sous-exploitee-n122366/"
+}, {
+  title: "BFM Île-de-France",
+  datetime: "2024-02-19",
+  type: "VIDEO",
+  description: "Seine-Saint-Denis: une application pour réutiliser des matériaux de chantier",
+  image: "",
+  link: "https://www.bfmtv.com/paris/replay-emissions/bonsoir-paris/seine-saint-denis-une-application-pour-reutiliser-des-materiaux-de-chantier_VN-202402190757.html"
+}, {
+  title: "New Tank Cities",
+  datetime: "2024-04-05",
+  type: "PODCAST",
+  description: "Déchets et réemploi : l’expérience d’une architecte MOE dans la direction de travaux",
+  image: "",
+  link: "https://cities.newstank.fr/article/view/320726/dechets-reemploi-experience-architecte-moe-direction-travaux-karima-lebsir.html"
+}, {
+  title: "Audioblog - ARTE Radio",
+  datetime: "2024-03-01",
+  type: "PODCAST",
+  description: "Saison 4 #24 Cycle Zéro",
+  image: "",
+  link: "https://audioblog.arteradio.com/blog/187813/podcast/224328/saison-4-24-cycle-zero"
+}, {
+  title: "Entrepreneurs d'avenir",
+  datetime: "2024-03-14",
+  type: "ARTICLE",
+  description: "Cycle zéro : rien ne se perd dans le BTP",
+  image: "",
+  link: "https://www.entrepreneursdavenir.com/actualites/cycle-zero-rien-ne-se-perd-dans-le-btp/"
 }];
 class PresseListArticle {
   constructor(data, container) {

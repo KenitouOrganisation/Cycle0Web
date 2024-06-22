@@ -555,6 +555,16 @@ footer{
     }
 }
 
+.light-grey-info-box {
+    background: #fafafa;
+    border-radius: 15px;
+    padding: 30px 34px;
+}
+
+.light-grey-info-box, .light-grey-info-box a{
+    font-size: 18px;
+}
+
 .highlight-section {
     background: rgba(0, 58, 58, 0.2);
     border: 1px solid transparent;

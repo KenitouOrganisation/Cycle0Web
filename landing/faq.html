@@ -24,11 +24,11 @@
         
         <meta charset="utf-8" />
         <base href=".">
-        <link rel="stylesheet" href="./src/style/style.css?v=1717013788880" />
+        <link rel="stylesheet" href="./src/style/style.css?v=1719056375783" />
         <!-- <link rel="stylesheet" href="./src/style/landing.css?v=2508222238" /> --->
-        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1717013788880" media="screen and (max-width : 900px)" />
+        <link rel="stylesheet" href="./src/style/style-mobile.css?v=1719056375783" media="screen and (max-width : 900px)" />
         <!--<link rel="stylesheet" href="./src/style/landing-tinymobile.css?v=2508222238" media="screen and (max-width : 800px) and (max-height : 640px)" /> -->
-        <link rel="icon" type="image/png" href="/src/img/icon.png?v=1717013788880" />
+        <link rel="icon" type="image/png" href="/src/img/icon.png?v=1719056375783" />
         <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
         <!-- For iOS Safari phone browser detection -->
         <meta name="format-detection" content="telephone=no">
@@ -66,8 +66,8 @@
         />-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.css">
         <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.1/dist/cookieconsent.js"></script>
-        <script defer src="./src/script/gCookieConsent.js?v=1717013788880"></script>
-        <script src="./src/script/FAQ.js?v=1717013788880"></script>
+        <script defer src="./src/script/gCookieConsent.js?v=1719056375783"></script>
+        <script src="./src/script/FAQ.js?v=1719056375783"></script>
     </head>
 
     <!--
@@ -96,7 +96,7 @@
     background: #fbfbfb;
 }
 
-.article-box .answer {
+.article-box .answer, .article-box .answer span {
     display: none;
     text-align: justify;
 }
@@ -125,7 +125,7 @@
     align-items: center;
 }
 
-.article-box.on .answer {
+.article-box.on .answer, .article-box.on .answer span {
     display: block;
 }
 
@@ -204,7 +204,7 @@
 
             <section class="first txt-center">
                 <h1 class="h1">Foire aux questions (F.A.Q)</h1>
-                <p>
+                <p class="light-grey-info-box">
                     Retrouvez ci-dessous les questions fréquemments posées.
                     <br >
                     Si vous ne trouvez pas votre réponse, vous pouvez <a href="./contacts.html?from_faq">nous contacter ici</a> en indiquant le sujet de votre demande.
@@ -215,7 +215,7 @@
                 <form action="" method="POST" id="contact_forms">
                     <div class="not-form delayed-appear">
                         <h1 class="h1">FAQ indisponible</h1>
-                        <p>
+                        <p class="light-grey-info-box">
                             Le FAQ requis l'utilisation de JavaScript. Il se peut aussi que votre navigateur web ait désactivé JavaScript ou qu'il soit obsolète. 
                             <br><br>
                             Si vous souhaitez nous contacter, vous pourrez nous envoyer un e-mail à l'adresse suivante : <a href="mailto:contact@cyclezero.fr">contact@cyclezero.fr</a>

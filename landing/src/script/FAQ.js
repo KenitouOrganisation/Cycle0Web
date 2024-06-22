@@ -366,6 +366,16 @@ Ainsi, nous favorisons <b>les déplacements courts</b>, afin de limiter l’impa
   answer: `C’est une question de temps ! Nôtre démarche est née en Île-de-France il y a seulement 8 mois et nous redoublons nos efforts pour nous développer le plus rapidement possible dans tout l’hexagone. Nous travaillons actuellement notre arrivée dans la région Nord, Bretagne et en PACA.
 `
 }, {
+  question: "Comment activer les notifications ?",
+  answer: `Soyez averti dès que vos matériaux sélectionnés sont disponibles !
+			Voici notre vidéo explicative ci-dessous :
+			<p></p>
+			<a href="https://youtu.be/dLxOT4RVgVY" target="_blank" class="_btt _primary">Activer les notifications ↗</a>
+			<p></p><span style="color: red;">
+				Attention, le code postal de l'alerte doit correspondre à votre localisation !
+				Sinon vous ne pourrez pas voir les matériaux disponibles à proximité même si vous recevez la notification.
+			</span>`
+}, {
   question: "Nous n’avons pas répondu à votre question ?",
   answer: `Posez-nous vos questions depuis <a href="./contacts.html?from_faq">notre formulaire ici</a>.
 Nous vous répondrons le plus rapidement possible.
@@ -388,8 +398,7 @@ class FAQListArticle {
       class: "answer"
     }, item.answer));
     box.addEventListener("click", e => {
-      if (e.target.classList.contains("answer")) return;
-      box.classList.toggle("on");
+      if (!e.target.classList.contains("answer") && !e.target.parentNode?.classList.contains("answer")) box.classList.toggle("on");
     });
     return box;
   }

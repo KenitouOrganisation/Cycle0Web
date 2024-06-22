@@ -26,6 +26,15 @@ const presseListData_coupDeCoeur = [
         image: "./src/img/illustrations/fr3_cyclezero.jpg",
         link: "https://france3-regions.francetvinfo.fr/paris-ile-de-france/paris/video-une-nouvelle-application-pour-recuperer-gratuitement-des-materiaux-sur-les-chantiers-2778070.html",
     },
+    {
+        title: "France 5 - Reportage",
+        datetime: "2024-05-28",
+        type: "VIDÉO",
+        description:
+            "La seconde main... première de la classe ?",
+        image: "./src/img/illustrations/fr5_cyclezero.jpg",
+        link: "https://www.linkedin.com/posts/cycle-zero_cycle-z%C3%A9ro-documentaire-france-5-activity-7201555149503242240-QdYC?utm_source=share",
+    }
 ];
 
 const presseListData_autres = [
@@ -200,5 +209,58 @@ const presseListData_autres = [
         image: "",
         link: "https://www.calameo.com/read/002202362265556728486?page=9",
     },
-
+    {
+        title: "France Bleu",
+        datetime: "2024-06-08",
+        type: "PODCAST",
+        description:
+            "Des matériaux ou matériels de chantier gratuits pour les particuliers",
+        image: "",
+        link: "https://www.francebleu.fr/emissions/la-chronique-de-valere-correard/des-materiaux-ou-materiels-de-chantier-gratuits-pour-les-particuliers-9256742",
+    },
+    {
+        title: "Que Choisir",
+        datetime: "2024-05-27",
+        type: "ARTICLE",
+        description:
+            "Le réemploi de matériaux, une mine d’or encore sous-exploitée",
+        image: "",
+        link: "https://www.quechoisir.org/enquete-economie-circulaire-dans-le-batiment-le-reemploi-de-materiaux-une-mine-d-or-encore-sous-exploitee-n122366/",
+    },
+    {
+        title: "BFM Île-de-France",
+        datetime: "2024-02-19",
+        type: "VIDEO",
+        description:
+            "Seine-Saint-Denis: une application pour réutiliser des matériaux de chantier",
+        image: "",
+        link: "https://www.bfmtv.com/paris/replay-emissions/bonsoir-paris/seine-saint-denis-une-application-pour-reutiliser-des-materiaux-de-chantier_VN-202402190757.html",
+    },
+    {
+        title: "New Tank Cities",
+        datetime: "2024-04-05",
+        type: "PODCAST",
+        description:
+            "Déchets et réemploi : l’expérience d’une architecte MOE dans la direction de travaux",
+        image: "",
+        link: "https://cities.newstank.fr/article/view/320726/dechets-reemploi-experience-architecte-moe-direction-travaux-karima-lebsir.html",
+    },
+    {
+        title: "Audioblog - ARTE Radio",
+        datetime: "2024-03-01",
+        type: "PODCAST",
+        description:
+            "Saison 4 #24 Cycle Zéro",
+        image: "",
+        link: "https://audioblog.arteradio.com/blog/187813/podcast/224328/saison-4-24-cycle-zero",
+    },
+    {
+        title: "Entrepreneurs d'avenir",
+        datetime: "2024-03-14",
+        type: "ARTICLE",
+        description:
+            "Cycle zéro : rien ne se perd dans le BTP",
+        image: "",
+        link: "https://www.entrepreneursdavenir.com/actualites/cycle-zero-rien-ne-se-perd-dans-le-btp/",
+    },
 ];
